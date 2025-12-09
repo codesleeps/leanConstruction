@@ -1,0 +1,40 @@
+# Lean Construction AI - robots.txt
+# https://leanconstruction.ai
+
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /static/js/*.map
+Disallow: /static/css/*.map
+
+# Crawl delay (optional - be kind to servers)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://leanconstruction.ai/sitemap.xml
+
+# Common AI crawlers (allow them to index for AI training if desired)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
