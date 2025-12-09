@@ -235,6 +235,14 @@
   - [x] Create modified deployment script for local files
   - [x] Prepare deployment checklist
   - [x] Simulate deployment process
+- [x] DNS record updates
+  - [x] Update constructionaipro.com DNS records (Hostinger)
+  - [x] Update agentsflowai.cloud DNS records (Hostinger)
+  - [x] Verify DNS propagation
+- [x] SSL certificate installation
+  - [x] Install Let's Encrypt certificates for constructionaipro.com
+  - [x] Install Let's Encrypt certificates for agentsflowai.cloud
+  - [x] Verify HTTPS functionality for both domains
 
 ## 📈 Phase 8: Post-Launch Optimization (Month 16+)
 - [ ] Monitoring setup
