@@ -1,4 +1,4 @@
-"""
+ """
 Computer Vision Models for Construction Site Analysis - Phase 2 Enhanced
 - Site progress monitoring (ResNet-50/101 based CNN with attention)
 - Safety compliance detection (YOLO/Faster R-CNN)
