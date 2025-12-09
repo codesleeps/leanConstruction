@@ -4,11 +4,18 @@ For demo/testing without heavy ML dependencies
 """
 
 from fastapi import FastAPI, HTTPException
-from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import Dict, List, Any, Optional
 from datetime import datetime
 import os
+import logging
+
+# Import payment routes
+from app.api.payments import router as payment_router
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Lean Construction AI API",
@@ -18,14 +25,33 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
-# CORS middleware
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
+# Import and apply security middleware
+try:
+    from app.middleware.security import add_security_middleware
+    add_security_middleware(app, enable_rate_limit=True, rate_limit=100)
+    logger.info("Security middleware loaded successfully")
+except ImportError as e:
+    logger.warning(f"Security middleware not available: {e}")
+    # Fallback to basic CORS if middleware not available
+    from fastapi.middleware.cors import CORSMiddleware
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=[
+            "http://localhost:3000",
+            "http://localhost:8000",
+            "http://127.0.0.1:3000",
+            "http://127.0.0.1:8000",
+            "https://leanconstruction.ai",
+            "https://app.leanconstruction.ai",
+        ],
+        allow_credentials=True,
+        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+        allow_headers=["*"],
+    )
+
+# Include payment routes
+app.include_router(payment_router)
+logger.info("Payment routes included successfully")
 
 # ============================================
 # Health & Status Endpoints

@@ -1,0 +1,18 @@
+SSH PUBLIC KEY - COPY THIS FOR YOUR VPS PROVIDER
+================================================
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCnpozAqoOZ7opNIgQthnDgO3lMSVPI6hfkzsfQH+LvCjvy2l5DQtPeWnaH6rmftDvFcY5VMJnrJsevW06su1dvEleCeZ5CSOIjAyuPFZNJgjlEjhGbxRAvhHl6yvWuJfQF24o8h46ioIMWmn/FeHklRpR2idBwSD4b3E45yv3PS8PrOxynSWZB5WtxSLwAWGoVAj2lxR0PXcoLUWutaT2mIREhvaacBZV2/Ci/sKN2ZJxNOPRQB2M7aXdJlBPVsz9xtHocwhwrMtvoTZkkZAc3nPoH4Qua+Nu/PsnJipAngDDQr8py3PSN08eEW95VdaWyCuQil7f8fYLb+nfBlNLojhkoQNE0bBat204eIpXTzLLsT7ZrecZRVqNG9d9S+D+GuAzr2ic5A6yq0SRGpX6JGZDCq6sEGd3fx54b57/Kn0kOao58+zqg5mouNYe8xmGjnXb6Cup50Bz6I06KYlW2BVPHzZvXYxvYHEcdOv6Bh36jyHRQJ2pJYNKCnS1elqBWYU831ryeUhsmHoBvt3V6wZ7XDjUClo3KlTIlIKDGbi/22//Uw/IJNtQ/FUFTSM9u4Nzjm7ueX63dWSDqQJa3G65uanBFn8CHzXdLb99d8quRHMQKn95jGfRZiIRxNkq2OzTcv8VF1GWghgkkhKyuhopwlU1YpY2gQEfsxHUNhQ== vps-deployment-20251209
+
+================================================
+INSTRUCTIONS:
+1. Open this file in any text editor (Notepad, TextEdit, VS Code, etc.)
+2. Select and copy the ENTIRE line starting with "ssh-rsa"
+3. Go to your VPS provider dashboard
+4. Find "SSH Keys" or "Security" section
+5. Click "Add SSH Key" or similar
+6. Paste the key and name it "Lean Construction Deployment"
+7. Save and continue with VPS setup
+
+The key starts with: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC...
+And ends with: ...UNhQ== vps-deployment-20251209
+================================================

@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useMemo, createContext, useContext } from 'react';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import { 
-  AppBar, Toolbar, Typography, Container, Grid, Paper, Box, 
-  Tabs, Tab, Card, CardContent, CircularProgress, Chip, 
+import {
+  AppBar, Toolbar, Typography, Container, Grid, Paper, Box,
+  Tabs, Tab, Card, CardContent, CircularProgress, Chip,
   IconButton, Drawer, List, ListItem, ListItemIcon, ListItemText,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   LinearProgress, Alert, AlertTitle, TextField, Button, Avatar,
@@ -27,14 +27,16 @@ import {
   Lock as LockIcon,
   Email as EmailIcon,
   Logout as LogoutIcon,
-  AccountCircle as AccountCircleIcon,
   Visibility,
   VisibilityOff
 } from '@mui/icons-material';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, 
-         PieChart, Pie, Cell, RadarChart, Radar, 
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+         PieChart, Pie, Cell, RadarChart, Radar,
          PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
 import axios from 'axios';
+import { StripePaymentProvider } from './components/StripePaymentContext';
+import SubscriptionManager from './components/SubscriptionManager';
+import Logo from './components/Logo';
 
 const API_BASE = 'http://localhost:8000';
 
@@ -133,28 +135,15 @@ function LoginPage({ onLogin }) {
         >
           {/* Logo Section */}
           <Box sx={{ textAlign: 'center', mb: 4 }}>
-            <Box
-              sx={{
-                width: 80,
-                height: 80,
-                borderRadius: '20px',
-                background: 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                mx: 'auto',
-                mb: 2,
-                boxShadow: '0 8px 32px rgba(25, 118, 210, 0.3)'
-              }}
-            >
-              <ConstructionIcon sx={{ fontSize: 40, color: 'white' }} />
+            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 3 }}>
+              <Logo size="large" variant="icon" sx={{ mb: 2 }} />
+              <Typography variant="h4" fontWeight="bold" gutterBottom>
+                Lean Construction AI
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                Sign in to access your dashboard
+              </Typography>
             </Box>
-            <Typography variant="h4" fontWeight="bold" gutterBottom>
-              Lean Construction AI
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Sign in to access your dashboard
-            </Typography>
           </Box>
 
           {/* Error Alert */}
@@ -359,7 +348,7 @@ function Dashboard({ user, onLogout }) {
           <IconButton color="inherit" edge="start" onClick={() => setDrawerOpen(!drawerOpen)} sx={{ mr: 2 }}>
             <MenuIcon />
           </IconButton>
-          <ConstructionIcon sx={{ mr: 1 }} />
+          <Logo size="small" variant="icon" sx={{ mr: 2 }} />
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
             Lean Construction AI
           </Typography>
@@ -429,7 +418,8 @@ function Dashboard({ user, onLogout }) {
             { text: 'Waste Analysis', icon: <WarningIcon />, tab: 1 },
             { text: 'Analytics', icon: <AnalyticsIcon />, tab: 2 },
             { text: 'Industry', icon: <BusinessIcon />, tab: 3 },
-            { text: 'System', icon: <SettingsIcon />, tab: 4 }
+            { text: 'Subscription', icon: <BusinessIcon />, tab: 4 },
+            { text: 'System', icon: <SettingsIcon />, tab: 5 }
           ].map(({ text, icon, tab }) => (
             <ListItem button key={text} onClick={() => { setTabValue(tab); setDrawerOpen(false); }}>
               <ListItemIcon>{icon}</ListItemIcon>
@@ -462,6 +452,7 @@ function Dashboard({ user, onLogout }) {
               <Tab icon={<WarningIcon />} label="WASTE ANALYSIS" />
               <Tab icon={<AnalyticsIcon />} label="ANALYTICS" />
               <Tab icon={<BusinessIcon />} label="INDUSTRY" />
+              <Tab icon={<SettingsIcon />} label="SUBSCRIPTION" />
               <Tab icon={<SettingsIcon />} label="SYSTEM" />
             </Tabs>
           </Paper>
@@ -757,8 +748,13 @@ function Dashboard({ user, onLogout }) {
             </Grid>
           </TabPanel>
 
-          {/* System Tab */}
+          {/* Subscription Tab */}
           <TabPanel value={tabValue} index={4}>
+            <SubscriptionManager user={user} />
+          </TabPanel>
+
+          {/* System Tab */}
+          <TabPanel value={tabValue} index={5}>
             <Grid container spacing={3}>
               {/* Health Status */}
               <Grid item xs={12} md={6}>
@@ -771,9 +767,9 @@ function Dashboard({ user, onLogout }) {
                   <Typography variant="subtitle2" gutterBottom>Available Modules:</Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                     {health?.modules && Object.entries(health.modules).map(([name, status]) => (
-                      <Chip 
-                        key={name} 
-                        label={name.replace('_', ' ')} 
+                      <Chip
+                        key={name}
+                        label={name.replace('_', ' ')}
                         color={status === 'available' ? 'success' : 'error'}
                         size="small"
                       />
@@ -790,8 +786,8 @@ function Dashboard({ user, onLogout }) {
                     <Box key={service.id} sx={{ mb: 2 }}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Typography>{service.name}</Typography>
-                        <Chip 
-                          label={`${service.instances} instances`} 
+                        <Chip
+                          label={`${service.instances} instances`}
                           size="small"
                           color={service.health === 'healthy' ? 'success' : 'warning'}
                         />
@@ -812,7 +808,7 @@ function Dashboard({ user, onLogout }) {
                           <CardContent>
                             <Typography variant="h6" color="primary">{tier.name}</Typography>
                             <Typography variant="h4">
-                              {tier.price_monthly === 0 ? 'Free' : 
+                              {tier.price_monthly === 0 ? 'Free' :
                                 typeof tier.price_monthly === 'number' ? `$${tier.price_monthly}/mo` : tier.price_monthly}
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
@@ -882,7 +878,7 @@ function App() {
           MuiAppBar: {
             styleOverrides: {
               root: {
-                background: mode === 'dark' 
+                background: mode === 'dark'
                   ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 100%)'
                   : 'linear-gradient(135deg, #1976d2 0%, #1565c0 100%)',
               },
@@ -917,14 +913,16 @@ function App() {
 
   return (
     <ColorModeContext.Provider value={colorMode}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        {user ? (
-          <Dashboard user={user} onLogout={handleLogout} />
-        ) : (
-          <LoginPage onLogin={handleLogin} />
-        )}
-      </ThemeProvider>
+      <StripePaymentProvider>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          {user ? (
+            <Dashboard user={user} onLogout={handleLogout} />
+          ) : (
+            <LoginPage onLogin={handleLogin} />
+          )}
+        </ThemeProvider>
+      </StripePaymentProvider>
     </ColorModeContext.Provider>
   );
 }
