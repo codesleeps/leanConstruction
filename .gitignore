@@ -126,3 +126,4 @@ secrets/
 *.pem
 *.key
 *.crt
+backend/venv/

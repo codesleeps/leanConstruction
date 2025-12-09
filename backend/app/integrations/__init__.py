@@ -7,8 +7,8 @@ Phase 3 - Expanded Third-party Integrations:
 - IoT Sensor integrations
 """
 
-from backend.app.integrations.procore import ProcoreClient
-from backend.app.integrations.erp_systems import (
+from .procore import ProcoreClient
+from .erp_systems import (
     ERPIntegrationManager,
     erp_manager,
     ERPSystem,
@@ -25,7 +25,7 @@ from backend.app.integrations.erp_systems import (
     JobCost,
     PurchaseOrder
 )
-from backend.app.integrations.iot_sensors import (
+from .iot_sensors import (
     IoTIntegrationSystem,
     iot_system,
     DeviceManager,
