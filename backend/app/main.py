@@ -4,8 +4,11 @@ from sqlalchemy.orm import Session
 from datetime import timedelta
 from .database import SessionLocal, engine
 from .models import Base, User, Project, Task, WasteLog
-from .auth import authenticate_user, create_access_token, get_current_active_user
+from .auth import authenticate_user, create_access_token, get_current_active_user, get_password_hash
+from .integrations.procore import ProcoreClient, analyze_procore_data_for_waste
+from .tasks.data_ingestion import ingest_external_data
 from pydantic import BaseModel
+import os
 
 Base.metadata.create_all(bind=engine)
 
@@ -191,3 +194,103 @@ def get_project_analytics(
         "total_waste_cost": total_waste_cost,
         "budget_remaining": project.budget - total_waste_cost
     }
+
+# Procore Integration Endpoints
+class ProcoreAuthRequest(BaseModel):
+    code: str
+    redirect_uri: str
+
+class ProcoreSyncRequest(BaseModel):
+    procore_project_id: int
+    company_id: int
+
+@app.post("/integrations/procore/auth")
+async def procore_authenticate(
+    auth_data: ProcoreAuthRequest,
+    current_user: User = Depends(get_current_active_user)
+):
+    """Authenticate with Procore and store access token"""
+    client_id = os.getenv("PROCORE_CLIENT_ID")
+    client_secret = os.getenv("PROCORE_CLIENT_SECRET")
+    
+    if not client_id or not client_secret:
+        raise HTTPException(status_code=500, detail="Procore credentials not configured")
+    
+    try:
+        client = ProcoreClient(client_id, client_secret)
+        token_data = client.authenticate(auth_data.redirect_uri, auth_data.code)
+        
+        # Store token securely (in production, encrypt and store in database)
+        return {
+            "message": "Successfully authenticated with Procore",
+            "expires_in": token_data.get("expires_in")
+        }
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=f"Authentication failed: {str(e)}")
+
+@app.post("/integrations/procore/sync/{project_id}")
+async def sync_procore_project(
+    project_id: int,
+    sync_data: ProcoreSyncRequest,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(get_current_active_user)
+):
+    """Sync data from Procore for a specific project"""
+    # Verify project ownership
+    project = db.query(Project).filter(Project.id == project_id, Project.owner_id == current_user.id).first()
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    
+    # Get Procore credentials
+    client_id = os.getenv("PROCORE_CLIENT_ID")
+    client_secret = os.getenv("PROCORE_CLIENT_SECRET")
+    access_token = os.getenv("PROCORE_ACCESS_TOKEN")  # In production, retrieve from secure storage
+    
+    if not all([client_id, client_secret, access_token]):
+        raise HTTPException(status_code=500, detail="Procore integration not configured")
+    
+    try:
+        # Initialize Procore client
+        client = ProcoreClient(client_id, client_secret, access_token)
+        
+        # Sync project data
+        procore_data = client.sync_project_data(sync_data.procore_project_id)
+        
+        # Analyze for waste
+        waste_analysis = analyze_procore_data_for_waste(procore_data)
+        
+        # Queue async processing
+        task = ingest_external_data.delay("procore", project_id, procore_data)
+        
+        return {
+            "message": "Procore sync initiated",
+            "task_id": task.id,
+            "waste_analysis": waste_analysis,
+            "data_summary": {
+                "activities": len(procore_data.get("schedule_activities", [])),
+                "rfis": len(procore_data.get("rfis", [])),
+                "change_orders": len(procore_data.get("change_orders", []))
+            }
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Sync failed: {str(e)}")
+
+@app.get("/integrations/procore/projects")
+async def list_procore_projects(
+    company_id: int,
+    current_user: User = Depends(get_current_active_user)
+):
+    """List all Procore projects for a company"""
+    client_id = os.getenv("PROCORE_CLIENT_ID")
+    client_secret = os.getenv("PROCORE_CLIENT_SECRET")
+    access_token = os.getenv("PROCORE_ACCESS_TOKEN")
+    
+    if not all([client_id, client_secret, access_token]):
+        raise HTTPException(status_code=500, detail="Procore integration not configured")
+    
+    try:
+        client = ProcoreClient(client_id, client_secret, access_token)
+        projects = client.get_projects(company_id)
+        return {"projects": projects}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch projects: {str(e)}")

@@ -41,5 +41,43 @@ services:
     depends_on:
       - backend
 
+  celery_worker:
+    build: ./backend
+    command: celery -A app.celery_app worker --loglevel=info
+    environment:
+      DATABASE_URL: postgresql://postgres:password@db/leandb
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./backend:/app
+
+  celery_beat:
+    build: ./backend
+    command: celery -A app.celery_app beat --loglevel=info
+    environment:
+      DATABASE_URL: postgresql://postgres:password@db/leandb
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./backend:/app
+
+  flower:
+    build: ./backend
+    command: celery -A app.celery_app flower --port=5555
+    ports:
+      - "5555:5555"
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+    depends_on:
+      - redis
+      - celery_worker
+
 volumes:
   postgres_data:

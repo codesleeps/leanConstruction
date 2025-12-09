@@ -1,0 +1,151 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_DB: leandb_test
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+      
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+        cache: 'pip'
+    
+    - name: Install dependencies
+      run: |
+        cd backend
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-asyncio httpx
+    
+    - name: Run linting
+      run: |
+        pip install flake8
+        flake8 backend/app --count --select=E9,F63,F7,F82 --show-source --statistics
+    
+    - name: Run tests
+      env:
+        DATABASE_URL: postgresql://postgres:password@localhost/leandb_test
+        SECRET_KEY: test-secret-key
+      run: |
+        cd backend
+        pytest tests/ -v --cov=app --cov-report=xml
+    
+    - name: Upload coverage
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./backend/coverage.xml
+        flags: backend
+
+  frontend-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+    
+    - name: Install dependencies
+      run: |
+        cd frontend
+        npm ci
+    
+    - name: Run linting
+      run: |
+        cd frontend
+        npm run lint || echo "Linting not configured yet"
+    
+    - name: Run tests
+      run: |
+        cd frontend
+        npm test -- --coverage --watchAll=false
+    
+    - name: Build
+      run: |
+        cd frontend
+        npm run build
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests]
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    
+    - name: Build and push backend
+      uses: docker/build-push-action@v4
+      with:
+        context: ./backend
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/lean-construction-backend:latest,${{ secrets.DOCKER_USERNAME }}/lean-construction-backend:${{ github.sha }}
+        cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/lean-construction-backend:buildcache
+        cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/lean-construction-backend:buildcache,mode=max
+    
+    - name: Build and push frontend
+      uses: docker/build-push-action@v4
+      with:
+        context: ./frontend
+        push: true
+        tags: ${{ secrets.DOCKER_USERNAME }}/lean-construction-frontend:latest,${{ secrets.DOCKER_USERNAME }}/lean-construction-frontend:${{ github.sha }}
+        cache-from: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/lean-construction-frontend:buildcache
+        cache-to: type=registry,ref=${{ secrets.DOCKER_USERNAME }}/lean-construction-frontend:buildcache,mode=max
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: docker-build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Deploy to production
+      run: |
+        echo "Add deployment steps here (AWS, Azure, GCP, etc.)"
+        # Example: kubectl set image deployment/backend backend=${{ secrets.DOCKER_USERNAME }}/lean-construction-backend:${{ github.sha }}

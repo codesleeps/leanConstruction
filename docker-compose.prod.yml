@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-leandb}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - app-network
+
+  redis:
+    image: redis:7-alpine
+    restart: always
+    networks:
+      - app-network
+
+  backend:
+    image: ${DOCKER_USERNAME}/lean-construction-backend:latest
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB:-leandb}
+      SECRET_KEY: ${SECRET_KEY}
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      ENVIRONMENT: production
+      DEBUG: "false"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+    restart: always
+    networks:
+      - app-network
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+
+  frontend:
+    image: ${DOCKER_USERNAME}/lean-construction-frontend:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    restart: always
+    networks:
+      - app-network
+
+  celery_worker:
+    image: ${DOCKER_USERNAME}/lean-construction-backend:latest
+    command: celery -A app.celery_app worker --loglevel=info --concurrency=4
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB:-leandb}
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      ENVIRONMENT: production
+    depends_on:
+      - db
+      - redis
+    restart: always
+    networks:
+      - app-network
+
+  celery_beat:
+    image: ${DOCKER_USERNAME}/lean-construction-backend:latest
+    command: celery -A app.celery_app beat --loglevel=info
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@db/${POSTGRES_DB:-leandb}
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+      ENVIRONMENT: production
+    depends_on:
+      - db
+      - redis
+    restart: always
+    networks:
+      - app-network
+
+  flower:
+    image: ${DOCKER_USERNAME}/lean-construction-backend:latest
+    command: celery -A app.celery_app flower --port=5555
+    ports:
+      - "5555:5555"
+    environment:
+      CELERY_BROKER_URL: redis://redis:6379/0
+      CELERY_RESULT_BACKEND: redis://redis:6379/0
+    depends_on:
+      - redis
+      - celery_worker
+    restart: always
+    networks:
+      - app-network
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:
+    driver: bridge
