@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from datetime import timedelta
@@ -7,12 +8,31 @@ from .models import Base, User, Project, Task, WasteLog
 from .auth import authenticate_user, create_access_token, get_current_active_user, get_password_hash
 from .integrations.procore import ProcoreClient, analyze_procore_data_for_waste
 from .tasks.data_ingestion import ingest_external_data
+from .api.ml_routes import router as ml_router
 from pydantic import BaseModel
 import os
 
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Lean Construction AI API", version="1.0.0")
+app = FastAPI(
+    title="Lean Construction AI API",
+    description="AI-powered construction analytics platform with computer vision, waste detection, and predictive forecasting",
+    version="2.0.0",
+    docs_url="/docs",
+    redoc_url="/redoc"
+)
+
+# CORS middleware for frontend integration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Configure appropriately for production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Include ML API routes
+app.include_router(ml_router, prefix="/api/v1")
 
 # Dependency to get DB session
 def get_db():
