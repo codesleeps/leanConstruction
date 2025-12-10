@@ -139,7 +139,7 @@ function LoginPage({ onLogin }) {
             <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mb: 3 }}>
               <Logo size="large" variant="icon" sx={{ mb: 2 }} />
               <Typography variant="h4" fontWeight="bold" gutterBottom>
-                Lean Construction AI
+                Lean AI Construction
               </Typography>
               <Typography variant="body2" color="text.secondary">
                 Sign in to access your dashboard
@@ -236,7 +236,7 @@ function LoginPage({ onLogin }) {
           {/* Footer */}
           <Box sx={{ mt: 3, textAlign: 'center' }}>
             <Typography variant="caption" color="text.secondary">
-              © 2024 Lean Construction AI. All rights reserved.
+              © 2024 Lean AI Construction. All rights reserved.
             </Typography>
           </Box>
         </Paper>
@@ -400,7 +400,7 @@ function Dashboard({ user, onLogout }) {
           </IconButton>
           <Logo size="small" variant="icon" sx={{ mr: 2 }} />
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
-            Lean Construction AI
+            Lean AI Construction
           </Typography>
           
           {/* Dark Mode Toggle */}
@@ -1031,7 +1031,7 @@ function Dashboard({ user, onLogout }) {
               <TextField fullWidth label="Role" defaultValue={user?.role} variant="outlined" />
             </Grid>
             <Grid item xs={12}>
-              <TextField fullWidth label="Company" defaultValue="Lean Construction AI" variant="outlined" />
+              <TextField fullWidth label="Company" defaultValue="Lean AI Construction" variant="outlined" />
             </Grid>
           </Grid>
         </DialogContent>

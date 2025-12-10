@@ -37,7 +37,7 @@ const Dashboard = () => {
   return (
     <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
       <Typography variant="h4" gutterBottom>
-        Lean Construction Dashboard
+        Lean AI Construction Dashboard
       </Typography>
       
       <Grid container spacing={3}>
