@@ -145,6 +145,15 @@ export default function HomePage() {
                 </Link>
               </div>
               
+              <div className="mt-8 text-center lg:text-left">
+                <Link
+                  href="https://app.leanaiconstruction.com"
+                  className="text-sm font-semibold text-white hover:text-primary-200 transition-colors"
+                >
+                  Already have an account? Sign In →
+                </Link>
+              </div>
+              
               <div className="mt-10 flex items-center gap-6 justify-center lg:justify-start">
                 <div className="flex -space-x-3">
                   {[1, 2, 3, 4, 5].map((i) => (
