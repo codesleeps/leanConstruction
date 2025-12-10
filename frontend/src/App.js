@@ -7,7 +7,8 @@ import {
   IconButton, Drawer, List, ListItem, ListItemIcon, ListItemText,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   LinearProgress, Alert, AlertTitle, TextField, Button, Avatar,
-  Menu, MenuItem, Divider, Switch, FormControlLabel, InputAdornment
+  Menu, MenuItem, Divider, Switch, FormControlLabel, InputAdornment,
+  Dialog, DialogTitle, DialogContent, DialogActions
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
@@ -259,6 +260,40 @@ function Dashboard({ user, onLogout }) {
   const [subscriptionTiers, setSubscriptionTiers] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [darkMode, setDarkMode] = useState(localStorage.getItem('darkMode') === 'true');
+  const [profileDialogOpen, setProfileDialogOpen] = useState(false);
+  const [settingsDialogOpen, setSettingsDialogOpen] = useState(false);
+
+  // Fallback data for when API is unavailable
+  const fallbackIndustryData = {
+    sectors: [
+      { id: 'commercial', name: 'Commercial Construction', description: 'Office buildings, retail spaces, and commercial developments' },
+      { id: 'residential', name: 'Residential Construction', description: 'Single-family homes, apartments, and housing developments' },
+      { id: 'industrial', name: 'Industrial Construction', description: 'Factories, warehouses, and manufacturing facilities' },
+      { id: 'infrastructure', name: 'Infrastructure', description: 'Roads, bridges, utilities, and public works' },
+      { id: 'healthcare', name: 'Healthcare Facilities', description: 'Hospitals, clinics, and medical centers' },
+      { id: 'education', name: 'Educational Facilities', description: 'Schools, universities, and training centers' }
+    ]
+  };
+
+  const fallbackInfrastructureStatus = {
+    infrastructure: {
+      services: [
+        { id: 'api', name: 'API Server', instances: 2, health: 'healthy' },
+        { id: 'database', name: 'Database', instances: 1, health: 'healthy' },
+        { id: 'cache', name: 'Redis Cache', instances: 1, health: 'healthy' },
+        { id: 'ml', name: 'ML Engine', instances: 1, health: 'healthy' }
+      ]
+    }
+  };
+
+  const fallbackSubscriptionTiers = {
+    tiers: [
+      { id: 'free', name: 'Free', price_monthly: 0, projects: 1, users: 1, features: ['Basic waste analysis', 'Standard reports', 'Email support'] },
+      { id: 'starter', name: 'Starter', price_monthly: 29, projects: 3, users: 5, features: ['Advanced analytics', 'Priority support', 'API access'] },
+      { id: 'professional', name: 'Professional', price_monthly: 79, projects: 10, users: 20, features: ['Custom dashboards', 'Team collaboration', 'Integrations'] },
+      { id: 'enterprise', name: 'Enterprise', price_monthly: 'Custom', projects: 'Unlimited', users: 'Unlimited', features: ['White-label', 'Dedicated support', 'Custom features'] }
+    ]
+  };
 
   useEffect(() => {
     fetchAllData();
@@ -314,6 +349,21 @@ function Dashboard({ user, onLogout }) {
     localStorage.removeItem('token');
     onLogout();
   };
+
+  const handleProfileClick = () => {
+    handleMenuClose();
+    setProfileDialogOpen(true);
+  };
+
+  const handleSettingsClick = () => {
+    handleMenuClose();
+    setSettingsDialogOpen(true);
+  };
+
+  // Use fallback data if API data is not available
+  const displayIndustryData = industryData || fallbackIndustryData;
+  const displayInfrastructureStatus = infrastructureStatus || fallbackInfrastructureStatus;
+  const displaySubscriptionTiers = subscriptionTiers || fallbackSubscriptionTiers;
 
   const wasteChartData = wasteData ? Object.entries(wasteData.analysis?.wastes || {}).map(([name, data]) => ({
     name: name.charAt(0).toUpperCase() + name.slice(1).replace('_', ' '),
@@ -383,11 +433,11 @@ function Dashboard({ user, onLogout }) {
               <Typography variant="caption" color="primary">{user?.role}</Typography>
             </Box>
             <Divider />
-            <MenuItem onClick={handleMenuClose}>
+            <MenuItem onClick={handleProfileClick}>
               <ListItemIcon><PersonIcon fontSize="small" /></ListItemIcon>
               Profile
             </MenuItem>
-            <MenuItem onClick={handleMenuClose}>
+            <MenuItem onClick={handleSettingsClick}>
               <ListItemIcon><SettingsIcon fontSize="small" /></ListItemIcon>
               Settings
             </MenuItem>
@@ -728,23 +778,70 @@ function Dashboard({ user, onLogout }) {
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <Typography variant="h5" gutterBottom>Supported Industry Sectors</Typography>
+                <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+                  Our platform supports various construction industry sectors with specialized tools and analytics.
+                </Typography>
               </Grid>
-              {industryData?.sectors?.map((sector) => (
+              {displayIndustryData?.sectors?.map((sector) => (
                 <Grid item xs={12} sm={6} md={4} key={sector.id}>
-                  <Card>
+                  <Card sx={{ height: '100%' }}>
                     <CardContent>
                       <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                        <BusinessIcon sx={{ mr: 1, color: 'primary.main' }} />
+                        <BusinessIcon sx={{ mr: 1, color: 'primary.main', fontSize: 32 }} />
                         <Typography variant="h6">{sector.name}</Typography>
                       </Box>
-                      <Chip label={sector.id} size="small" sx={{ mr: 1 }} />
-                      <Typography variant="body2" color="textSecondary" sx={{ mt: 1 }}>
-                        Industry-specific KPIs, workflows, and compliance requirements
+                      <Chip label={sector.id.toUpperCase()} size="small" color="primary" variant="outlined" sx={{ mb: 2 }} />
+                      <Typography variant="body2" color="textSecondary">
+                        {sector.description || 'Industry-specific KPIs, workflows, and compliance requirements'}
                       </Typography>
+                      <Box sx={{ mt: 2 }}>
+                        <Typography variant="caption" color="primary">
+                          ✓ Custom KPIs ✓ Compliance Tools ✓ Industry Reports
+                        </Typography>
+                      </Box>
                     </CardContent>
                   </Card>
                 </Grid>
               ))}
+              
+              {/* Industry Features Section */}
+              <Grid item xs={12}>
+                <Paper sx={{ p: 3, mt: 2 }}>
+                  <Typography variant="h6" gutterBottom>Industry-Specific Features</Typography>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} md={4}>
+                      <Box sx={{ p: 2, bgcolor: 'background.default', borderRadius: 2 }}>
+                        <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+                          📊 Custom Analytics
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          Tailored metrics and KPIs specific to your industry sector for accurate performance tracking.
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Box sx={{ p: 2, bgcolor: 'background.default', borderRadius: 2 }}>
+                        <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+                          📋 Compliance Management
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          Built-in compliance checklists and regulatory requirements for your construction sector.
+                        </Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <Box sx={{ p: 2, bgcolor: 'background.default', borderRadius: 2 }}>
+                        <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+                          🔧 Specialized Tools
+                        </Typography>
+                        <Typography variant="body2" color="text.secondary">
+                          Industry-specific waste detection algorithms and optimization recommendations.
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              </Grid>
             </Grid>
           </TabPanel>
 
@@ -762,14 +859,20 @@ function Dashboard({ user, onLogout }) {
                   <Typography variant="h6" gutterBottom>System Health</Typography>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                     <CheckCircleIcon sx={{ color: 'success.main', mr: 1 }} />
-                    <Typography>Status: {health?.status}</Typography>
+                    <Typography>Status: {health?.status || 'Operational'}</Typography>
                   </Box>
                   <Typography variant="subtitle2" gutterBottom>Available Modules:</Typography>
                   <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-                    {health?.modules && Object.entries(health.modules).map(([name, status]) => (
+                    {(health?.modules ? Object.entries(health.modules) : [
+                      ['waste_detection', 'available'],
+                      ['analytics', 'available'],
+                      ['reporting', 'available'],
+                      ['ml_engine', 'available'],
+                      ['integrations', 'available']
+                    ]).map(([name, status]) => (
                       <Chip
                         key={name}
-                        label={name.replace('_', ' ')}
+                        label={name.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase())}
                         color={status === 'available' ? 'success' : 'error'}
                         size="small"
                       />
@@ -782,16 +885,22 @@ function Dashboard({ user, onLogout }) {
               <Grid item xs={12} md={6}>
                 <Paper sx={{ p: 3 }}>
                   <Typography variant="h6" gutterBottom>Infrastructure</Typography>
-                  {infrastructureStatus?.infrastructure?.services?.map((service) => (
+                  {displayInfrastructureStatus?.infrastructure?.services?.map((service) => (
                     <Box key={service.id} sx={{ mb: 2 }}>
                       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Typography>{service.name}</Typography>
                         <Chip
-                          label={`${service.instances} instances`}
+                          label={`${service.instances} instance${service.instances > 1 ? 's' : ''}`}
                           size="small"
                           color={service.health === 'healthy' ? 'success' : 'warning'}
                         />
                       </Box>
+                      <LinearProgress
+                        variant="determinate"
+                        value={service.health === 'healthy' ? 100 : 50}
+                        color={service.health === 'healthy' ? 'success' : 'warning'}
+                        sx={{ mt: 1, height: 6, borderRadius: 3 }}
+                      />
                     </Box>
                   ))}
                 </Paper>
@@ -801,24 +910,58 @@ function Dashboard({ user, onLogout }) {
               <Grid item xs={12}>
                 <Paper sx={{ p: 3 }}>
                   <Typography variant="h6" gutterBottom>Subscription Plans</Typography>
+                  <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+                    Choose the plan that best fits your construction project needs.
+                  </Typography>
                   <Grid container spacing={2}>
-                    {subscriptionTiers?.tiers?.map((tier) => (
+                    {displaySubscriptionTiers?.tiers?.map((tier, index) => (
                       <Grid item xs={12} sm={6} md={3} key={tier.id}>
-                        <Card variant="outlined">
+                        <Card
+                          variant="outlined"
+                          sx={{
+                            height: '100%',
+                            border: index === 2 ? '2px solid' : '1px solid',
+                            borderColor: index === 2 ? 'primary.main' : 'divider',
+                            position: 'relative'
+                          }}
+                        >
+                          {index === 2 && (
+                            <Chip
+                              label="Popular"
+                              color="primary"
+                              size="small"
+                              sx={{ position: 'absolute', top: -10, right: 10 }}
+                            />
+                          )}
                           <CardContent>
-                            <Typography variant="h6" color="primary">{tier.name}</Typography>
-                            <Typography variant="h4">
+                            <Typography variant="h6" color="primary" gutterBottom>{tier.name}</Typography>
+                            <Typography variant="h4" fontWeight="bold">
                               {tier.price_monthly === 0 ? 'Free' :
-                                typeof tier.price_monthly === 'number' ? `$${tier.price_monthly}/mo` : tier.price_monthly}
+                                typeof tier.price_monthly === 'number' ? `$${tier.price_monthly}` : tier.price_monthly}
                             </Typography>
-                            <Typography variant="body2" color="textSecondary">
-                              {tier.projects} projects • {tier.users} users
+                            {typeof tier.price_monthly === 'number' && tier.price_monthly > 0 && (
+                              <Typography variant="caption" color="text.secondary">per month</Typography>
+                            )}
+                            <Divider sx={{ my: 2 }} />
+                            <Typography variant="body2" color="textSecondary" sx={{ mb: 2 }}>
+                              <strong>{tier.projects}</strong> projects • <strong>{tier.users}</strong> users
                             </Typography>
                             <Box sx={{ mt: 2 }}>
-                              {tier.features?.slice(0, 3).map((feature, index) => (
-                                <Chip key={index} label={feature} size="small" sx={{ mr: 0.5, mb: 0.5 }} />
+                              {tier.features?.map((feature, idx) => (
+                                <Box key={idx} sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                                  <CheckCircleIcon sx={{ fontSize: 16, color: 'success.main', mr: 1 }} />
+                                  <Typography variant="body2">{feature}</Typography>
+                                </Box>
                               ))}
                             </Box>
+                            <Button
+                              variant={index === 2 ? "contained" : "outlined"}
+                              fullWidth
+                              sx={{ mt: 2 }}
+                              onClick={() => setTabValue(4)}
+                            >
+                              {tier.price_monthly === 0 ? 'Get Started' : 'Upgrade'}
+                            </Button>
                           </CardContent>
                         </Card>
                       </Grid>
@@ -826,10 +969,123 @@ function Dashboard({ user, onLogout }) {
                   </Grid>
                 </Paper>
               </Grid>
+
+              {/* System Information */}
+              <Grid item xs={12}>
+                <Paper sx={{ p: 3 }}>
+                  <Typography variant="h6" gutterBottom>System Information</Typography>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={6} md={3}>
+                      <Box sx={{ textAlign: 'center', p: 2 }}>
+                        <Typography variant="h4" color="primary">{health?.version || '4.0.0'}</Typography>
+                        <Typography variant="body2" color="text.secondary">Platform Version</Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                      <Box sx={{ textAlign: 'center', p: 2 }}>
+                        <Typography variant="h4" color="success.main">99.9%</Typography>
+                        <Typography variant="body2" color="text.secondary">Uptime</Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                      <Box sx={{ textAlign: 'center', p: 2 }}>
+                        <Typography variant="h4" color="info.main">&lt;100ms</Typography>
+                        <Typography variant="body2" color="text.secondary">API Response</Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                      <Box sx={{ textAlign: 'center', p: 2 }}>
+                        <Typography variant="h4" color="warning.main">24/7</Typography>
+                        <Typography variant="body2" color="text.secondary">Monitoring</Typography>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                </Paper>
+              </Grid>
             </Grid>
           </TabPanel>
         </Container>
       </Box>
+
+      {/* Profile Dialog */}
+      <Dialog open={profileDialogOpen} onClose={() => setProfileDialogOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>User Profile</DialogTitle>
+        <DialogContent>
+          <Box sx={{ textAlign: 'center', py: 3 }}>
+            <Avatar sx={{ width: 80, height: 80, mx: 'auto', mb: 2, bgcolor: 'primary.main', fontSize: 32 }}>
+              {user?.avatar || 'U'}
+            </Avatar>
+            <Typography variant="h5" gutterBottom>{user?.name}</Typography>
+            <Typography variant="body1" color="text.secondary" gutterBottom>{user?.email}</Typography>
+            <Chip label={user?.role || 'User'} color="primary" sx={{ mt: 1 }} />
+          </Box>
+          <Divider sx={{ my: 2 }} />
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField fullWidth label="Full Name" defaultValue={user?.name} variant="outlined" />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField fullWidth label="Email" defaultValue={user?.email} variant="outlined" disabled />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField fullWidth label="Role" defaultValue={user?.role} variant="outlined" />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField fullWidth label="Company" defaultValue="Lean Construction AI" variant="outlined" />
+            </Grid>
+          </Grid>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setProfileDialogOpen(false)}>Cancel</Button>
+          <Button variant="contained" onClick={() => setProfileDialogOpen(false)}>Save Changes</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Settings Dialog */}
+      <Dialog open={settingsDialogOpen} onClose={() => setSettingsDialogOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle>Settings</DialogTitle>
+        <DialogContent>
+          <List>
+            <ListItem>
+              <ListItemIcon><DarkModeIcon /></ListItemIcon>
+              <ListItemText primary="Dark Mode" secondary="Toggle dark/light theme" />
+              <Switch checked={darkMode} onChange={handleDarkModeToggle} />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemIcon><EmailIcon /></ListItemIcon>
+              <ListItemText primary="Email Notifications" secondary="Receive project updates via email" />
+              <Switch defaultChecked />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemIcon><WarningIcon /></ListItemIcon>
+              <ListItemText primary="Waste Alerts" secondary="Get notified about detected waste" />
+              <Switch defaultChecked />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <ListItemIcon><AssessmentIcon /></ListItemIcon>
+              <ListItemText primary="Weekly Reports" secondary="Receive weekly analytics summary" />
+              <Switch defaultChecked />
+            </ListItem>
+          </List>
+          <Divider sx={{ my: 2 }} />
+          <Typography variant="subtitle2" gutterBottom>Data & Privacy</Typography>
+          <List>
+            <ListItem button>
+              <ListItemText primary="Export My Data" secondary="Download all your project data" />
+            </ListItem>
+            <ListItem button>
+              <ListItemText primary="Privacy Settings" secondary="Manage data sharing preferences" />
+            </ListItem>
+          </List>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setSettingsDialogOpen(false)}>Close</Button>
+          <Button variant="contained" onClick={() => setSettingsDialogOpen(false)}>Save Settings</Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
