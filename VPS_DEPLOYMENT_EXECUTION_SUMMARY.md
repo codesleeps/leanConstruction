@@ -51,23 +51,20 @@ Verified that all services are running correctly:
 ## Next Required Steps
 
 ### 1. DNS Configuration
-Update DNS records at your domain registrar to point:
-- `constructionaipro.com` → `srv1187860.hstgr.cloud`
-- `www.constructionaipro.com` → `srv1187860.hstgr.cloud`
-- `agentsflowai.cloud` → `srv1187860.hstgr.cloud`
-- `www.agentsflowai.cloud` → `srv1187860.hstgr.cloud`
+Update DNS A records at your domain registrar to point:
+- `leanaiconstruction.com` → `72.61.16.111`
+- `www.leanaiconstruction.com` → `72.61.16.111`
 
 ### 2. SSL Certificate Setup
 After DNS propagation (may take a few minutes to hours), run:
 ```bash
-sudo certbot --nginx -d constructionaipro.com -d www.constructionaipro.com
-sudo certbot --nginx -d agentsflowai.cloud -d www.agentsflowai.cloud
+sudo certbot --nginx -d leanaiconstruction.com -d www.leanaiconstruction.com
 ```
 
 ### 3. Final Verification
 After DNS and SSL setup, verify access to:
-- https://constructionaipro.com
-- https://agentsflowai.cloud
+- https://leanaiconstruction.com
+- https://www.leanaiconstruction.com
 
 ## Monitoring and Maintenance
 

@@ -32,8 +32,7 @@ This document summarizes the successful deployment of the Lean Construction AI p
 - Firewall configuration (UFW)
 
 ### Domains Configured
-- Lean Construction AI: constructionaipro.com
-- PixelCraft Bloom: agentsflowai.cloud
+- Lean Construction AI: leanaiconstruction.com
 
 ## Deployment Process
 
@@ -76,19 +75,20 @@ This document summarizes the successful deployment of the Lean Construction AI p
 
 ## Next Steps
 1. Update DNS records to point to VPS IP (72.61.16.111)
+   - leanaiconstruction.com → 72.61.16.111
+   - www.leanaiconstruction.com → 72.61.16.111
 2. Run SSL certificate setup:
    ```
-   sudo certbot --nginx -d constructionaipro.com -d www.constructionaipro.com
-   sudo certbot --nginx -d agentsflowai.cloud -d www.agentsflowai.cloud
+   sudo certbot --nginx -d leanaiconstruction.com -d www.leanaiconstruction.com
    ```
 3. Conduct thorough testing of all application features
 4. Set up alerting and notification systems
 5. Monitor performance and resource usage
 
 ## Access Points
-- **Lean Construction AI**: http://constructionaipro.com
-- **PixelCraft Bloom**: http://agentsflowai.cloud
-- **Flower Monitoring**: http://constructionaipro.com:5555 (after DNS update)
+- **Lean Construction AI**: https://leanaiconstruction.com
+- **API Documentation**: https://leanaiconstruction.com/docs
+- **Flower Monitoring**: https://leanaiconstruction.com:5555 (after SSL setup)
 
 ## Commands for Management
 - Check PM2 status: `pm2 status`

@@ -152,30 +152,21 @@ Peak Performance (2x load):
 1. **Update DNS Records**:
    ```
    Type: A Record
-   Name: leanconstruction.ai
-   Value: YOUR_VPS_IP
-   TTL: 3600
+   Name: leanaiconstruction.com
+   Value: 72.61.16.111
+   TTL: 300
    
    Type: A Record
-   Name: www.leanconstruction.ai
-   Value: YOUR_VPS_IP
-   TTL: 3600
-   
-   Type: A Record
-   Name: pixelcraft.bloom
-   Value: YOUR_VPS_IP
-   TTL: 3600
-   
-   Type: A Record
-   Name: www.pixelcraft.bloom
-   Value: YOUR_VPS_IP
-   TTL: 3600
+   Name: www.leanaiconstruction.com
+   Value: 72.61.16.111
+   TTL: 300
    ```
 
 2. **Verify DNS Propagation**:
    ```bash
-   dig leanconstruction.ai
-   dig pixelcraft.bloom
+   dig leanaiconstruction.com A +short
+   dig www.leanaiconstruction.com A +short
+   # Expected output: 72.61.16.111
    ```
 
 ### Step 4: SSL Certificate Setup (20 minutes)
@@ -184,9 +175,8 @@ Peak Performance (2x load):
 # Install Certbot
 sudo apt install -y certbot python3-certbot-nginx
 
-# Get certificates
-sudo certbot --nginx -d leanconstruction.ai -d www.leanconstruction.ai
-sudo certbot --nginx -d pixelcraft.bloom -d www.pixelcraft.bloom
+# Get certificates for leanaiconstruction.com
+sudo certbot --nginx -d leanaiconstruction.com -d www.leanaiconstruction.com
 
 # Test auto-renewal
 sudo certbot renew --dry-run
@@ -209,7 +199,7 @@ sudo certbot renew --dry-run
    SMTP_PORT=587
    SMTP_USER=your-email@domain.com
    SMTP_PASSWORD=your-email-password
-   ALLOWED_HOSTS=leanconstruction.ai,www.leanconstruction.ai
+   ALLOWED_HOSTS=leanaiconstruction.com,www.leanaiconstruction.com
    EOF
    ```
 
@@ -218,8 +208,8 @@ sudo certbot renew --dry-run
    cd /var/www/lean-construction/frontend
    
    cat > .env.production << 'EOF'
-   REACT_APP_API_URL=https://leanconstruction.ai/api
-   REACT_APP_WS_URL=wss://leanconstruction.ai/ws
+   REACT_APP_API_URL=https://leanaiconstruction.com/api
+   REACT_APP_WS_URL=wss://leanaiconstruction.com/ws
    REACT_APP_ENVIRONMENT=production
    EOF
    ```
@@ -232,7 +222,7 @@ sudo certbot renew --dry-run
    pm2 status
    
    # Test API endpoints
-   curl https://leanconstruction.ai/api/health
+   curl https://leanaiconstruction.com/api/health
    
    # Check logs
    pm2 logs lean-construction-api
@@ -241,11 +231,10 @@ sudo certbot renew --dry-run
 2. **Frontend Testing**:
    ```bash
    # Test website accessibility
-   curl -I https://leanconstruction.ai
-   curl -I https://pixelcraft.bloom
+   curl -I https://leanaiconstruction.com
    
    # Test authentication
-   curl -X POST https://leanconstruction.ai/api/auth/login \
+   curl -X POST https://leanaiconstruction.com/api/auth/login \
      -H "Content-Type: application/json" \
      -d '{"email":"demo@example.com","password":"demo123"}'
    ```
@@ -253,10 +242,10 @@ sudo certbot renew --dry-run
 3. **Security Testing**:
    ```bash
    # Test security headers
-   curl -s -D - https://leanconstruction.ai -o /dev/null | grep -E "^(x-|X-|content-security)"
+   curl -s -D - https://leanaiconstruction.com -o /dev/null | grep -E "^(x-|X-|content-security)"
    
    # Test rate limiting
-   for i in {1..110}; do curl -s -o /dev/null -w "%{http_code}\n" https://leanconstruction.ai/api/health; done
+   for i in {1..110}; do curl -s -o /dev/null -w "%{http_code}\n" https://leanaiconstruction.com/api/health; done
    ```
 
 ## 📋 Pre-Launch Checklist

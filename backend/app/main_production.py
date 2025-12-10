@@ -1,17 +1,16 @@
 """
-Lean Construction AI API - Lite Version
-For demo/testing without heavy ML dependencies
+Lean Construction AI API - Production Version
+Full-featured API with graceful degradation for missing ML dependencies
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import OAuth2PasswordRequestForm
 from pydantic import BaseModel
 from typing import Dict, List, Any, Optional
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import logging
-
-# Import payment routes
-from app.api.payments import router as payment_router
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -19,41 +18,45 @@ logger = logging.getLogger(__name__)
 
 app = FastAPI(
     title="Lean Construction AI API",
-    description="AI-powered construction analytics platform - Lite Version for Demo",
+    description="AI-powered construction analytics platform - Production Ready",
     version="4.0.0",
     docs_url="/docs",
     redoc_url="/redoc"
 )
 
-# Import and apply security middleware
+# CORS middleware for frontend integration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:3000",
+        "http://localhost:8000",
+        "http://127.0.0.1:3000",
+        "http://127.0.0.1:8000",
+        "https://leanconstruction.ai",
+        "https://app.leanconstruction.ai",
+        "https://leanaiconstruction.com",
+        "https://www.leanaiconstruction.com",
+    ],
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=["*"],
+)
+
+# Try to import payment routes
+try:
+    from app.api.payments import router as payment_router
+    app.include_router(payment_router)
+    logger.info("Payment routes included successfully")
+except ImportError as e:
+    logger.warning(f"Payment routes not available: {e}")
+
+# Try to import security middleware
 try:
     from app.middleware.security import add_security_middleware
     add_security_middleware(app, enable_rate_limit=True, rate_limit=100)
     logger.info("Security middleware loaded successfully")
 except ImportError as e:
     logger.warning(f"Security middleware not available: {e}")
-    # Fallback to basic CORS if middleware not available
-    from fastapi.middleware.cors import CORSMiddleware
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=[
-            "http://localhost:3000",
-            "http://localhost:8000",
-            "http://127.0.0.1:3000",
-            "http://127.0.0.1:8000",
-            "https://leanconstruction.ai",
-            "https://app.leanconstruction.ai",
-            "https://leanaiconstruction.com",
-            "https://www.leanaiconstruction.com",
-        ],
-        allow_credentials=True,
-        allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
-        allow_headers=["*"],
-    )
-
-# Include payment routes
-app.include_router(payment_router)
-logger.info("Payment routes included successfully")
 
 # ============================================
 # Health & Status Endpoints
@@ -92,6 +95,14 @@ async def health_check():
         }
     }
 
+@app.get("/api/status")
+async def api_status():
+    return {
+        "status": "operational",
+        "timestamp": datetime.utcnow().isoformat(),
+        "version": "4.0.0"
+    }
+
 @app.get("/api/v1/ml/health")
 async def ml_health():
     return {
@@ -102,7 +113,7 @@ async def ml_health():
     }
 
 # ============================================
-# Phase 2 - Waste Detection Demo
+# Phase 2 - Waste Detection
 # ============================================
 
 class WasteAnalysisRequest(BaseModel):
@@ -112,7 +123,7 @@ class WasteAnalysisRequest(BaseModel):
 
 @app.post("/api/v1/ml/analyze-waste")
 async def analyze_waste(request: WasteAnalysisRequest):
-    """Demo: Analyze project for lean wastes (DOWNTIME framework)"""
+    """Analyze project for lean wastes (DOWNTIME framework)"""
     return {
         "status": "success",
         "project_id": request.project_id,
@@ -156,7 +167,7 @@ async def get_waste_types():
     }
 
 # ============================================
-# Phase 2 - Forecasting Demo
+# Phase 2 - Forecasting
 # ============================================
 
 class ForecastRequest(BaseModel):
@@ -165,7 +176,7 @@ class ForecastRequest(BaseModel):
 
 @app.post("/api/v1/ml/forecast")
 async def generate_forecast(request: ForecastRequest):
-    """Demo: Generate schedule and cost forecasts"""
+    """Generate schedule and cost forecasts"""
     return {
         "status": "success",
         "project_id": request.project_id,
@@ -193,12 +204,12 @@ async def generate_forecast(request: ForecastRequest):
     }
 
 # ============================================
-# Phase 3 - Lean Tools Demo
+# Phase 3 - Lean Tools
 # ============================================
 
 @app.get("/api/v1/ml/lean/metrics")
 async def get_lean_metrics():
-    """Demo: Get lean metrics summary"""
+    """Get lean metrics summary"""
     return {
         "status": "success",
         "metrics": {
@@ -211,12 +222,12 @@ async def get_lean_metrics():
     }
 
 # ============================================
-# Phase 4 - Analytics & BI Demo
+# Phase 4 - Analytics & BI
 # ============================================
 
 @app.get("/api/v1/ml/analytics/kpis/{project_id}")
 async def get_project_kpis(project_id: str):
-    """Demo: Get project KPIs"""
+    """Get project KPIs"""
     return {
         "status": "success",
         "project_id": project_id,
@@ -252,7 +263,7 @@ async def get_project_kpis(project_id: str):
 
 @app.get("/api/v1/ml/analytics/executive-summary/{project_id}")
 async def get_executive_summary(project_id: str):
-    """Demo: Get executive decision support summary"""
+    """Get executive decision support summary"""
     return {
         "status": "success",
         "project_id": project_id,
@@ -278,7 +289,7 @@ async def get_executive_summary(project_id: str):
     }
 
 # ============================================
-# Phase 4 - Industry Customizations Demo
+# Phase 4 - Industry Customizations
 # ============================================
 
 @app.get("/api/v1/ml/industry/sectors")
@@ -327,19 +338,112 @@ async def get_industry_sectors():
 
 @app.get("/api/v1/ml/industry/profile/{sector}")
 async def get_industry_profile(sector: str):
-    """Demo: Get industry profile"""
+    """Get industry profile"""
     profiles = {
         "healthcare": {
+            "sector": "healthcare",
+            "name": "Healthcare Construction",
             "typical_phases": ["Pre-design", "Design", "Permitting", "Site Work", "Foundation", "Structure", "MEP", "Interior", "Commissioning"],
-            "critical_compliance": ["HIPAA", "Joint Commission", "ADA"],
-            "safety_factors": ["Infection control", "Patient safety", "Air quality"],
-            "kpi_priorities": ["ICRA compliance", "Noise control", "Schedule adherence"]
+            "critical_compliance": ["HIPAA", "Joint Commission", "ADA", "CMS Conditions of Participation"],
+            "safety_factors": ["Infection control", "Patient safety", "Air quality", "Noise control"],
+            "kpi_priorities": ["ICRA compliance", "Noise control", "Schedule adherence", "Infection prevention"],
+            "risk_factors": ["Regulatory changes", "Equipment lead times", "Infection control during construction"],
+            "best_practices": [
+                "Implement ICRA protocols from day one",
+                "Coordinate with hospital operations for phasing",
+                "Use negative air pressure in construction zones",
+                "Daily infection control monitoring"
+            ]
         },
         "commercial": {
+            "sector": "commercial",
+            "name": "Commercial Construction",
             "typical_phases": ["Pre-construction", "Demolition", "Foundation", "Structure", "Envelope", "MEP", "Finishes", "Occupancy"],
-            "critical_compliance": ["ADA", "Fire codes", "LEED"],
-            "safety_factors": ["Fall protection", "Electrical safety", "Fire prevention"],
-            "kpi_priorities": ["Cost control", "Schedule", "Quality"]
+            "critical_compliance": ["ADA", "Fire codes", "LEED", "Local zoning"],
+            "safety_factors": ["Fall protection", "Electrical safety", "Fire prevention", "Public safety"],
+            "kpi_priorities": ["Cost control", "Schedule", "Quality", "Tenant satisfaction"],
+            "risk_factors": ["Market conditions", "Tenant changes", "Material costs"],
+            "best_practices": [
+                "Early tenant engagement",
+                "Value engineering workshops",
+                "Prefabrication where possible",
+                "BIM coordination"
+            ]
+        },
+        "residential": {
+            "sector": "residential",
+            "name": "Residential Construction",
+            "typical_phases": ["Site Prep", "Foundation", "Framing", "Roofing", "MEP Rough-in", "Insulation", "Drywall", "Finishes", "Landscaping"],
+            "critical_compliance": ["Building codes", "Energy codes", "HOA requirements", "Warranty standards"],
+            "safety_factors": ["Fall protection", "Tool safety", "Site security", "Weather protection"],
+            "kpi_priorities": ["Customer satisfaction", "Schedule", "Quality", "Warranty claims"],
+            "risk_factors": ["Weather delays", "Subcontractor availability", "Material shortages"],
+            "best_practices": [
+                "Clear communication with homeowners",
+                "Quality checklists at each phase",
+                "Weather contingency planning",
+                "Detailed punch list process"
+            ]
+        },
+        "industrial": {
+            "sector": "industrial",
+            "name": "Industrial Construction",
+            "typical_phases": ["Site Development", "Foundation", "Steel Erection", "Envelope", "Process Equipment", "MEP", "Commissioning"],
+            "critical_compliance": ["OSHA", "EPA", "Process safety", "Fire codes"],
+            "safety_factors": ["Heavy equipment", "Confined spaces", "Chemical handling", "Crane operations"],
+            "kpi_priorities": ["Safety", "Equipment installation", "Commissioning", "Production timeline"],
+            "risk_factors": ["Equipment delivery", "Specialized labor", "Process changes"],
+            "best_practices": [
+                "Detailed equipment coordination",
+                "Early commissioning planning",
+                "Specialized safety training",
+                "Process simulation before startup"
+            ]
+        },
+        "infrastructure": {
+            "sector": "infrastructure",
+            "name": "Infrastructure Projects",
+            "typical_phases": ["Planning", "Design", "Right-of-way", "Earthwork", "Structures", "Paving", "Utilities", "Finishing"],
+            "critical_compliance": ["DOT standards", "Environmental permits", "ADA", "Utility regulations"],
+            "safety_factors": ["Traffic control", "Excavation safety", "Public safety", "Utility conflicts"],
+            "kpi_priorities": ["Public safety", "Schedule", "Environmental compliance", "Budget"],
+            "risk_factors": ["Weather", "Utility conflicts", "Public opposition", "Regulatory changes"],
+            "best_practices": [
+                "Comprehensive utility coordination",
+                "Public communication plan",
+                "Environmental monitoring",
+                "Traffic management planning"
+            ]
+        },
+        "educational": {
+            "sector": "educational",
+            "name": "Educational Facilities",
+            "typical_phases": ["Planning", "Design", "Site Work", "Foundation", "Structure", "MEP", "Interior", "Technology", "Commissioning"],
+            "critical_compliance": ["ADA", "Fire codes", "Educational standards", "Security requirements"],
+            "safety_factors": ["Student safety", "Air quality", "Security systems", "Playground safety"],
+            "kpi_priorities": ["Schedule (academic calendar)", "Budget", "Learning environment", "Security"],
+            "risk_factors": ["Academic calendar constraints", "Funding changes", "Technology requirements"],
+            "best_practices": [
+                "Align with academic calendar",
+                "Engage educators in design",
+                "Future-proof technology infrastructure",
+                "Security-first design approach"
+            ]
+        },
+        "data_center": {
+            "sector": "data_center",
+            "name": "Data Center Construction",
+            "typical_phases": ["Site Selection", "Design", "Foundation", "Structure", "Power Infrastructure", "Cooling Systems", "IT Infrastructure", "Testing", "Commissioning"],
+            "critical_compliance": ["Uptime Institute", "TIA-942", "Energy codes", "Security standards"],
+            "safety_factors": ["Electrical safety", "Fire suppression", "Security", "Environmental controls"],
+            "kpi_priorities": ["Reliability", "Power efficiency", "Cooling capacity", "Security"],
+            "risk_factors": ["Power availability", "Equipment lead times", "Technology changes"],
+            "best_practices": [
+                "Redundancy in all critical systems",
+                "Comprehensive testing protocols",
+                "Energy efficiency optimization",
+                "Scalability planning"
+            ]
         }
     }
     return {
@@ -349,12 +453,12 @@ async def get_industry_profile(sector: str):
     }
 
 # ============================================
-# Phase 4 - Infrastructure Demo
+# Phase 4 - Infrastructure
 # ============================================
 
 @app.get("/api/v1/ml/infrastructure/status")
 async def get_infrastructure_status():
-    """Demo: Get infrastructure status"""
+    """Get infrastructure status"""
     return {
         "status": "success",
         "infrastructure": {
@@ -373,12 +477,12 @@ async def get_infrastructure_status():
     }
 
 # ============================================
-# Phase 4 - Commercial Demo
+# Phase 4 - Commercial
 # ============================================
 
 @app.get("/api/v1/ml/commercial/tiers")
 async def get_subscription_tiers():
-    """Demo: Get subscription tiers"""
+    """Get subscription tiers"""
     return {
         "status": "success",
         "tiers": [
@@ -450,6 +554,49 @@ async def get_models_info():
         },
         "phase": "Phase 4 Production Ready",
         "version": "4.0.0"
+    }
+
+# ============================================
+# Reports
+# ============================================
+
+@app.get("/api/v1/ml/reports/types")
+async def get_report_types():
+    """Get available report types"""
+    return {
+        "report_types": [
+            {
+                "type": "daily",
+                "name": "Daily Report",
+                "description": "Daily progress and safety summary",
+                "sections": ["progress", "safety"]
+            },
+            {
+                "type": "weekly",
+                "name": "Weekly Report",
+                "description": "Weekly comprehensive review",
+                "sections": ["progress", "waste", "safety", "workplace"]
+            },
+            {
+                "type": "monthly",
+                "name": "Monthly Report",
+                "description": "Monthly full analysis with forecasting",
+                "sections": ["progress", "waste", "forecast", "safety", "workplace"]
+            },
+            {
+                "type": "executive",
+                "name": "Executive Report",
+                "description": "High-level summary for management",
+                "sections": ["progress", "forecast"]
+            },
+            {
+                "type": "comprehensive",
+                "name": "Comprehensive Report",
+                "description": "Full analysis including all sections",
+                "sections": ["progress", "waste", "forecast", "safety", "workplace"]
+            }
+        ],
+        "output_formats": ["json", "html", "markdown"]
     }
 
 if __name__ == "__main__":

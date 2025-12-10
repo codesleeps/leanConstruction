@@ -33,14 +33,13 @@ chmod +x modified-vps-deployment.sh
 ```
 
 ### 4. DNS Configuration
-Update DNS records to point:
-- constructionaipro.com → srv1187860.hstgr.cloud
-- agentsflowai.cloud → srv1187860.hstgr.cloud
+Update DNS A records to point:
+- leanaiconstruction.com → 72.61.16.111
+- www.leanaiconstruction.com → 72.61.16.111
 
 ### 5. SSL Certificate Setup
 ```bash
-sudo certbot --nginx -d constructionaipro.com -d www.constructionaipro.com
-sudo certbot --nginx -d agentsflowai.cloud -d www.agentsflowai.cloud
+sudo certbot --nginx -d leanaiconstruction.com -d www.leanaiconstruction.com
 ```
 
 ### 6. Verify Deployment

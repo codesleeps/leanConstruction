@@ -1953,15 +1953,10 @@ async def generate_insights(project_data: Dict[str, Any]):
 
 @router.get("/industry/sectors")
 async def get_industry_sectors():
-    """Get available industry sectors"""
+    """Get available industry sectors with descriptions"""
     try:
-        sectors = [
-            {
-                "id": s.value,
-                "name": s.value.replace("_", " ").title()
-            }
-            for s in IndustrySector
-        ]
+        # Use the industry customization system to get full sector details
+        sectors = industry_customization_system.get_available_sectors()
         return {"status": "success", "sectors": sectors}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
