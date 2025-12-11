@@ -39,6 +39,7 @@ import axios from 'axios';
 import { StripePaymentProvider } from './components/StripePaymentContext';
 import SubscriptionManager from './components/SubscriptionManager';
 import Logo from './components/Logo';
+import SignupPage from './components/SignupPage';
 
 const API_BASE = 'http://localhost:8000';
 
@@ -57,7 +58,7 @@ function TabPanel({ children, value, index }) {
 }
 
 // Login Component
-function LoginPage({ onLogin }) {
+function LoginPage({ onLogin, onSwitchToSignup }) {
   const [email, setEmail] = useState('demo@leanconstruction.ai');
   const [password, setPassword] = useState('demo123');
   const [showPassword, setShowPassword] = useState(false);
@@ -224,8 +225,33 @@ function LoginPage({ onLogin }) {
             </Button>
           </form>
 
+          {/* Try Demo Accounts Button */}
+          <Box sx={{ mt: 3 }}>
+            <Button
+              fullWidth
+              variant="outlined"
+              size="large"
+              onClick={onSwitchToSignup}
+              sx={{
+                py: 1.5,
+                borderRadius: 2,
+                textTransform: 'none',
+                fontSize: '1rem',
+                fontWeight: 600,
+                borderColor: 'white',
+                color: 'white',
+                '&:hover': {
+                  borderColor: 'white',
+                  bgcolor: 'rgba(255,255,255,0.1)',
+                }
+              }}
+            >
+              Try Demo Accounts
+            </Button>
+          </Box>
+
           {/* Demo Credentials */}
-          <Box sx={{ mt: 3, p: 2, bgcolor: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)', borderRadius: 2 }}>
+          <Box sx={{ mt: 2, p: 2, bgcolor: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)', borderRadius: 2 }}>
             <Typography variant="caption" color="text.secondary" display="block" textAlign="center">
               Demo Credentials
             </Typography>
@@ -1120,6 +1146,7 @@ function Dashboard({ user, onLogout }) {
 function App() {
   const [user, setUser] = useState(null);
   const [mode, setMode] = useState(localStorage.getItem('darkMode') === 'true' ? 'dark' : 'light');
+  const [currentPage, setCurrentPage] = useState('login'); // 'login' or 'signup'
 
   useEffect(() => {
     // Check for existing session
@@ -1193,6 +1220,14 @@ function App() {
     setUser(null);
   };
 
+  const handleSwitchToSignup = () => {
+    setCurrentPage('signup');
+  };
+
+  const handleSwitchToLogin = () => {
+    setCurrentPage('login');
+  };
+
   return (
     <ColorModeContext.Provider value={colorMode}>
       <StripePaymentProvider>
@@ -1200,8 +1235,10 @@ function App() {
           <CssBaseline />
           {user ? (
             <Dashboard user={user} onLogout={handleLogout} />
+          ) : currentPage === 'signup' ? (
+            <SignupPage onLogin={handleLogin} onSwitchToLogin={handleSwitchToLogin} />
           ) : (
-            <LoginPage onLogin={handleLogin} />
+            <LoginPage onLogin={handleLogin} onSwitchToSignup={handleSwitchToSignup} />
           )}
         </ThemeProvider>
       </StripePaymentProvider>
