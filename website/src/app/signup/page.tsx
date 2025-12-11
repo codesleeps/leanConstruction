@@ -18,6 +18,7 @@ const signup = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isCreatingDemo, setIsCreatingDemo] = useState(false);
   const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -53,6 +54,43 @@ const signup = () => {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDemoAccount = async (accountType: string) => {
+    setIsCreatingDemo(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/auth/demo-account/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ account_type: accountType }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.detail || 'Failed to create demo account');
+      }
+
+      // Store demo credentials for easy access
+      localStorage.setItem('demo_credentials', JSON.stringify({
+        email: data.demo_email,
+        password: data.demo_password,
+        account_type: data.account_type
+      }));
+
+      // Show success message and redirect to login
+      alert(`Demo account created!\n\nEmail: ${data.demo_email}\nPassword: ${data.demo_password}\n\nUse these credentials to log in and explore the platform.`);
+      
+      router.push('/login');
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to create demo account');
+    } finally {
+      setIsCreatingDemo(false);
     }
   };
 

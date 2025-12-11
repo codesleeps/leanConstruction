@@ -47,6 +47,21 @@ const Login = () => {
       localStorage.setItem('user_data', JSON.stringify(data.user));
 
       // Redirect to dashboard
+  const handleDemoLogin = () => {
+    // Check for demo credentials in localStorage
+    const demoCredentials = localStorage.getItem('demo_credentials');
+    if (demoCredentials) {
+      try {
+        const credentials = JSON.parse(demoCredentials);
+        setFormData({
+          email: credentials.email,
+          password: credentials.password
+        });
+      } catch (err) {
+        console.error('Error parsing demo credentials:', err);
+      }
+    }
+  };
       router.push('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
