@@ -86,12 +86,36 @@ const testimonials = [
 ];
 
 const trustedBy = [
-  "BuildRight Construction",
-  "Pacific Builders",
-  "GreenBuild Solutions",
-  "Metro Development",
-  "Skyline Projects",
-  "Foundation Corp",
+  {
+    name: "BuildRight Construction",
+    logo: "/trustedByLeadingCompanies/Aecom-logo.webp",
+    alt: "AECOM Logo"
+  },
+  {
+    name: "Pacific Builders",
+    logo: "/trustedByLeadingCompanies/BLACKRIDGE+1-528w.webp",
+    alt: "BlackRidge Logo"
+  },
+  {
+    name: "GreenBuild Solutions",
+    logo: "/trustedByLeadingCompanies/Hensel_Phelps_200_200.webp",
+    alt: "Hensel Phelps Logo"
+  },
+  {
+    name: "Metro Development",
+    logo: "/trustedByLeadingCompanies/IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp",
+    alt: "Kier Construction Logo"
+  },
+  {
+    name: "Skyline Projects",
+    logo: "/trustedByLeadingCompanies/iso-ce-web-2024-600x205-1.webp",
+    alt: "ISO CE Logo"
+  },
+  {
+    name: "Foundation Corp",
+    logo: "/trustedByLeadingCompanies/logo.webp",
+    alt: "Company Logo"
+  },
 ];
 
 export default function HomePage() {
@@ -243,8 +267,12 @@ export default function HomePage() {
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
             {trustedBy.map((company) => (
-              <div key={company} className="text-gray-400 font-semibold text-lg">
-                {company}
+              <div key={company.name} className="flex items-center justify-center h-16 px-6 py-3 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
+                <img
+                  src={company.logo}
+                  alt={company.alt}
+                  className="max-h-12 max-w-32 object-contain"
+                />
               </div>
             ))}
           </div>
@@ -284,9 +312,9 @@ export default function HomePage() {
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {features.map((feature) => (
-              <div key={feature.name} className="card card-hover">
+              <div key={feature.name} className="card card-hover w-full max-w-sm">
                 <div className={`w-12 h-12 rounded-xl ${feature.color} flex items-center justify-center mb-4`}>
                   <feature.icon className="w-6 h-6 text-white" />
                 </div>
