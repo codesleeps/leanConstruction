@@ -35,9 +35,33 @@ const features = [
     color: "bg-green-500",
   },
   {
+    name: "Site Progress Monitoring",
+    description: "Computer vision tracks construction progress automatically, providing accurate status updates and milestone tracking.",
+    icon: TrendingUp,
+    color: "bg-indigo-500",
+  },
+  {
+    name: "Safety Compliance Detection",
+    description: "AI-powered safety monitoring detects compliance violations and safety hazards in real-time to prevent accidents.",
+    icon: Shield,
+    color: "bg-red-500",
+  },
+  {
+    name: "Equipment Tracking",
+    description: "Computer vision automatically tracks equipment location, usage, and maintenance needs across your job sites.",
+    icon: Zap,
+    color: "bg-orange-500",
+  },
+  {
+    name: "5S Assessment",
+    description: "AI-driven 5S methodology evaluation ensures workplace organization and standardization across all projects.",
+    icon: CheckCircle,
+    color: "bg-teal-500",
+  },
+  {
     name: "Lean Methodology Tools",
     description: "Built-in 5S, Kanban, and value stream mapping tools to optimize your construction workflows.",
-    icon: Zap,
+    icon: Users,
     color: "bg-yellow-500",
   },
   {
@@ -45,12 +69,6 @@ const features = [
     description: "Keep your entire team aligned with shared workspaces, task management, and real-time communication.",
     icon: Users,
     color: "bg-pink-500",
-  },
-  {
-    name: "Enterprise Security",
-    description: "Bank-level encryption, SSO integration, and compliance with industry standards keep your data safe.",
-    icon: Shield,
-    color: "bg-red-500",
   },
 ];
 

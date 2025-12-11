@@ -1,7 +1,7 @@
 # 🚀 Business Growth Roadmap - What's Next
 
 **Platform Status**: ✅ **LIVE AND OPERATIONAL**  
-**Website**: https://agentsflowai.cloud  
+**Website**: https://leanaiconstruction.com
 **Date**: December 10, 2025
 
 ---
@@ -12,7 +12,7 @@
 ```bash
 # Install SSL certificates for secure HTTPS
 ssh root@srv1187860.hstgr.cloud
-certbot --nginx -d agentsflowai.cloud -d www.agentsflowai.cloud
+certbot --nginx -d leanaiconstruction.com -d www.leanaiconstruction.com
 ```
 - **Impact**: Professional security, SEO boost, customer trust
 - **Time**: 30 minutes
@@ -26,11 +26,58 @@ certbot --nginx -d agentsflowai.cloud -d www.agentsflowai.cloud
 - **Time**: 1 hour
 
 ### **3. Customer Onboarding**
-- Create user registration flow
-- Set up demo accounts for prospects
-- Configure email notifications
-- **Impact**: Start acquiring users
-- **Time**: 2-3 days
+
+#### **User Registration Flow**
+```bash
+# Set up authentication endpoints
+POST /api/auth/signup
+POST /api/auth/login
+POST /api/auth/forgot-password
+GET  /api/user/profile
+```
+- **Landing Page**: `/signup` with construction-specific value proposition
+- **Registration Form**: Company name, project size, construction type
+- **Email Verification**: Account activation with welcome email
+- **Password Reset**: Secure recovery flow
+
+#### **Demo Accounts Setup**
+```bash
+# Create demo data for prospects
+Demo Account 1: "Small Contractor" (3-10 projects)
+Demo Account 2: "Medium Builder" (10-50 projects)
+Demo Account 3: "Enterprise Client" (50+ projects)
+```
+- **Pre-populated Data**: Sample projects, waste logs, reports
+- **Guided Tours**: Interactive walkthrough of key features
+- **Feature Access**: Full platform access for 7-day trial
+- **Sample Reports**: Pre-generated analytics and insights
+
+#### **Email Notification System**
+```bash
+# Email templates to implement
+- Welcome Email (Account activation)
+- Onboarding Guide (Feature introduction)
+- Weekly Progress Updates (Usage analytics)
+- Feature Announcements (New capabilities)
+- Re-engagement Campaigns (Inactive users)
+```
+
+#### **Onboarding Sequence**
+1. **Day 0**: Welcome email with login credentials
+2. **Day 1**: Onboarding guide email with quick start tutorial
+3. **Day 3**: Check-in email asking about experience
+4. **Day 7**: Trial ending reminder with upgrade options
+5. **Day 14**: Feature highlight showcasing unused capabilities
+
+#### **Customer Success Touchpoints**
+- **Live Chat**: Integration with Intercom or similar
+- **Video Tutorials**: Screen recordings for key features
+- **Support Portal**: Knowledge base and FAQ section
+- **Feedback Collection**: In-app NPS surveys
+
+- **Impact**: Streamlined user acquisition and retention
+- **Time**: 3-5 days implementation
+- **Priority**: HIGH - Critical for customer acquisition
 
 ---
 

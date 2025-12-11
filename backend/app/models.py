@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Float, Text, ForeignKey
+from sqlalchemy import Column, Integer, String, DateTime, Float, Text, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative import declarative_base
 from datetime import datetime
@@ -16,8 +16,21 @@ class User(Base):
     role = Column(String)  # e.g., 'admin', 'manager', 'worker'
     created_at = Column(DateTime, default=datetime.utcnow)
     is_active = Column(Integer, default=1)
+    
+    # Onboarding fields
+    is_onboarded = Column(Boolean, default=False)
+    onboarding_completed_at = Column(DateTime, nullable=True)
+    company_size = Column(String)  # 'small' (3-10), 'medium' (10-50), 'enterprise' (50+)
+    construction_type = Column(String)  # 'residential', 'commercial', 'infrastructure', 'industrial'
+    phone_number = Column(String, nullable=True)
+    onboarding_step = Column(Integer, default=0)  # Track onboarding progress (0-5)
+    email_verified = Column(Boolean, default=False)
+    last_login = Column(DateTime, nullable=True)
+    demo_account = Column(Boolean, default=False)  # Mark as demo account
+    trial_expires_at = Column(DateTime, nullable=True)
 
     projects = relationship("Project", back_populates="owner")
+    onboarding_events = relationship("OnboardingEvent", back_populates="user")
 
 class Project(Base):
     __tablename__ = "projects"
@@ -66,3 +79,29 @@ class WasteLog(Base):
     resolved_at = Column(DateTime, nullable=True)
 
     project = relationship("Project", back_populates="waste_logs")
+
+class OnboardingEvent(Base):
+    __tablename__ = "onboarding_events"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    event_type = Column(String)  # 'signup', 'email_verified', 'profile_completed', 'first_project', 'feature_used'
+    event_data = Column(Text)  # JSON string with event details
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    user = relationship("User", back_populates="onboarding_events")
+
+class EmailNotification(Base):
+    __tablename__ = "email_notifications"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    email_type = Column(String)  # 'welcome', 'onboarding_guide', 'progress_update', 'feature_announcement', 'reengagement'
+    subject = Column(String)
+    content = Column(Text)
+    sent_at = Column(DateTime, nullable=True)
+    opened_at = Column(DateTime, nullable=True)
+    clicked_at = Column(DateTime, nullable=True)
+    status = Column(String, default="pending")  # 'pending', 'sent', 'opened', 'clicked', 'bounced'
+
+    user = relationship("User")

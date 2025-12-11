@@ -34,6 +34,10 @@ app.add_middleware(
 # Include ML API routes
 app.include_router(ml_router, prefix="/api/v1")
 
+# Include onboarding API routes
+from .api.onboarding import router as onboarding_router
+app.include_router(onboarding_router, prefix="/api/v1")
+
 # Dependency to get DB session
 def get_db():
     db = SessionLocal()
