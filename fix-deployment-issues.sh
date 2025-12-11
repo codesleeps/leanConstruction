@@ -75,14 +75,14 @@ source venv/bin/activate
 
 # Step 7: Install dependencies
 log "Step 7: Installing dependencies..."
-pip install --upgrade pip
+pip install --break-system-packages --upgrade pip
 
 if [ -f "requirements.txt" ]; then
     log "Installing from requirements.txt..."
-    pip install -r requirements.txt
+    pip install --break-system-packages -r requirements.txt
 else
     log "Installing minimal dependencies..."
-    pip install fastapi uvicorn[standard] python-multipart python-jose[cryptography] passlib[bcrypt] python-dotenv
+    pip install --break-system-packages fastapi uvicorn[standard] python-multipart python-jose[cryptography] passlib[bcrypt] python-dotenv
 fi
 
 # Step 8: Test basic imports
