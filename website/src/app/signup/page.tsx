@@ -33,7 +33,7 @@ const signup = () => {
     setError('');
 
     try {
-      const response = await fetch('/api/v1/onboarding/register', {
+      const response = await fetch('/api/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -65,11 +65,27 @@ const signup = () => {
             ← Back to Home
           </Link>
           <h2 className="mt-6 text-3xl font-heading font-bold text-gray-900">
-            Start Your Construction AI Journey
+            Transform Your Construction Projects with AI
           </h2>
           <p className="mt-2 text-lg text-gray-600">
-            Join 500+ construction teams already building smarter
+            Join 500+ construction teams reducing waste by 30% and saving millions in project costs
           </p>
+          
+          {/* Key Benefits */}
+          <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+            <div className="flex items-center text-green-700">
+              <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
+              <span>Reduce project waste by 30%</span>
+            </div>
+            <div className="flex items-center text-green-700">
+              <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
+              <span>Predict delays before they happen</span>
+            </div>
+            <div className="flex items-center text-green-700">
+              <CheckCircle className="w-4 h-4 mr-2 text-green-600" />
+              <span>Save $2M+ per project on average</span>
+            </div>
+          </div>
         </div>
 
         {/* Progress Steps */}
@@ -96,11 +112,76 @@ const signup = () => {
           </div>
         </div>
 
+        {/* Construction-Specific Features */}
+        <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
+          <h3 className="text-xl font-semibold text-gray-900 mb-4 text-center">🔨 Built for Construction Professionals</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-4">
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-8 h-8 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                  <span className="text-red-600 font-bold text-sm">AI</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Waste Detection</h4>
+                  <p className="text-sm text-gray-600">Automatically identify and categorize construction waste using computer vision</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                  <span className="text-blue-600 font-bold text-sm">📊</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Predictive Analytics</h4>
+                  <p className="text-sm text-gray-600">Forecast project delays and budget overruns before they happen</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center mr-3">
+                  <span className="text-green-600 font-bold text-sm">⚡</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Real-time Monitoring</h4>
+                  <p className="text-sm text-gray-600">Track progress, costs, and resource utilization in real-time</p>
+                </div>
+              </div>
+            </div>
+            <div className="space-y-4">
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                  <span className="text-purple-600 font-bold text-sm">🔗</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Procore Integration</h4>
+                  <p className="text-sm text-gray-600">Seamlessly sync with Procore for unified project management</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center mr-3">
+                  <span className="text-yellow-600 font-bold text-sm">📱</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Mobile Ready</h4>
+                  <p className="text-sm text-gray-600">Capture waste and updates directly from the construction site</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <div className="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-lg flex items-center justify-center mr-3">
+                  <span className="text-indigo-600 font-bold text-sm">📈</span>
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Lean Methodology</h4>
+                  <p className="text-sm text-gray-600">Built-in lean construction tools and best practices</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Demo Account Section */}
         <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
           <h3 className="text-lg font-semibold text-blue-900 mb-4">🚀 Try Demo Account</h3>
           <p className="text-blue-700 mb-4">
-            Explore our platform with sample data before committing to registration.
+            Explore our platform with realistic sample data before committing to registration.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="bg-white rounded-lg p-4 border border-blue-200">
@@ -109,6 +190,7 @@ const signup = () => {
                 <span className="font-semibold text-blue-900">Small Contractor</span>
               </div>
               <p className="text-sm text-blue-700">3-10 projects</p>
+              <p className="text-xs text-blue-600 mt-1">Residential & small commercial</p>
             </div>
             <div className="bg-white rounded-lg p-4 border border-blue-200">
               <div className="flex items-center mb-2">
@@ -116,6 +198,7 @@ const signup = () => {
                 <span className="font-semibold text-blue-900">Medium Builder</span>
               </div>
               <p className="text-sm text-blue-700">10-50 projects</p>
+              <p className="text-xs text-blue-600 mt-1">Commercial & infrastructure</p>
             </div>
             <div className="bg-white rounded-lg p-4 border border-blue-200">
               <div className="flex items-center mb-2">
@@ -123,10 +206,26 @@ const signup = () => {
                 <span className="font-semibold text-blue-900">Enterprise</span>
               </div>
               <p className="text-sm text-blue-700">50+ projects</p>
+              <p className="text-xs text-blue-600 mt-1">Large-scale developments</p>
             </div>
           </div>
-          <button className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors">
-            Try Demo Account
+          <button
+            onClick={() => handleDemoAccount('small')}
+            className="mt-4 w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Try Small Contractor Demo
+          </button>
+          <button
+            onClick={() => handleDemoAccount('medium')}
+            className="mt-2 w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition-colors"
+          >
+            Try Medium Builder Demo
+          </button>
+          <button
+            onClick={() => handleDemoAccount('enterprise')}
+            className="mt-2 w-full bg-blue-400 text-white py-2 px-4 rounded-lg hover:bg-blue-500 transition-colors"
+          >
+            Try Enterprise Demo
           </button>
         </div>
 
