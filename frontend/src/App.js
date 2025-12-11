@@ -8,7 +8,7 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
   LinearProgress, Alert, AlertTitle, TextField, Button, Avatar,
   Menu, MenuItem, Divider, Switch, FormControlLabel, InputAdornment,
-  Dialog, DialogTitle, DialogContent, DialogActions
+  Dialog, DialogTitle, DialogContent, DialogActions, Fab
 } from '@mui/material';
 import {
   Dashboard as DashboardIcon,
@@ -29,7 +29,8 @@ import {
   Email as EmailIcon,
   Logout as LogoutIcon,
   Visibility,
-  VisibilityOff
+  VisibilityOff,
+  ArrowUpward as ArrowUpwardIcon
 } from '@mui/icons-material';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
          PieChart, Pie, Cell, RadarChart, Radar,
@@ -1005,6 +1006,31 @@ function Dashboard({ user, onLogout }) {
             </Grid>
           </TabPanel>
         </Container>
+        {/* Back to Top Button - Mobile Only, Left Side */}
+        <Fab
+          size="small"
+          aria-label="back to top"
+          sx={{
+            position: 'fixed',
+            left: 16,
+            bottom: 16,
+            zIndex: 1000,
+            display: { xs: 'flex', sm: 'none' }, // Only show on mobile
+            backgroundColor: 'primary.main',
+            color: 'white',
+            '&:hover': {
+              backgroundColor: 'primary.dark',
+            }
+          }}
+          onClick={() => {
+            window.scrollTo({
+              top: 0,
+              behavior: 'smooth'
+            });
+          }}
+        >
+          <ArrowUpwardIcon />
+        </Fab>
       </Box>
 
       {/* Profile Dialog */}

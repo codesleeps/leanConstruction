@@ -8,6 +8,14 @@ export const metadata: Metadata = {
   description: "Transform your construction projects with AI-powered waste detection, predictive analytics, and lean methodology tools. Reduce costs by up to 30% and improve efficiency.",
   keywords: "construction management, AI, lean construction, waste detection, predictive analytics, project management, construction software",
   authors: [{ name: "Lean AI Construction" }],
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "Lean AI Construction - AI-Powered Construction Management",
     description: "Transform your construction projects with AI-powered waste detection, predictive analytics, and lean methodology tools.",
