@@ -1,11 +1,11 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle, XCircle, Lock, Loader, Eye, EyeOff } from 'lucide-react';
 
-const ResetPassword = () => {
+const ResetPasswordContent = () => {
   const [status, setStatus] = useState<'request' | 'reset' | 'loading' | 'success' | 'error'>('request');
   const [previousStatus, setPreviousStatus] = useState<'request' | 'reset'>('request');
   const [message, setMessage] = useState('');
@@ -342,4 +342,14 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default function ResetPassword() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader className="h-8 w-8 text-primary-600 animate-spin" />
+      </div>
+    }>
+      <ResetPasswordContent />
+    </Suspense>
+  );
+}

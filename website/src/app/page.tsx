@@ -401,16 +401,14 @@ export default function HomePage() {
                 ].map((tool, index) => (
                   <div
                     key={`${tool.name}-${index}`}
-                    className="flex-shrink-0 w-48 h-24 bg-white rounded-xl border border-gray-100 shadow-sm flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-105 hover:shadow-md"
+                    className="flex-shrink-0 w-48 h-24 bg-gray-50 rounded-xl border border-gray-200 shadow-sm flex items-center justify-center p-4 hover:shadow-md transition-all duration-300"
                   >
-                    <div className="relative w-full h-full">
-                      <Image
-                        src={tool.src}
-                        alt={`${tool.name} logo`}
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
+                    <img
+                      src={tool.src}
+                      alt={`${tool.name} logo`}
+                      className="max-w-full max-h-full object-contain"
+                      loading="eager"
+                    />
                   </div>
                 ))}
               </div>
