@@ -426,7 +426,7 @@ console.log(data);
                 Start your free trial today and experience the power of AI-driven construction management.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="https://app.leanaiconstruction.com/signup" className="btn-primary bg-white text-primary-700 hover:bg-gray-100 text-lg px-8 py-4">
+                <Link href="/signup" className="btn-primary bg-white text-primary-700 hover:bg-gray-100 text-lg px-8 py-4">
                   Start Free Trial
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>

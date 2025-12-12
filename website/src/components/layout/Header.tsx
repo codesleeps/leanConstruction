@@ -15,8 +15,13 @@ const navigation = [
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
+    // Check login status
+    const token = localStorage.getItem('token');
+    setIsLoggedIn(!!token);
+
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
     };
@@ -28,8 +33,8 @@ export function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-            ? "bg-white/95 backdrop-blur-md shadow-lg"
-            : "bg-transparent"
+          ? "bg-white/95 backdrop-blur-md shadow-lg"
+          : "bg-transparent"
           }`}
       >
         <nav className="container-custom" aria-label="Global">
@@ -75,21 +80,32 @@ export function Header() {
 
             {/* Desktop CTA buttons */}
             <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
-              <Link
-                href="https://app.leanaiconstruction.com"
-                className={`text-sm font-semibold leading-6 px-4 py-2 rounded-lg transition-colors ${scrolled
-                    ? "text-gray-900 hover:text-primary-600"
-                    : "text-white hover:text-primary-200"
-                  }`}
-              >
-                Sign In
-              </Link>
-              <Link
-                href="https://app.leanaiconstruction.com/signup"
-                className="btn-primary text-sm py-2"
-              >
-                Start Free Trial
-              </Link>
+              {isLoggedIn ? (
+                <Link
+                  href="/dashboard"
+                  className="btn-primary text-sm py-2"
+                >
+                  Go to Dashboard
+                </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className={`text-sm font-semibold leading-6 px-4 py-2 rounded-lg transition-colors ${scrolled
+                      ? "text-gray-900 hover:text-primary-600"
+                      : "text-white hover:text-primary-200"
+                      }`}
+                  >
+                    Sign In
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="btn-primary text-sm py-2"
+                  >
+                    Start Free Trial
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </nav>
@@ -139,20 +155,32 @@ export function Header() {
                   ))}
                 </div>
                 <div className="py-6 space-y-3">
-                  <Link
-                    href="https://app.leanaiconstruction.com"
-                    className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Sign In
-                  </Link>
-                  <Link
-                    href="https://app.leanaiconstruction.com/signup"
-                    className="btn-primary w-full text-center"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    Start Free Trial
-                  </Link>
+                  {isLoggedIn ? (
+                    <Link
+                      href="/dashboard"
+                      className="btn-primary w-full text-center"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      Go to Dashboard
+                    </Link>
+                  ) : (
+                    <>
+                      <Link
+                        href="/login"
+                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Sign In
+                      </Link>
+                      <Link
+                        href="/signup"
+                        className="btn-primary w-full text-center"
+                        onClick={() => setMobileMenuOpen(false)}
+                      >
+                        Start Free Trial
+                      </Link>
+                    </>
+                  )}
                 </div>
               </div>
             </div>

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { 
-  ArrowRight, 
-  Check, 
+import {
+  ArrowRight,
+  Check,
   X,
   HelpCircle,
   Building2,
@@ -127,7 +127,7 @@ export default function PricingPage() {
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }} />
         </div>
-        
+
         <div className="container-custom relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white">
@@ -142,11 +142,11 @@ export default function PricingPage() {
             </p>
           </div>
         </div>
-        
+
         {/* Wave Divider */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F9FAFB"/>
+            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F9FAFB" />
           </svg>
         </div>
       </section>
@@ -165,33 +165,32 @@ export default function PricingPage() {
               Save 20%
             </span>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {tiers.map((tier) => (
-              <div 
+              <div
                 key={tier.id}
-                className={`relative bg-white rounded-2xl shadow-xl overflow-hidden ${
-                  tier.popular ? 'ring-2 ring-primary-500' : ''
-                }`}
+                className={`relative bg-white rounded-2xl shadow-xl overflow-hidden ${tier.popular ? 'ring-2 ring-primary-500' : ''
+                  }`}
               >
                 {tier.popular && (
                   <div className="absolute top-0 left-0 right-0 bg-primary-500 text-white text-center text-sm font-medium py-2">
                     Most Popular
                   </div>
                 )}
-                
+
                 <div className={`p-8 ${tier.popular ? 'pt-14' : ''}`}>
                   <div className="w-12 h-12 rounded-xl bg-primary-100 flex items-center justify-center mb-4">
                     <tier.icon className="w-6 h-6 text-primary-600" />
                   </div>
-                  
+
                   <h3 className="text-2xl font-heading font-bold text-gray-900">
                     {tier.name}
                   </h3>
                   <p className="mt-2 text-gray-600 text-sm">
                     {tier.description}
                   </p>
-                  
+
                   <div className="mt-6">
                     {tier.price.monthly ? (
                       <>
@@ -209,20 +208,19 @@ export default function PricingPage() {
                       </span>
                     )}
                   </div>
-                  
+
                   <Link
-                    href={tier.price.monthly ? "https://app.leanaiconstruction.com/signup" : "/contact"}
-                    className={`mt-8 w-full flex items-center justify-center px-6 py-3 rounded-lg font-semibold transition-all ${
-                      tier.popular
-                        ? 'bg-primary-600 text-white hover:bg-primary-700'
-                        : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
-                    }`}
+                    href={tier.price.monthly ? "/signup" : "/contact"}
+                    className={`mt-8 w-full flex items-center justify-center px-6 py-3 rounded-lg font-semibold transition-all ${tier.popular
+                      ? 'bg-primary-600 text-white hover:bg-primary-700'
+                      : 'bg-gray-100 text-gray-900 hover:bg-gray-200'
+                      }`}
                   >
                     {tier.cta}
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </div>
-                
+
                 <div className="px-8 pb-8">
                   <div className="border-t border-gray-100 pt-8">
                     <h4 className="text-sm font-semibold text-gray-900 mb-4">
@@ -262,7 +260,7 @@ export default function PricingPage() {
               See a detailed comparison of what's included in each plan.
             </p>
           </div>
-          
+
           <div className="overflow-x-auto">
             <table className="w-full min-w-[800px]">
               <thead>
@@ -307,11 +305,11 @@ export default function PricingPage() {
               <span className="gradient-text">questions</span>
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              Have questions? We've got answers. If you can't find what you're looking for, 
+              Have questions? We've got answers. If you can't find what you're looking for,
               feel free to contact our support team.
             </p>
           </div>
-          
+
           <div className="max-w-3xl mx-auto">
             <div className="grid gap-6">
               {faqs.map((faq) => (
@@ -339,21 +337,21 @@ export default function PricingPage() {
                 backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
               }} />
             </div>
-            
+
             <div className="relative z-10 text-center max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white">
                 Still have questions?
               </h2>
               <p className="mt-6 text-lg md:text-xl text-white/80">
-                Our team is here to help. Schedule a demo to see how Lean AI Construction 
+                Our team is here to help. Schedule a demo to see how Lean AI Construction
                 can transform your projects.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/contact" className="btn-primary bg-white text-primary-700 hover:bg-gray-100 text-lg px-8 py-4">
+                <Link href="/book-demo" className="btn-primary bg-white text-primary-700 hover:bg-gray-100 text-lg px-8 py-4">
                   Schedule a Demo
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
-                <Link href="https://app.leanaiconstruction.com/signup" className="btn-secondary border-white/30 text-white hover:bg-white/10 text-lg px-8 py-4">
+                <Link href="/signup" className="btn-secondary border-white/30 text-white hover:bg-white/10 text-lg px-8 py-4">
                   Start Free Trial
                 </Link>
               </div>

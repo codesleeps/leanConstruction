@@ -26,6 +26,10 @@ from enum import Enum
 import logging
 import io
 import json
+from sqlalchemy.orm import Session
+from sqlalchemy import func, case
+from ..database import SessionLocal
+from ..models import MLUsageLog
 
 # ML module imports
 from ..ml import (
@@ -109,6 +113,14 @@ _workplace_analyzer = None
 _waste_engine = None
 _forecast_system = None
 _reporting_system = None
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
 
 
 def get_progress_pipeline():
@@ -750,6 +762,61 @@ async def get_report_types():
         "output_formats": ["json", "html", "markdown"]
     }
 
+
+# ============================================
+# Analytics & Metrics Endpoints
+# ============================================
+
+@router.get("/models/metrics")
+async def get_model_metrics(
+    start_date: Optional[datetime] = None,
+    end_date: Optional[datetime] = None,
+    model_name: Optional[str] = None,
+    db: Session = Depends(get_db)
+):
+    """
+    Get aggregated ML model metrics
+    """
+    try:
+        # Build query
+        # SQLA case syntax: case((condition, value), else_=value)
+        # Note: In some versions case([(condition, value)], else_=value)
+        query = db.query(
+            MLUsageLog.model_name,
+            func.count(MLUsageLog.id).label('total_calls'),
+            func.avg(MLUsageLog.latency_ms).label('avg_latency'),
+            func.sum(MLUsageLog.tokens_input).label('total_input_tokens'),
+            func.sum(MLUsageLog.tokens_output).label('total_output_tokens'),
+            func.sum(case((MLUsageLog.error_occurred == True, 1), else_=0)).label('error_count')
+        )
+        
+        if start_date:
+            query = query.filter(MLUsageLog.created_at >= start_date)
+        if end_date:
+            query = query.filter(MLUsageLog.created_at <= end_date)
+        if model_name:
+            query = query.filter(MLUsageLog.model_name == model_name)
+            
+        query = query.group_by(MLUsageLog.model_name)
+        results = query.all()
+        
+        metrics = []
+        for row in results:
+            metrics.append({
+                "model_name": row.model_name,
+                "total_calls": row.total_calls,
+                "avg_latency": float(row.avg_latency) if row.avg_latency else 0,
+                "total_tokens": (row.total_input_tokens or 0) + (row.total_output_tokens or 0),
+                "error_rate": (row.error_count / row.total_calls) if row.total_calls > 0 else 0
+            })
+            
+        return {"metrics": metrics}
+
+    except Exception as e:
+        logger.error(f"Model metrics error: {e}")
+        # If table doesn't exist yet or other DB error, return empty/mock
+        # This prevents crashing if migrations haven't run
+        return {"metrics": [], "error": str(e)}
 
 # ============================================
 # Health Check & Status

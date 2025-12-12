@@ -180,7 +180,7 @@ export default function HomePage() {
               </p>
 
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Link href="https://app.leanaiconstruction.com/signup" className="btn-primary text-lg px-8 py-4">
+                <Link href="/signup" className="btn-primary text-lg px-8 py-4">
                   Start Free Trial
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
@@ -191,7 +191,7 @@ export default function HomePage() {
 
               <div className="mt-8 text-center lg:text-left">
                 <Link
-                  href="https://app.leanaiconstruction.com"
+                  href="/login"
                   className="text-sm font-semibold text-white hover:text-primary-200 transition-colors"
                 >
                   Already have an account? Sign In →
@@ -471,12 +471,12 @@ export default function HomePage() {
                 faster, and more sustainably.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="https://app.leanaiconstruction.com/signup" className="btn-primary bg-white text-primary-700 hover:bg-gray-100 text-lg px-8 py-4">
+                <Link href="/signup" className="btn-primary bg-white text-primary-700 hover:bg-gray-100 text-lg px-8 py-4">
                   Start Your Free Trial
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
-                <Link href="/contact" className="btn-secondary border-white/30 text-white hover:bg-white/10 text-lg px-8 py-4">
-                  Talk to Sales
+                <Link href="/book-demo" className="btn-secondary border-white/30 text-white hover:bg-white/10 text-lg px-8 py-4">
+                  Book a Demo
                 </Link>
               </div>
               <p className="mt-6 text-sm text-white/60">

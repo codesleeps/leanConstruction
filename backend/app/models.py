@@ -105,3 +105,34 @@ class EmailNotification(Base):
     status = Column(String, default="pending")  # 'pending', 'sent', 'opened', 'clicked', 'bounced'
 
     user = relationship("User")
+
+class Appointment(Base):
+    __tablename__ = "appointments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    lead_name = Column(String)
+    lead_email = Column(String)
+    lead_phone = Column(String, nullable=True)
+    start_time = Column(DateTime)
+    end_time = Column(DateTime)
+    status = Column(String, default="scheduled")  # 'scheduled', 'cancelled', 'completed'
+    notes = Column(Text, nullable=True)
+    meeting_link = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    user = relationship("User")
+
+class MLUsageLog(Base):
+    __tablename__ = "ml_usage_logs"
+
+    id = Column(Integer, primary_key=True, index=True)
+    model_name = Column(String, index=True)  # e.g., 'llama3', 'gpt-4', 'resnet-50'
+    endpoint = Column(String)  # e.g., '/api/v1/ml/analyze-waste'
+    tokens_input = Column(Integer, default=0)
+    tokens_output = Column(Integer, default=0)
+    latency_ms = Column(Float)
+    error_occurred = Column(Boolean, default=False)
+    error_message = Column(Text, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=True)

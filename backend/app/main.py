@@ -42,6 +42,14 @@ app.include_router(onboarding_router, prefix="/api/v1")
 from .api.auth import router as auth_router
 app.include_router(auth_router)
 
+# Include appointments API routes
+from .api.appointments import router as appointments_router
+app.include_router(appointments_router)
+
+# Include payments API routes
+from .api.payments import router as payments_router
+app.include_router(payments_router)
+
 # Dependency to get DB session
 def get_db():
     db = SessionLocal()

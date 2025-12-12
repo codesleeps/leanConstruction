@@ -1,11 +1,17 @@
 # 🎯 Immediate Next Steps - Action Checklist
 
-**Platform**: https://leanaiconstruction.com ✅ **LIVE**  
-**Date**: December 10, 2025
+**Platform**: https://leanaiconstruction.com ✅ **LIVE (Deploying)**  
+**Date**: December 12, 2025
 
 ---
 
 ## ✅ **COMPLETED TODAY**
+
+### **Architecture & Wiring**
+- [x] **Unified Domain Strategy** - Merged Website and Dashboard onto `leanaiconstruction.com`
+- [x] **Clean Slate** - Archived confusing/legacy deployment scripts
+- [x] **Authentication Wiring** - Connected React Dashboard to Real Backend API (Removed fake login)
+- [x] **Seamless Onboarding** - Fixed "Go to Dashboard" to auto-redirect authenticated users
 
 ### **UI Fixes (Dashboard)**
 - [x] **Profile & Settings Dialogs** - Made dropdown links functional with working dialogs
@@ -29,31 +35,23 @@
 
 ## 🚀 **This Week's Priorities**
 
-### **Day 1-2: Deploy Marketing Website**
-- [ ] **Deploy Website to VPS** (1 hour)
+### **Day 1: Unified Deployment (Current Step)**
+- [x] **Prepare Deployment Script** (`deploy_unified.sh`)
+- [ ] **Execute Deployment** (Running now...)
   ```bash
-  # On local machine
-  cd website
-  npm run build
-  tar -czf website-build.tar.gz .next package.json public
-  scp website-build.tar.gz root@srv1187860.hstgr.cloud:/root/
-  
-  # On VPS
-  ssh root@srv1187860.hstgr.cloud
-  mkdir -p /var/www/website
-  cd /var/www/website
-  tar -xzf /root/website-build.tar.gz
-  npm install --production
+  ./deploy_unified.sh
   ```
-- [ ] **Configure Nginx** for website
-  - Main domain (leanaiconstruction.com) → Marketing website
-  - App subdomain (app.leanaiconstruction.com) → Dashboard
+- [ ] **Verify Production URLs**
+  - **Main Site**: `https://leanaiconstruction.com`
+  - **Dashboard**: `https://leanaiconstruction.com/dashboard`
+  - **API Docs**: `https://leanaiconstruction.com/docs`
 - [ ] **Install SSL Certificate** (30 minutes)
   ```bash
-  certbot --nginx -d leanaiconstruction.com -d www.leanaiconstruction.com -d app.leanaiconstruction.com
+  # On VPS after deployment
+  certbot --nginx -d leanaiconstruction.com -d www.leanaiconstruction.com
   ```
 
-### **Day 3-5: Customer Preparation**
+### **Day 2-3: Customer Preparation**
 - [ ] **Create Demo Accounts**
   - Set up 5-10 demo construction projects
   - Prepare sample data for waste detection
@@ -63,7 +61,7 @@
   - Document API endpoints
   - Prepare feature tour
 
-### **Day 6-7: Marketing Foundation**
+### **Day 4-5: Marketing Foundation**
 - [ ] **LinkedIn Business Profile**
   - Create company page
   - Post about platform launch
@@ -128,9 +126,9 @@
 ### **Week 1 Goals**
 - [x] Dashboard UI issues fixed ✅
 - [x] Marketing website created ✅
-- [ ] Website deployed to production
+- [x] Unified Deployment Script Created ✅
+- [ ] Production Deployment Verified
 - [ ] SSL certificate active
-- [ ] DNS configured for subdomains
 
 ### **Week 2 Goals**
 - [ ] 10 qualified leads contacted
@@ -176,31 +174,26 @@
 
 ## 📞 **Quick Start Commands**
 
-### **Deploy Marketing Website**
+### **Deploy Unified Platform**
 ```bash
-# Build and deploy
-cd website
-npm run build
-tar -czf website-build.tar.gz .next package.json public node_modules
-scp website-build.tar.gz root@srv1187860.hstgr.cloud:/root/
+./deploy_unified.sh
 ```
 
-### **SSL Certificate**
+### **SSL Certificate (On VPS)**
 ```bash
 ssh root@srv1187860.hstgr.cloud
-certbot --nginx -d leanaiconstruction.com -d www.leanaiconstruction.com -d app.leanaiconstruction.com
+certbot --nginx -d leanaiconstruction.com -d www.leanaiconstruction.com
 ```
 
 ### **DNS Check**
 ```bash
 nslookup leanaiconstruction.com
-nslookup app.leanaiconstruction.com
 ```
 
-### **Website Test**
+### **Health Check**
 ```bash
 curl -I https://leanaiconstruction.com
-curl https://app.leanaiconstruction.com/api/health
+curl https://leanaiconstruction.com/api/health
 ```
 
 ### **Performance Monitor**
@@ -215,11 +208,10 @@ df -h
 ## 🎉 **Success Indicators**
 
 ### **Immediate (This Week)**
-- ✅ Dashboard UI fully functional
-- ✅ Marketing website built and ready
-- 🎯 Website deployed to production
+- ✅ Unified Architecture Implemented
+- ✅ Dashboard Wired to Real Backend
+- 🎯 Deployment to Production Complete
 - 🎯 SSL certificate active (green padlock)
-- 🎯 Professional domain setup with subdomains
 
 ### **Short-term (Next Month)**
 - 🎯 First paying customer acquired
@@ -227,40 +219,29 @@ df -h
 - 🎯 $1,000+ Monthly Recurring Revenue
 - 🎯 Positive user testimonials
 
-### **Medium-term (Next Quarter)**
-- 🚀 200+ active users
-- 🚀 $10,000+ MRR
-- 🚀 Market recognition in construction tech
-- 🚀 Feature requests from customers
-
 ---
 
-## 📁 **Project Structure**
+## 📁 **Project Structure (Unified)**
 
 ```
 leanConstruction/
-├── frontend/          # React Dashboard (app.leanaiconstruction.com)
+├── frontend/          # React App (leanaiconstruction.com/dashboard)
 │   └── src/
-│       ├── App.js     # Main dashboard with all UI fixes
+│       ├── App.js     # Main dashboard wires to /api
 │       └── components/
-├── website/           # Next.js Marketing Site (leanaiconstruction.com) ✨ NEW
+├── website/           # Next.js Site (leanaiconstruction.com)
 │   └── src/
 │       ├── app/
 │       │   ├── page.tsx        # Home page
-│       │   ├── features/       # Features page
-│       │   ├── pricing/        # Pricing page
-│       │   ├── about/          # About page
-│       │   └── contact/        # Contact page
+│       │   ├── onboarding/     # Onboarding Flow
+│       │   └── login/          # Login Page (Sets auth token)
 │       └── components/
-│           └── layout/
-│               ├── Header.tsx  # Navigation
-│               └── Footer.tsx  # Footer
-├── backend/           # FastAPI Backend
-└── mobile/            # React Native App
+├── backend/           # FastAPI Backend (leanaiconstruction.com/api)
+└── deploy_unified.sh  # Master Deployment Script
 ```
 
 ---
 
-**Current Status**: 🟢 **PLATFORM READY FOR BUSINESS**  
-**Next Action**: 🎯 **Deploy Marketing Website to VPS**  
-**Timeline**: ⏰ **Execute this week for maximum impact**
+**Current Status**: 🚀 **DEPLOYMENT IN PROGRESS**  
+**Next Action**: 🎯 **Verify Production URL**  
+**Timeline**: ⏰ **Live today**

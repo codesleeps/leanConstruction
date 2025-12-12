@@ -32,16 +32,18 @@ import {
   VisibilityOff,
   ArrowUpward as ArrowUpwardIcon
 } from '@mui/icons-material';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-         PieChart, Pie, Cell, RadarChart, Radar,
-         PolarGrid, PolarAngleAxis, PolarRadiusAxis } from 'recharts';
+import {
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
+  PieChart, Pie, Cell, RadarChart, Radar,
+  PolarGrid, PolarAngleAxis, PolarRadiusAxis
+} from 'recharts';
 import axios from 'axios';
 import { StripePaymentProvider } from './components/StripePaymentContext';
 import SubscriptionManager from './components/SubscriptionManager';
 import Logo from './components/Logo';
 import SignupPage from './components/SignupPage';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = '/api';
 
 // Auth Context
 const AuthContext = createContext(null);
@@ -49,7 +51,7 @@ const AuthContext = createContext(null);
 const useAuth = () => useContext(AuthContext);
 
 // Theme Context
-export const ColorModeContext = createContext({ toggleColorMode: () => {} });
+export const ColorModeContext = createContext({ toggleColorMode: () => { } });
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884d8', '#82ca9d', '#ffc658', '#ff7300'];
 
@@ -71,25 +73,52 @@ function LoginPage({ onLogin, onSwitchToSignup }) {
     e.preventDefault();
     setLoading(true);
     setError('');
-    
-    // Simulate API call
-    setTimeout(() => {
-      if (email && password) {
-        const user = {
-          id: '1',
-          name: email.split('@')[0].charAt(0).toUpperCase() + email.split('@')[0].slice(1),
-          email: email,
-          role: 'Project Manager',
-          avatar: email.charAt(0).toUpperCase()
-        };
-        localStorage.setItem('user', JSON.stringify(user));
-        localStorage.setItem('token', 'demo-jwt-token-' + Date.now());
-        onLogin(user);
-      } else {
-        setError('Please enter email and password');
+
+    try {
+      // Use URLSearchParams for OAuth2PasswordRequestForm
+      const formData = new URLSearchParams();
+      formData.append('username', email);
+      formData.append('password', password);
+
+      const response = await axios.post(`${API_BASE}/auth/login`, formData, {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      });
+
+      const { access_token, user } = response.data;
+
+      // If user data isn't returned by login, verify token to get user
+      let userData = user;
+      if (!userData) {
+        // Fetch user data
+        const userRes = await axios.get(`${API_BASE}/auth/users/me`, {
+          headers: { Authorization: `Bearer ${access_token}` }
+        });
+        userData = userRes.data;
       }
+
+      // Map backend user to frontend user shape
+      const appUser = {
+        id: userData.id,
+        name: userData.full_name || userData.email, // Handle full_name vs name
+        email: userData.email,
+        role: userData.role || 'User',
+        avatar: (userData.full_name || userData.email).charAt(0).toUpperCase(),
+        company: userData.company
+      };
+
+      // Store using consistent keys
+      localStorage.setItem('user_data', JSON.stringify(appUser));
+      localStorage.setItem('access_token', access_token);
+
+      onLogin(appUser);
+    } catch (err) {
+      console.error('Login error:', err);
+      setError(err.response?.data?.detail || 'Login failed. Please check your credentials.');
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   const handleDarkModeToggle = () => {
@@ -105,7 +134,7 @@ function LoginPage({ onLogin, onSwitchToSignup }) {
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        background: darkMode 
+        background: darkMode
           ? 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)'
           : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         position: 'relative'
@@ -174,7 +203,7 @@ function LoginPage({ onLogin, onSwitchToSignup }) {
               }}
               sx={{ mb: 2 }}
             />
-            
+
             <TextField
               fullWidth
               label="Password"
@@ -429,15 +458,15 @@ function Dashboard({ user, onLogout }) {
           <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
             Lean AI Construction
           </Typography>
-          
+
           {/* Dark Mode Toggle */}
           <IconButton color="inherit" onClick={handleDarkModeToggle} sx={{ mr: 1 }}>
             {darkMode ? <LightModeIcon /> : <DarkModeIcon />}
           </IconButton>
 
-          <Chip 
-            label={`v${health?.version || '4.0.0'}`} 
-            size="small" 
+          <Chip
+            label={`v${health?.version || '4.0.0'}`}
+            size="small"
             sx={{ color: 'white', bgcolor: 'rgba(255,255,255,0.2)', mr: 2 }}
           />
 
@@ -538,7 +567,7 @@ function Dashboard({ user, onLogout }) {
           <TabPanel value={tabValue} index={0}>
             {/* Executive Summary Alert */}
             {executiveSummary && (
-              <Alert 
+              <Alert
                 severity={executiveSummary.summary?.overall_health === 'GOOD' ? 'success' : 'warning'}
                 sx={{ mb: 3 }}
               >
@@ -559,9 +588,9 @@ function Dashboard({ user, onLogout }) {
                       </Box>
                       <SpeedIcon sx={{ fontSize: 40, color: 'primary.main' }} />
                     </Box>
-                    <LinearProgress 
-                      variant="determinate" 
-                      value={(kpiData?.kpis?.schedule?.spi || 0.95) * 100} 
+                    <LinearProgress
+                      variant="determinate"
+                      value={(kpiData?.kpis?.schedule?.spi || 0.95) * 100}
                       sx={{ mt: 2 }}
                     />
                   </CardContent>
@@ -578,9 +607,9 @@ function Dashboard({ user, onLogout }) {
                       </Box>
                       <TrendingUpIcon sx={{ fontSize: 40, color: 'success.main' }} />
                     </Box>
-                    <LinearProgress 
-                      variant="determinate" 
-                      value={Math.min((kpiData?.kpis?.cost?.cpi || 1.02) * 100, 100)} 
+                    <LinearProgress
+                      variant="determinate"
+                      value={Math.min((kpiData?.kpis?.cost?.cpi || 1.02) * 100, 100)}
                       color="success"
                       sx={{ mt: 2 }}
                     />
@@ -598,8 +627,8 @@ function Dashboard({ user, onLogout }) {
                       </Box>
                       <CheckCircleIcon sx={{ fontSize: 40, color: 'info.main' }} />
                     </Box>
-                    <LinearProgress 
-                      variant="determinate" 
+                    <LinearProgress
+                      variant="determinate"
                       value={(kpiData?.kpis?.quality?.first_time_quality || 0.94) * 100}
                       color="info"
                       sx={{ mt: 2 }}
@@ -618,8 +647,8 @@ function Dashboard({ user, onLogout }) {
                       </Box>
                       <AssessmentIcon sx={{ fontSize: 40, color: 'warning.main' }} />
                     </Box>
-                    <LinearProgress 
-                      variant="determinate" 
+                    <LinearProgress
+                      variant="determinate"
                       value={(kpiData?.kpis?.safety?.safety_compliance || 0.97) * 100}
                       color="warning"
                       sx={{ mt: 2 }}
@@ -715,8 +744,8 @@ function Dashboard({ user, onLogout }) {
                             <TableCell align="right">{row.score}%</TableCell>
                             <TableCell align="right">£{row.cost.toLocaleString()}</TableCell>
                             <TableCell align="right">
-                              <Chip 
-                                label={index < 3 ? 'High' : index < 6 ? 'Medium' : 'Low'} 
+                              <Chip
+                                label={index < 3 ? 'High' : index < 6 ? 'Medium' : 'Low'}
                                 color={index < 3 ? 'error' : index < 6 ? 'warning' : 'success'}
                                 size="small"
                               />
@@ -773,8 +802,8 @@ function Dashboard({ user, onLogout }) {
                             <TableCell>{risk.risk}</TableCell>
                             <TableCell align="right">{(risk.probability * 100).toFixed(0)}%</TableCell>
                             <TableCell align="right">
-                              <Chip 
-                                label={risk.impact} 
+                              <Chip
+                                label={risk.impact}
                                 color={risk.impact === 'HIGH' ? 'error' : risk.impact === 'MEDIUM' ? 'warning' : 'success'}
                                 size="small"
                               />
@@ -830,7 +859,7 @@ function Dashboard({ user, onLogout }) {
                   </Card>
                 </Grid>
               ))}
-              
+
               {/* Industry Features Section */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 3, mt: 2 }}>
@@ -1149,11 +1178,25 @@ function App() {
   const [currentPage, setCurrentPage] = useState('login'); // 'login' or 'signup'
 
   useEffect(() => {
-    // Check for existing session
-    const savedUser = localStorage.getItem('user');
-    const token = localStorage.getItem('token');
+    // Check for existing session using UNIFIED keys
+    const savedUser = localStorage.getItem('user_data'); // Changed from 'user'
+    const token = localStorage.getItem('access_token'); // Changed from 'token'
+
     if (savedUser && token) {
-      setUser(JSON.parse(savedUser));
+      try {
+        const parsedUser = JSON.parse(savedUser);
+        setUser(parsedUser);
+
+        // Setup axios interceptor for auth
+        axios.interceptors.request.use(config => {
+          config.headers.Authorization = `Bearer ${token}`;
+          return config;
+        });
+      } catch (e) {
+        // Invalid data
+        localStorage.removeItem('user_data');
+        localStorage.removeItem('access_token');
+      }
     }
   }, []);
 
@@ -1217,6 +1260,12 @@ function App() {
   };
 
   const handleLogout = () => {
+    localStorage.removeItem('user_data');
+    localStorage.removeItem('access_token');
+    // Also clear legacy keys
+    localStorage.removeItem('user');
+    localStorage.removeItem('token');
+
     setUser(null);
   };
 

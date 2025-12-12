@@ -34,8 +34,10 @@ const ResetPassword = () => {
     e.preventDefault();
     setStatus('loading');
 
+
     try {
-      const response = await fetch('/api/auth/forgot-password', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/auth/forgot-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,10 +75,12 @@ const ResetPassword = () => {
 
     setStatus('loading');
 
+
     try {
       const token = searchParams.get('token');
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
 
-      const response = await fetch('/api/auth/reset-password', {
+      const response = await fetch(`${API_URL}/api/auth/reset-password`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

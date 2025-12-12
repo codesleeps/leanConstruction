@@ -27,8 +27,10 @@ const Login = () => {
     setIsLoading(true);
     setError('');
 
+
     try {
-      const response = await fetch('/api/auth/login', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -47,21 +49,21 @@ const Login = () => {
       localStorage.setItem('user_data', JSON.stringify(data.user));
 
       // Redirect to dashboard
-  const handleDemoLogin = () => {
-    // Check for demo credentials in localStorage
-    const demoCredentials = localStorage.getItem('demo_credentials');
-    if (demoCredentials) {
-      try {
-        const credentials = JSON.parse(demoCredentials);
-        setFormData({
-          email: credentials.email,
-          password: credentials.password
-        });
-      } catch (err) {
-        console.error('Error parsing demo credentials:', err);
-      }
-    }
-  };
+      const handleDemoLogin = () => {
+        // Check for demo credentials in localStorage
+        const demoCredentials = localStorage.getItem('demo_credentials');
+        if (demoCredentials) {
+          try {
+            const credentials = JSON.parse(demoCredentials);
+            setFormData({
+              email: credentials.email,
+              password: credentials.password
+            });
+          } catch (err) {
+            console.error('Error parsing demo credentials:', err);
+          }
+        }
+      };
       router.push('/dashboard');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -220,8 +222,8 @@ const Login = () => {
               <div className="text-xs text-blue-700">50+ projects</div>
             </div>
           </div>
-          <Link 
-            href="/demo" 
+          <Link
+            href="/demo"
             className="block w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors text-center"
           >
             Try Demo

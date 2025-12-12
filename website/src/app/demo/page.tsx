@@ -3,11 +3,11 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { 
-  Building, 
-  Users, 
-  Building2, 
-  ArrowRight, 
+import {
+  Building,
+  Users,
+  Building2,
+  ArrowRight,
   CheckCircle,
   BarChart3,
   Zap,
@@ -91,15 +91,16 @@ const DemoPage = () => {
     setIsCreating(true);
     setSelectedDemo(demoType);
 
+
     try {
-      const response = await fetch('/api/v1/onboarding/demo-account', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/auth/demo-account/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          account_type: demoType,
-          company_name: `${demoTypes.find(d => d.id === demoType)?.name} Demo`
+          account_type: demoType
         }),
       });
 
@@ -184,7 +185,7 @@ const DemoPage = () => {
               <div>
                 <h4 className="font-semibold text-blue-900">What You'll See</h4>
                 <p className="text-blue-700 text-sm mt-1">
-                  Explore realistic construction data including projects, waste logs, tasks, and AI-powered analytics. 
+                  Explore realistic construction data including projects, waste logs, tasks, and AI-powered analytics.
                   All data is sample/demo data for illustration purposes.
                 </p>
               </div>
@@ -226,7 +227,7 @@ const DemoPage = () => {
             Try Our Platform with Demo Data
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Explore Lean AI Construction with realistic sample data. No signup required - 
+            Explore Lean AI Construction with realistic sample data. No signup required -
             experience the power of AI-driven construction management instantly.
           </p>
         </div>
@@ -236,9 +237,9 @@ const DemoPage = () => {
           {demoTypes.map((demo) => {
             const IconComponent = demo.icon;
             const colors = getColorClasses(demo.color);
-            
+
             return (
-              <div 
+              <div
                 key={demo.id}
                 className={`bg-white rounded-2xl shadow-lg border-2 ${colors.border} overflow-hidden hover:shadow-xl transition-shadow duration-300`}
               >
@@ -251,7 +252,7 @@ const DemoPage = () => {
                   </h3>
                   <p className="text-gray-600 text-sm">{demo.description}</p>
                 </div>
-                
+
                 <div className="p-6">
                   <div className="space-y-4 mb-6">
                     <div className="flex items-center text-sm text-gray-600">
@@ -263,7 +264,7 @@ const DemoPage = () => {
                       {demo.projectCount}
                     </div>
                   </div>
-                  
+
                   <div className="mb-6">
                     <h4 className="font-semibold text-gray-900 mb-3">Features Included:</h4>
                     <ul className="space-y-2">
@@ -275,7 +276,7 @@ const DemoPage = () => {
                       ))}
                     </ul>
                   </div>
-                  
+
                   <div className="mb-6">
                     <h4 className="font-semibold text-gray-900 mb-3">Sample Projects:</h4>
                     <ul className="space-y-2">
@@ -286,7 +287,7 @@ const DemoPage = () => {
                       ))}
                     </ul>
                   </div>
-                  
+
                   <button
                     onClick={() => handleCreateDemo(demo.id)}
                     disabled={isCreating && selectedDemo === demo.id}

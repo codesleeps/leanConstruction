@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { 
-  ArrowRight, 
-  Mail, 
-  Phone, 
+import {
+  ArrowRight,
+  Mail,
+  Phone,
   MapPin,
   MessageSquare,
   Clock,
@@ -83,10 +83,10 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate form submission
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    
+
     setIsSubmitting(false);
     setIsSubmitted(true);
   };
@@ -107,7 +107,7 @@ export default function ContactPage() {
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }} />
         </div>
-        
+
         <div className="container-custom relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white">
@@ -117,16 +117,16 @@ export default function ContactPage() {
               </span>
             </h1>
             <p className="mt-6 text-lg md:text-xl text-white/80">
-              Have questions about Lean AI Construction? We'd love to hear from you. 
+              Have questions about Lean AI Construction? We'd love to hear from you.
               Send us a message and we'll respond as soon as possible.
             </p>
           </div>
         </div>
-        
+
         {/* Wave Divider */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F9FAFB"/>
+            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F9FAFB" />
           </svg>
         </div>
       </section>
@@ -171,7 +171,7 @@ export default function ContactPage() {
               <p className="mt-4 text-gray-600">
                 Fill out the form below and we'll get back to you within 24 hours.
               </p>
-              
+
               {isSubmitted ? (
                 <div className="mt-8 bg-green-50 rounded-2xl p-8 text-center">
                   <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
@@ -234,7 +234,7 @@ export default function ContactPage() {
                       />
                     </div>
                   </div>
-                  
+
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-2">
@@ -265,7 +265,7 @@ export default function ContactPage() {
                       />
                     </div>
                   </div>
-                  
+
                   <div>
                     <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
                       Subject *
@@ -286,7 +286,7 @@ export default function ContactPage() {
                       <option value="other">Other</option>
                     </select>
                   </div>
-                  
+
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
                       Message *
@@ -302,7 +302,7 @@ export default function ContactPage() {
                       placeholder="Tell us how we can help..."
                     />
                   </div>
-                  
+
                   <button
                     type="submit"
                     disabled={isSubmitting}
@@ -326,7 +326,7 @@ export default function ContactPage() {
                 </form>
               )}
             </div>
-            
+
             {/* Office Locations */}
             <div>
               <h2 className="text-3xl font-heading font-bold text-gray-900">
@@ -335,7 +335,7 @@ export default function ContactPage() {
               <p className="mt-4 text-gray-600">
                 Visit us at one of our global offices or reach out to the team nearest you.
               </p>
-              
+
               <div className="mt-8 space-y-6">
                 {offices.map((office) => (
                   <div key={office.city} className="bg-gray-50 rounded-2xl p-6">
@@ -363,7 +363,7 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
-              
+
               {/* Business Hours */}
               <div className="mt-8 bg-primary-50 rounded-2xl p-6">
                 <div className="flex items-center gap-3 mb-4">
@@ -414,7 +414,7 @@ export default function ContactPage() {
                 backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
               }} />
             </div>
-            
+
             <div className="relative z-10 text-center max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white">
                 Ready to get started?
@@ -423,7 +423,7 @@ export default function ContactPage() {
                 Start your free trial today and see how Lean AI Construction can transform your projects.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="https://app.leanaiconstruction.com/signup" className="btn-primary bg-white text-primary-700 hover:bg-gray-100 text-lg px-8 py-4">
+                <Link href="/signup" className="btn-primary bg-white text-primary-700 hover:bg-gray-100 text-lg px-8 py-4">
                   Start Free Trial
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>

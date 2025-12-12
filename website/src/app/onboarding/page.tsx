@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { 
-  CheckCircle, 
-  Circle, 
-  ArrowRight, 
-  User, 
-  FolderPlus, 
-  BarChart3, 
+import {
+  CheckCircle,
+  Circle,
+  ArrowRight,
+  User,
+  FolderPlus,
+  BarChart3,
   Zap,
   Mail,
   Phone,
@@ -34,8 +34,10 @@ const OnboardingDashboard = () => {
   }, []);
 
   const fetchOnboardingProgress = async () => {
+
     try {
-      const response = await fetch('/api/v1/onboarding/progress');
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/v1/onboarding/progress`);
       if (response.ok) {
         const data = await response.json();
         setProgress(data);
@@ -50,7 +52,8 @@ const OnboardingDashboard = () => {
 
   const completeStep = async (stepType: string, stepData?: any) => {
     try {
-      await fetch('/api/v1/onboarding/track-event', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      await fetch(`${API_URL}/api/v1/onboarding/track-event`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -60,7 +63,7 @@ const OnboardingDashboard = () => {
           event_data: stepData || {}
         }),
       });
-      
+
       // Refresh progress
       fetchOnboardingProgress();
     } catch (error) {
@@ -129,7 +132,7 @@ const OnboardingDashboard = () => {
       status: progress?.completed_steps.includes(5) ? "completed" : "pending",
       action: {
         text: "Go to Dashboard",
-        onClick: () => console.log("Navigate to main dashboard")
+        onClick: () => window.location.href = "/dashboard"
       }
     }
   ];
@@ -151,8 +154,8 @@ const OnboardingDashboard = () => {
             <h1 className="text-2xl font-heading font-bold text-gray-900">
               Welcome to Lean AI Construction
             </h1>
-            <Link 
-              href="/dashboard" 
+            <Link
+              href="/dashboard"
               className="text-primary-600 hover:text-primary-700 font-medium"
             >
               Skip Onboarding
@@ -178,13 +181,13 @@ const OnboardingDashboard = () => {
               <div className="text-sm text-gray-500">Complete</div>
             </div>
           </div>
-          
+
           {/* Progress Bar */}
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div 
+            <div
               className="bg-primary-600 h-2 rounded-full transition-all duration-300"
-              style={{ 
-                width: `${((progress?.completed_steps.length || 0) / onboardingSteps.length) * 100}%` 
+              style={{
+                width: `${((progress?.completed_steps.length || 0) / onboardingSteps.length) * 100}%`
               }}
             ></div>
           </div>
@@ -196,65 +199,59 @@ const OnboardingDashboard = () => {
             const IconComponent = step.icon;
             const isCompleted = step.status === "completed";
             const isCurrent = step.status === "current";
-            
+
             return (
-              <div 
+              <div
                 key={step.id}
-                className={`bg-white rounded-xl shadow-sm border-2 transition-all duration-200 ${
-                  isCompleted ? 'border-green-200 bg-green-50' : 
-                  isCurrent ? 'border-primary-200 bg-primary-50' : 
-                  'border-gray-200'
-                }`}
+                className={`bg-white rounded-xl shadow-sm border-2 transition-all duration-200 ${isCompleted ? 'border-green-200 bg-green-50' :
+                  isCurrent ? 'border-primary-200 bg-primary-50' :
+                    'border-gray-200'
+                  }`}
               >
                 <div className="p-6">
                   <div className="flex items-start">
-                    <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${
-                      isCompleted ? 'bg-green-100' :
+                    <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center ${isCompleted ? 'bg-green-100' :
                       isCurrent ? 'bg-primary-100' :
-                      'bg-gray-100'
-                    }`}>
+                        'bg-gray-100'
+                      }`}>
                       {isCompleted ? (
                         <CheckCircle className="w-6 h-6 text-green-600" />
                       ) : (
-                        <IconComponent className={`w-6 h-6 ${
-                          isCurrent ? 'text-primary-600' : 'text-gray-400'
-                        }`} />
+                        <IconComponent className={`w-6 h-6 ${isCurrent ? 'text-primary-600' : 'text-gray-400'
+                          }`} />
                       )}
                     </div>
-                    
+
                     <div className="ml-4 flex-1">
                       <div className="flex items-center justify-between">
                         <div>
-                          <h3 className={`text-lg font-semibold ${
-                            isCompleted ? 'text-green-900' :
+                          <h3 className={`text-lg font-semibold ${isCompleted ? 'text-green-900' :
                             isCurrent ? 'text-primary-900' :
-                            'text-gray-900'
-                          }`}>
+                              'text-gray-900'
+                            }`}>
                             {step.title}
                           </h3>
-                          <p className={`text-sm mt-1 ${
-                            isCompleted ? 'text-green-700' :
+                          <p className={`text-sm mt-1 ${isCompleted ? 'text-green-700' :
                             isCurrent ? 'text-primary-700' :
-                            'text-gray-600'
-                          }`}>
+                              'text-gray-600'
+                            }`}>
                             {step.description}
                           </p>
                         </div>
-                        
+
                         {step.action && (
                           <button
                             onClick={step.action.onClick}
-                            className={`ml-4 px-4 py-2 rounded-lg font-medium transition-colors ${
-                              isCompleted ? 'bg-green-100 text-green-700 cursor-not-allowed' :
+                            className={`ml-4 px-4 py-2 rounded-lg font-medium transition-colors ${isCompleted ? 'bg-green-100 text-green-700 cursor-not-allowed' :
                               'bg-primary-600 text-white hover:bg-primary-700'
-                            }`}
+                              }`}
                             disabled={isCompleted}
                           >
                             {step.action.text}
                           </button>
                         )}
                       </div>
-                      
+
                       {isCurrent && (
                         <div className="mt-4 p-4 bg-primary-100 rounded-lg">
                           <div className="flex items-center text-primary-800">
@@ -278,14 +275,14 @@ const OnboardingDashboard = () => {
             Our team is here to help you make the most of Lean AI Construction.
           </p>
           <div className="flex flex-wrap gap-4">
-            <Link 
-              href="/help" 
+            <Link
+              href="/help"
               className="bg-white text-primary-600 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors"
             >
               View Help Center
             </Link>
-            <Link 
-              href="/contact" 
+            <Link
+              href="/contact"
               className="border border-white text-white px-4 py-2 rounded-lg font-medium hover:bg-white hover:text-primary-600 transition-colors"
             >
               Contact Support

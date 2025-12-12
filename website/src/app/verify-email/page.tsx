@@ -25,7 +25,8 @@ const VerifyEmail = () => {
 
   const verifyEmail = async (token: string) => {
     try {
-      const response = await fetch('/api/auth/verify-email', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/auth/verify-email`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

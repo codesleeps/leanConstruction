@@ -33,8 +33,10 @@ const Signup = () => {
     setIsLoading(true);
     setError('');
 
+
     try {
-      const response = await fetch('/api/auth/signup', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -61,8 +63,10 @@ const Signup = () => {
     setIsCreatingDemo(true);
     setError('');
 
+
     try {
-      const response = await fetch('/api/auth/demo-account/create', {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/auth/demo-account/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
