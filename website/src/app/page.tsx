@@ -293,7 +293,7 @@ export default function HomePage() {
             {trustedBy.map((company) => (
               <div
                 key={company.name}
-                className="relative h-16 w-32 transition-all duration-300 ease-in-out grayscale hover:grayscale-0 hover:scale-110"
+                className="relative h-16 w-32 transition-all duration-300 ease-in-out hover:scale-110"
               >
                 <Image
                   src={company.logo}
