@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle, XCircle, Lock, Loader, Eye, EyeOff } from 'lucide-react';
 
-const ResetPassword = () => {
+export const dynamic = 'force-dynamic';
+
+function ResetPasswordForm() {
   const [status, setStatus] = useState<'request' | 'reset' | 'loading' | 'success' | 'error'>('request');
   const [previousStatus, setPreviousStatus] = useState<'request' | 'reset'>('request');
   const [message, setMessage] = useState('');
@@ -336,6 +338,19 @@ const ResetPassword = () => {
       </div>
     </div>
   );
-};
+}
 
-export default ResetPassword;
+export default function ResetPassword() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center">
+          <Loader className="h-8 w-8 text-primary-600 animate-spin mx-auto" />
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    }>
+      <ResetPasswordForm />
+    </Suspense>
+  );
+}

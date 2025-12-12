@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle, XCircle, Mail, Loader } from 'lucide-react';
 
-const VerifyEmail = () => {
+export const dynamic = 'force-dynamic';
+
+function VerifyEmailForm() {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [message, setMessage] = useState('');
   const router = useRouter();
@@ -13,7 +15,7 @@ const VerifyEmail = () => {
 
   useEffect(() => {
     const token = searchParams.get('token');
-    
+
     if (!token) {
       setStatus('error');
       setMessage('No verification token provided');
@@ -92,7 +94,7 @@ const VerifyEmail = () => {
               <p className="text-gray-600 mb-6">
                 {message}
               </p>
-              
+
               <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
                 <div className="flex items-center mb-2">
                   <Mail className="w-5 h-5 text-green-600 mr-2" />
@@ -110,7 +112,7 @@ const VerifyEmail = () => {
                 >
                   Go to Dashboard
                 </button>
-                
+
                 <button
                   onClick={handleContinueToLogin}
                   className="w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-semibold hover:bg-gray-200 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
@@ -132,7 +134,7 @@ const VerifyEmail = () => {
               <p className="text-gray-600 mb-6">
                 {message}
               </p>
-              
+
               <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
                 <h3 className="font-semibold text-red-900 mb-2">Common Issues:</h3>
                 <ul className="text-sm text-red-700 space-y-1 text-left">
@@ -149,7 +151,7 @@ const VerifyEmail = () => {
                 >
                   Register Again
                 </Link>
-                
+
                 <Link
                   href="/login"
                   className="block w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-semibold hover:bg-gray-200 text-center focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
@@ -173,6 +175,19 @@ const VerifyEmail = () => {
       </div>
     </div>
   );
-};
+}
 
-export default VerifyEmail;
+export default function VerifyEmail() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
+        <div className="text-center">
+          <Loader className="h-8 w-8 text-primary-600 animate-spin mx-auto" />
+          <p className="mt-4 text-gray-600">Loading...</p>
+        </div>
+      </div>
+    }>
+      <VerifyEmailForm />
+    </Suspense>
+  );
+}
