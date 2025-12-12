@@ -360,7 +360,70 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </section >
+      </section>
+
+      {/* Integrations Section */}
+      <section className="py-20 bg-white overflow-hidden">
+        <div className="container-custom">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900">
+              Seamlessly integrates with your{" "}
+              <span className="gradient-text">favorite tools</span>
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              Connect Lean AI Construction with the software you already use to centralize your project data
+              and unlock powerful insights.
+            </p>
+          </div>
+
+          <div className="relative">
+            {/* Logo Marquee Animation - First Row */}
+            <div className="flex gap-12 overflow-hidden py-4">
+              <div className="flex gap-12 animate-scroll">
+                {[
+                  { name: "Procore", src: "/integrated_tools_logo/procore.webp" },
+                  { name: "Autodesk", src: "/integrated_tools_logo/autodesk.webp" },
+                  { name: "Bluebeam", src: "/integrated_tools_logo/Bluebeam.webp" },
+                  { name: "Primavera P6", src: "/integrated_tools_logo/Primavera-P6.webp" },
+                  { name: "Microsoft Project", src: "/integrated_tools_logo/microsoft-project.webp" },
+                  { name: "PlanGrid", src: "/integrated_tools_logo/plangrid-logo.webp" },
+                  { name: "Sage", src: "/integrated_tools_logo/sage.webp" },
+                  { name: "Quickbooks", src: "/integrated_tools_logo/intuit-quickbooks.webp" },
+                  // Duplicate for continuous scroll effect
+                  { name: "Procore", src: "/integrated_tools_logo/procore.webp" },
+                  { name: "Autodesk", src: "/integrated_tools_logo/autodesk.webp" },
+                  { name: "Bluebeam", src: "/integrated_tools_logo/Bluebeam.webp" },
+                  { name: "Primavera P6", src: "/integrated_tools_logo/Primavera-P6.webp" },
+                  { name: "Microsoft Project", src: "/integrated_tools_logo/microsoft-project.webp" },
+                  { name: "PlanGrid", src: "/integrated_tools_logo/plangrid-logo.webp" },
+                  { name: "Sage", src: "/integrated_tools_logo/sage.webp" },
+                  { name: "Quickbooks", src: "/integrated_tools_logo/intuit-quickbooks.webp" },
+                ].map((tool, index) => (
+                  <div
+                    key={`${tool.name}-${index}`}
+                    className="flex-shrink-0 w-48 h-24 bg-white rounded-xl border border-gray-100 shadow-sm flex items-center justify-center p-6 grayscale hover:grayscale-0 transition-all duration-300 hover:scale-105 hover:shadow-md"
+                  >
+                    <div className="relative w-full h-full">
+                      <Image
+                        src={tool.src}
+                        alt={`${tool.name} logo`}
+                        fill
+                        className="object-contain"
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="text-center mt-12">
+              <p className="text-sm font-medium text-gray-500">
+                + 50 more integrations available via API
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* How It Works Section */}
       < section className="section-padding bg-white" >
