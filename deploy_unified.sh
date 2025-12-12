@@ -30,7 +30,7 @@ echo "Step 1: Building Dashboard (React App)..."
 echo "--------------------------------------------------------"
 cd frontend
 if [ ! -d "node_modules" ]; then
-    npm ci
+    npm install
 fi
 npm run build
 cd ..
@@ -41,7 +41,7 @@ echo "Step 2: Building Website (Next.js)..."
 echo "--------------------------------------------------------"
 cd website
 if [ ! -d "node_modules" ]; then
-    npm ci
+    npm install
 fi
 # Standard build (not standalone)
 npm run build
