@@ -73,6 +73,17 @@ function LandingPage({ onSwitchToSignup, onSwitchToLogin }) {
     '/trustedByLeadingCompanies/network-rail-logo-png_seeklogo-323728.webp'
   ];
 
+  const integrations = [
+    { name: "Procore", logo: "/integrated_tools_logo/procore.webp" },
+    { name: "Autodesk", logo: "/integrated_tools_logo/autodesk.webp" },
+    { name: "Microsoft Project", logo: "/integrated_tools_logo/microsoft-project.webp" },
+    { name: "Primavera P6", logo: "/integrated_tools_logo/Primavera-P6.webp" },
+    { name: "Bluebeam", logo: "/integrated_tools_logo/Bluebeam.webp" },
+    { name: "PlanGrid", logo: "/integrated_tools_logo/plangrid-logo.webp" },
+    { name: "Sage", logo: "/integrated_tools_logo/sage.webp" },
+    { name: "QuickBooks", logo: "/integrated_tools_logo/intuit-quickbooks.webp" },
+  ];
+
   const testimonials = [
     {
       name: 'Sarah Johnson',
@@ -317,6 +328,71 @@ function LandingPage({ onSwitchToSignup, onSwitchToLogin }) {
                     </Typography>
                   </CardContent>
                 </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </Container>
+      </Box>
+
+      {/* Integrations Section */}
+      <Box sx={{ bgcolor: darkMode ? 'rgba(255,255,255,0.05)' : 'rgba(255,255,255,0.1)', py: 8 }}>
+        <Container maxWidth="lg">
+          <Typography
+            variant="h3"
+            sx={{
+              textAlign: 'center',
+              mb: 2,
+              fontWeight: 'bold',
+              color: darkMode ? 'white' : 'text.primary'
+            }}
+          >
+            Integrates with your favorite tools
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              textAlign: 'center',
+              mb: 6,
+              color: darkMode ? 'rgba(255,255,255,0.7)' : 'text.secondary'
+            }}
+          >
+            Seamlessly connect with the construction software you already use
+          </Typography>
+          <Grid container spacing={4}>
+            {integrations.map((integration, index) => (
+              <Grid item xs={12} sm={6} md={3} key={index}>
+                <Paper
+                  elevation={3}
+                  sx={{
+                    p: 3,
+                    textAlign: 'center',
+                    bgcolor: darkMode ? 'rgba(30,30,46,0.8)' : 'rgba(255,255,255,0.9)',
+                    backdropFilter: 'blur(10px)',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 8px 25px rgba(0,0,0,0.15)'
+                    }
+                  }}
+                >
+                  <img
+                    src={integration.logo}
+                    alt={integration.name}
+                    style={{
+                      height: '64px',
+                      width: 'auto',
+                      maxWidth: '100%',
+                      margin: '0 auto 12px auto',
+                      objectFit: 'contain',
+                      display: 'block'
+                    }}
+                    loading="lazy"
+                  />
+                  <Typography variant="h6" sx={{ fontWeight: 'bold', color: darkMode ? 'white' : 'text.primary' }}>
+                    {integration.name}
+                  </Typography>
+                </Paper>
               </Grid>
             ))}
           </Grid>
