@@ -173,7 +173,7 @@ const integrations = [
 
 export default function FeaturesPage() {
   return (
-    <>
+    <div className="overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 gradient-bg overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -438,6 +438,6 @@ console.log(data);
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

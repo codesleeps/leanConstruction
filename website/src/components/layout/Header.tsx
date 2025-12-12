@@ -27,8 +27,8 @@ export function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
+        ? "bg-white/95 backdrop-blur-md shadow-lg"
+        : "bg-transparent"
         }`}
     >
       <nav className="container-custom" aria-label="Global">
@@ -77,8 +77,8 @@ export function Header() {
             <Link
               href="https://app.leanaiconstruction.com"
               className={`text-sm font-semibold leading-6 px-4 py-2 rounded-lg transition-colors ${scrolled
-                  ? "text-gray-900 hover:text-primary-600"
-                  : "text-white hover:text-primary-200"
+                ? "text-gray-900 hover:text-primary-600"
+                : "text-white hover:text-primary-200"
                 }`}
             >
               Sign In
@@ -98,12 +98,12 @@ export function Header() {
         <div className="lg:hidden" role="dialog" aria-modal="true">
           {/* Background backdrop */}
           <div
-            className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm"
+            className="fixed inset-0 z-[100] bg-black/20 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
 
           {/* Menu panel */}
-          <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <div className="fixed inset-y-0 right-0 z-[101] w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
                 <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center">
