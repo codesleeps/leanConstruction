@@ -125,11 +125,7 @@ const trustedBy = [
     logo: "/trustedByLeadingCompanies/IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp",
     alt: "Kier Construction Logo"
   },
-  {
-    name: "ISO CE",
-    logo: "/trustedByLeadingCompanies/iso-ce-web-2024-600x205-1.webp",
-    alt: "ISO CE Logo"
-  },
+
   {
     name: "Network Rail",
     logo: "/trustedByLeadingCompanies/network-rail-logo-png_seeklogo-323728.webp",
@@ -289,11 +285,11 @@ export default function HomePage() {
           <p className="text-center text-sm font-medium text-gray-500 mb-8">
             TRUSTED BY LEADING CONSTRUCTION COMPANIES
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 md:gap-12 items-center justify-items-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 md:gap-12 items-center justify-items-center">
             {trustedBy.map((company) => (
               <div
                 key={company.name}
-                className="relative h-16 w-32 transition-all duration-300 ease-in-out hover:scale-110"
+                className="relative h-24 w-48 transition-all duration-300 ease-in-out hover:scale-110"
               >
                 <Image
                   src={company.logo}
