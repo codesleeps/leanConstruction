@@ -1,11 +1,11 @@
 import Link from "next/link";
-import { 
-  ArrowRight, 
-  Camera, 
-  Brain, 
-  BarChart3, 
-  Zap, 
-  Users, 
+import {
+  ArrowRight,
+  Camera,
+  Brain,
+  BarChart3,
+  Zap,
+  Users,
   Shield,
   Workflow,
   LineChart,
@@ -181,7 +181,7 @@ export default function FeaturesPage() {
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }} />
         </div>
-        
+
         <div className="container-custom relative z-10">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white">
@@ -191,16 +191,16 @@ export default function FeaturesPage() {
               </span>
             </h1>
             <p className="mt-6 text-lg md:text-xl text-white/80">
-              Everything you need to manage construction projects efficiently, 
+              Everything you need to manage construction projects efficiently,
               reduce waste, and deliver on time and under budget.
             </p>
           </div>
         </div>
-        
+
         {/* Wave Divider */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F9FAFB"/>
+            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F9FAFB" />
           </svg>
         </div>
       </section>
@@ -209,10 +209,10 @@ export default function FeaturesPage() {
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
           {mainFeatures.map((feature, index) => (
-            <div 
+            <div
               key={feature.id}
               id={feature.id}
-              className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center ${index > 0 ? 'mt-24' : ''}`}
+              className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center ${index > 0 ? 'mt-24' : ''} max-w-7xl mx-auto`}
             >
               {/* Content */}
               <div className="flex-1">
@@ -234,7 +234,7 @@ export default function FeaturesPage() {
                   ))}
                 </ul>
               </div>
-              
+
               {/* Image Placeholder */}
               <div className="flex-1">
                 <div className="relative">
@@ -262,11 +262,11 @@ export default function FeaturesPage() {
               <span className="gradient-text">more</span>
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              Discover all the tools and features that make Lean AI Construction 
+              Discover all the tools and features that make Lean AI Construction
               the most comprehensive platform for modern construction management.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {additionalFeatures.map((feature) => (
               <div key={feature.name} className="flex gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors">
@@ -296,14 +296,14 @@ export default function FeaturesPage() {
               <span className="gradient-text">favorite tools</span>
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              Connect Lean AI Construction with the tools you already use. 
+              Connect Lean AI Construction with the tools you already use.
               Our platform integrates seamlessly with industry-leading software.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {integrations.map((integration) => (
-              <div 
+              <div
                 key={integration.name}
                 className="flex items-center justify-center p-8 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
               >
@@ -320,7 +320,7 @@ export default function FeaturesPage() {
               </div>
             ))}
           </div>
-          
+
           <div className="mt-12 text-center">
             <p className="text-gray-600 mb-4">
               Don't see your tool? We're always adding new integrations.
@@ -344,7 +344,7 @@ export default function FeaturesPage() {
                 </span>
               </h2>
               <p className="mt-4 text-lg text-gray-400">
-                Our RESTful API gives you full access to your data and platform capabilities. 
+                Our RESTful API gives you full access to your data and platform capabilities.
                 Build custom integrations, automate workflows, and extend functionality to meet your unique needs.
               </p>
               <ul className="mt-8 space-y-4">
@@ -368,7 +368,7 @@ export default function FeaturesPage() {
                 </Link>
               </div>
             </div>
-            
+
             {/* Code Preview */}
             <div className="bg-gray-800 rounded-2xl p-6 font-mono text-sm">
               <div className="flex items-center gap-2 mb-4">
@@ -377,7 +377,7 @@ export default function FeaturesPage() {
                 <div className="w-3 h-3 rounded-full bg-green-500" />
               </div>
               <pre className="text-gray-300 overflow-x-auto">
-{`// Get project analytics
+                {`// Get project analytics
 const response = await fetch(
   'https://api.leanaiconstruction.com/v1/projects/123/analytics',
   {
@@ -417,7 +417,7 @@ console.log(data);
                 backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
               }} />
             </div>
-            
+
             <div className="relative z-10 text-center max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white">
                 Ready to see these features in action?
