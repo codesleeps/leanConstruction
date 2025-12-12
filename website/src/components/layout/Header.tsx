@@ -101,12 +101,12 @@ export function Header() {
       >
         {/* Background backdrop */}
         <div
-          className="fixed inset-0 z-[9998] bg-black/20 backdrop-blur-sm"
+          className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm"
           onClick={() => setMobileMenuOpen(false)}
         />
 
         {/* Menu panel */}
-        <div className="fixed inset-y-0 right-0 z-[9999] w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+        <div className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
             <Link href="/" className="-m-1.5 p-1.5 flex items-center gap-2">
               <div className="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center">

@@ -1,13 +1,11 @@
 "use client";
 
-import { useState, useEffect, Suspense } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { CheckCircle, XCircle, Mail, Loader } from 'lucide-react';
 
-export const dynamic = 'force-dynamic';
-
-function VerifyEmailForm() {
+const VerifyEmail = () => {
   const [status, setStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [message, setMessage] = useState('');
   const router = useRouter();
@@ -175,19 +173,6 @@ function VerifyEmailForm() {
       </div>
     </div>
   );
-}
+};
 
-export default function VerifyEmail() {
-  return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center">
-        <div className="text-center">
-          <Loader className="h-8 w-8 text-primary-600 animate-spin mx-auto" />
-          <p className="mt-4 text-gray-600">Loading...</p>
-        </div>
-      </div>
-    }>
-      <VerifyEmailForm />
-    </Suspense>
-  );
-}
+export default VerifyEmail;
