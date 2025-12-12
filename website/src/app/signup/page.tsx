@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowRight, CheckCircle, Building2, Users, Building } from 'lucide-react';
 
-const signup = () => {
+const Signup = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -85,7 +85,7 @@ const signup = () => {
 
       // Show success message and redirect to login
       alert(`Demo account created!\n\nEmail: ${data.demo_email}\nPassword: ${data.demo_password}\n\nUse these credentials to log in and explore the platform.`);
-      
+
       router.push('/login');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to create demo account');
@@ -108,7 +108,7 @@ const signup = () => {
           <p className="mt-2 text-lg text-gray-600">
             Join 500+ construction teams reducing waste by 30% and saving millions in project costs
           </p>
-          
+
           {/* Key Benefits */}
           <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
             <div className="flex items-center text-green-700">
@@ -480,4 +480,4 @@ const signup = () => {
   );
 };
 
-export default signup;
+export default Signup;
