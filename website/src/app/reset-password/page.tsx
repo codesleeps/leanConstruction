@@ -7,6 +7,7 @@ import { CheckCircle, XCircle, Lock, Loader, Eye, EyeOff } from 'lucide-react';
 
 const ResetPassword = () => {
   const [status, setStatus] = useState<'request' | 'reset' | 'loading' | 'success' | 'error'>('request');
+  const [previousStatus, setPreviousStatus] = useState<'request' | 'reset'>('request');
   const [message, setMessage] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -48,6 +49,7 @@ const ResetPassword = () => {
         throw new Error(data.detail || 'Request failed');
       }
 
+      setPreviousStatus('request');
       setStatus('success');
       setMessage(data.message);
     } catch (err) {
@@ -58,7 +60,7 @@ const ResetPassword = () => {
 
   const handleResetSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (resetForm.password !== resetForm.confirmPassword) {
       setMessage('Passwords do not match');
       return;
@@ -73,15 +75,15 @@ const ResetPassword = () => {
 
     try {
       const token = searchParams.get('token');
-      
+
       const response = await fetch('/api/auth/reset-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           token: token,
-          new_password: resetForm.password 
+          new_password: resetForm.password
         }),
       });
 
@@ -91,6 +93,7 @@ const ResetPassword = () => {
         throw new Error(data.detail || 'Reset failed');
       }
 
+      setPreviousStatus('reset');
       setStatus('success');
       setMessage(data.message);
     } catch (err) {
@@ -257,16 +260,16 @@ const ResetPassword = () => {
               <CheckCircle className="h-8 w-8 text-green-600" />
             </div>
             <h3 className="text-xl font-heading font-bold text-gray-900 mb-4">
-              {status === 'request' ? 'Check Your Email' : 'Password Reset Successful!'}
+              {previousStatus === 'request' ? 'Check Your Email' : 'Password Reset Successful!'}
             </h3>
             <p className="text-gray-600 mb-6">
               {message}
             </p>
-            
-            {status === 'request' && (
+
+            {previousStatus === 'request' && (
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
                 <p className="text-sm text-blue-700">
-                  We've sent password reset instructions to your email address. 
+                  We've sent password reset instructions to your email address.
                   Please check your inbox and follow the link to reset your password.
                 </p>
               </div>
@@ -293,7 +296,7 @@ const ResetPassword = () => {
             <p className="text-gray-600 mb-6">
               {message}
             </p>
-            
+
             <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
               <h4 className="font-semibold text-red-900 mb-2">Common Issues:</h4>
               <ul className="text-sm text-red-700 space-y-1 text-left">
@@ -310,7 +313,7 @@ const ResetPassword = () => {
               >
                 Try Again
               </Link>
-              
+
               <Link
                 href="/login"
                 className="block w-full bg-gray-100 text-gray-700 py-3 px-4 rounded-lg font-semibold hover:bg-gray-200 text-center focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
