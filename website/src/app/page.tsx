@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { 
-  ArrowRight, 
-  CheckCircle, 
-  BarChart3, 
-  Brain, 
-  Camera, 
-  Shield, 
-  Zap, 
+import Image from "next/image";
+import {
+  ArrowRight,
+  CheckCircle,
+  BarChart3,
+  Brain,
+  Camera,
+  Shield,
+  Zap,
   Users,
   TrendingUp,
   Clock,
@@ -105,34 +106,39 @@ const testimonials = [
 
 const trustedBy = [
   {
-    name: "BuildRight Construction",
+    name: "Aecom",
     logo: "/trustedByLeadingCompanies/Aecom-logo.webp",
-    alt: "AECOM Logo"
+    alt: "Aecom Logo"
   },
   {
-    name: "Pacific Builders",
+    name: "BlackRidge",
     logo: "/trustedByLeadingCompanies/BLACKRIDGE+1-528w.webp",
     alt: "BlackRidge Logo"
   },
   {
-    name: "GreenBuild Solutions",
+    name: "Hensel Phelps",
     logo: "/trustedByLeadingCompanies/Hensel_Phelps_200_200.webp",
     alt: "Hensel Phelps Logo"
   },
   {
-    name: "Metro Development",
+    name: "Kier Construction",
     logo: "/trustedByLeadingCompanies/IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp",
     alt: "Kier Construction Logo"
   },
   {
-    name: "Skyline Projects",
+    name: "ISO CE",
     logo: "/trustedByLeadingCompanies/iso-ce-web-2024-600x205-1.webp",
     alt: "ISO CE Logo"
   },
   {
-    name: "Foundation Corp",
+    name: "Network Rail",
+    logo: "/trustedByLeadingCompanies/network-rail-logo-png_seeklogo-323728.webp",
+    alt: "Network Rail Logo"
+  },
+  {
+    name: "Construction Partner",
     logo: "/trustedByLeadingCompanies/logo.webp",
-    alt: "Company Logo"
+    alt: "Construction Partner Logo"
   },
 ];
 
@@ -147,11 +153,11 @@ export default function HomePage() {
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }} />
         </div>
-        
+
         {/* Floating Elements */}
         <div className="absolute top-20 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl animate-float" />
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary-500/20 rounded-full blur-3xl animate-float animate-delay-300" />
-        
+
         <div className="container-custom relative z-10 pt-32 pb-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="text-center lg:text-left">
@@ -162,7 +168,7 @@ export default function HomePage() {
                 </span>
                 Now with GPT-4 Integration
               </div>
-              
+
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white leading-tight">
                 Build Smarter with{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-green-300">
@@ -170,13 +176,13 @@ export default function HomePage() {
                 </span>{" "}
                 Construction
               </h1>
-              
+
               <p className="mt-6 text-lg md:text-xl text-white/80 max-w-2xl">
-                Transform your construction projects with intelligent waste detection, 
-                predictive analytics, and lean methodology tools. Reduce costs by up to 30% 
+                Transform your construction projects with intelligent waste detection,
+                predictive analytics, and lean methodology tools. Reduce costs by up to 30%
                 while building faster and more sustainably.
               </p>
-              
+
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Link href="https://app.leanaiconstruction.com/signup" className="btn-primary text-lg px-8 py-4">
                   Start Free Trial
@@ -186,7 +192,7 @@ export default function HomePage() {
                   See How It Works
                 </Link>
               </div>
-              
+
               <div className="mt-8 text-center lg:text-left">
                 <Link
                   href="https://app.leanaiconstruction.com"
@@ -195,7 +201,7 @@ export default function HomePage() {
                   Already have an account? Sign In →
                 </Link>
               </div>
-              
+
               <div className="mt-10 flex items-center gap-6 justify-center lg:justify-start">
                 <div className="flex -space-x-3">
                   {[1, 2, 3, 4, 5].map((i) => (
@@ -207,7 +213,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            
+
             {/* Hero Image/Dashboard Preview */}
             <div className="relative">
               <div className="relative bg-white/10 backdrop-blur-lg rounded-2xl border border-white/20 p-4 shadow-2xl">
@@ -268,11 +274,11 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-        
+
         {/* Wave Divider */}
         <div className="absolute bottom-0 left-0 right-0">
           <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F9FAFB"/>
+            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F9FAFB" />
           </svg>
         </div>
       </section>
@@ -283,13 +289,18 @@ export default function HomePage() {
           <p className="text-center text-sm font-medium text-gray-500 mb-8">
             TRUSTED BY LEADING CONSTRUCTION COMPANIES
           </p>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-8 md:gap-12 items-center justify-items-center">
             {trustedBy.map((company) => (
-              <div key={company.name} className="flex items-center justify-center h-16 px-6 py-3 grayscale hover:grayscale-0 transition-all duration-300 opacity-60 hover:opacity-100">
-                <img
+              <div
+                key={company.name}
+                className="relative h-16 w-32 transition-all duration-300 ease-in-out grayscale hover:grayscale-0 hover:scale-110"
+              >
+                <Image
                   src={company.logo}
                   alt={company.alt}
-                  className="max-h-12 max-w-32 object-contain"
+                  fill
+                  className="object-contain"
+                  sizes="(max-width: 768px) 128px, 160px"
                 />
               </div>
             ))}
@@ -325,11 +336,11 @@ export default function HomePage() {
               <span className="gradient-text">smarter</span>
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              Our comprehensive platform combines AI technology with lean construction 
+              Our comprehensive platform combines AI technology with lean construction
               principles to help you deliver projects on time and under budget.
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
             {features.map((feature) => (
               <div key={feature.name} className="card card-hover w-full max-w-sm">
@@ -345,7 +356,7 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-          
+
           <div className="mt-12 text-center">
             <Link href="/features" className="btn-primary">
               Explore All Features
@@ -353,10 +364,10 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-      </section>
+      </section >
 
       {/* How It Works Section */}
-      <section className="section-padding bg-white">
+      < section className="section-padding bg-white" >
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900">
@@ -364,11 +375,11 @@ export default function HomePage() {
               <span className="gradient-text">minutes</span>
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              Our platform is designed to be intuitive and easy to use. 
+              Our platform is designed to be intuitive and easy to use.
               Here's how you can transform your construction projects.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
@@ -401,10 +412,10 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* Testimonials Section */}
-      <section className="section-padding bg-gray-900">
+      < section className="section-padding bg-gray-900" >
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-white">
@@ -417,7 +428,7 @@ export default function HomePage() {
               See what our customers have to say about transforming their projects with Lean AI Construction.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <div key={index} className="bg-gray-800 rounded-2xl p-8">
@@ -442,10 +453,10 @@ export default function HomePage() {
             ))}
           </div>
         </div>
-      </section>
+      </section >
 
       {/* CTA Section */}
-      <section className="section-padding bg-white">
+      < section className="section-padding bg-white" >
         <div className="container-custom">
           <div className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20">
             {/* Background Pattern */}
@@ -454,13 +465,13 @@ export default function HomePage() {
                 backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
               }} />
             </div>
-            
+
             <div className="relative z-10 text-center max-w-3xl mx-auto">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white">
                 Ready to transform your construction projects?
               </h2>
               <p className="mt-6 text-lg md:text-xl text-white/80">
-                Join 500+ construction teams already using Lean AI Construction to build smarter, 
+                Join 500+ construction teams already using Lean AI Construction to build smarter,
                 faster, and more sustainably.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
@@ -478,7 +489,7 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </section >
     </>
   );
 }
