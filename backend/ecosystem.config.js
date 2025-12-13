@@ -7,9 +7,8 @@ module.exports = {
     interpreter: 'none',
     env: {
       PYTHONPATH: '/var/www/lean-construction',
-      DATABASE_URL: 'sqlite:///./lean_construction.db',
-      SECRET_KEY: 'production-secret-key-change-this',
-      ENVIRONMENT: 'production'
+      // DATABASE_URL and SECRET_KEY are now loaded from .env file
+      // ENVIRONMENT: 'production'
     },
     instances: 1,
     exec_mode: 'fork',

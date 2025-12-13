@@ -3,6 +3,14 @@
 # ============================================
 # VPS Deployment Script for Both Apps (Modified)
 # ============================================
+#
+# ⚠️  DEPRECATED: This script is deprecated in favor of:
+#   - backend/deploy-backend.sh (for backend deployment)
+#   - deploy/production-deployment.sh (for full deployment)
+#
+# This script contains local macOS paths that won't work on VPS.
+# Use the modern deployment scripts instead.
+# ============================================
 
 set -e
 
@@ -54,8 +62,12 @@ sudo mkdir -p /var/log/pixelcraft-bloom
 # Extract applications from tar.gz files
 echo "📤 Extracting applications from tar.gz files..."
 cd /var/www/lean-construction
-sudo tar -xzf /Users/test/Desktop/leanConstruction/lean-construction-backend.tar.gz --strip-components=1
-sudo tar -xzf /Users/test/Desktop/leanConstruction/lean-construction-frontend.tar.gz --strip-components=1
+# NOTE: This script expects tarballs at:
+#   /tmp/lean-construction-backend.tar.gz
+#   /tmp/lean-construction-frontend.tar.gz
+# These should be copied to VPS via scp before running this script
+sudo tar -xzf /tmp/lean-construction-backend.tar.gz --strip-components=1
+sudo tar -xzf /tmp/lean-construction-frontend.tar.gz --strip-components=1
 
 cd /var/www/pixelcraft-bloom
 # For PixelCraft Bloom, we'll need to get it from GitHub or another source

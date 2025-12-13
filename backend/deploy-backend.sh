@@ -104,15 +104,11 @@ echo ""
 # Upgrade pip
 pip install --upgrade pip
 
-# Install minimal production dependencies
-pip install fastapi==0.104.1 \
-    uvicorn[standard]==0.24.0 \
-    python-multipart==0.0.6 \
-    python-jose[cryptography]==3.3.0 \
-    passlib[bcrypt]==1.7.4 \
-    python-decouple==3.8
+# Install full production dependencies from requirements.txt
+# This ensures all packages including stripe and others are installed
+pip install -r requirements.txt
 
-print_success "Dependencies installed"
+print_success "Dependencies installed from requirements.txt"
 
 echo ""
 print_step "Step 6: Testing backend import..."
@@ -123,6 +119,17 @@ cd $BACKEND_DIR
 python -c "from app.main_lite import app; print('✅ Backend imports successfully!')"
 
 print_success "Backend import test passed"
+
+echo ""
+print_warning "⚠️  CURRENT DEPLOYMENT USING app.main_lite"
+echo ""
+echo "This deployment is currently using app.main_lite which provides:"
+echo "• Lite/demo suite of endpoints"
+echo "• Payment routes"
+echo "• Basic ML demo endpoints (waste detection, forecasting, etc.)"
+echo ""
+echo "For full production API with all routes, use app.main_production instead."
+echo "See DEPLOYMENT_INSTRUCTIONS.md for upgrade path."
 
 echo ""
 print_step "Step 7: Configuring PM2..."
@@ -205,8 +212,9 @@ if ! curl -f -s "$API_URL" > /dev/null; then
     pm2 restart lean-construction-api
     sleep 10
     if ! curl -f -s "$API_URL" > /dev/null; then
-        echo "[$(date)] Restart failed, trying systemd..." >> /var/log/lean-construction-health.log
-        sudo systemctl restart lean-construction-backend
+        echo "[$(date)] PM2 restart failed, attempting full restart..." >> /var/log/lean-construction-health.log
+        pm2 delete lean-construction-api
+        pm2 start $BACKEND_DIR/ecosystem.config.js
     fi
 fi
 HEALTHCHECK
@@ -219,13 +227,14 @@ sudo chmod +x /usr/local/bin/lean-construction-healthcheck.sh
 print_success "Health check monitoring configured"
 
 echo ""
-print_step "Step 11: Configuring systemd service..."
+print_step "Step 11: Configuring systemd service (backup only)..."
 echo ""
 
-# Create systemd service
+# Create systemd service as backup (not enabled by default)
+# PM2 is the primary process manager
 sudo tee /etc/systemd/system/lean-construction-backend.service > /dev/null <<'SYSTEMD'
 [Unit]
-Description=Lean Construction AI Backend API
+Description=Lean Construction AI Backend API (Backup - PM2 is primary)
 After=network.target
 
 [Service]
@@ -243,11 +252,12 @@ StandardError=append:/var/www/lean-construction/logs/backend-error.log
 WantedBy=multi-user.target
 SYSTEMD
 
-# Reload systemd
+# Reload systemd but DO NOT enable - PM2 is the primary manager
 sudo systemctl daemon-reload
-sudo systemctl enable lean-construction-backend
+# Systemd service is created for emergency fallback only
+# Use: sudo systemctl start lean-construction-backend (if needed)
 
-print_success "Systemd service configured"
+print_success "Systemd service configured (backup only, not enabled)"
 
 echo ""
 echo "🎉 Backend Deployment Complete!"
@@ -257,9 +267,9 @@ echo "📊 Deployment Summary:"
 echo "✅ Backend API: Running on port 8000"
 echo "✅ Health Check: http://localhost:8000/health"
 echo "✅ API Docs: http://localhost:8000/docs"
-echo "✅ PM2 Process Manager: Active"
+echo "✅ PM2 Process Manager: Active (Primary)"
 echo "✅ Health Monitoring: Configured (runs every 5 minutes)"
-echo "✅ Systemd Service: Configured as backup"
+echo "ℹ️  Systemd Service: Configured as emergency backup only"
 echo ""
 echo "📋 Management Commands:"
 echo "• Check status: pm2 status"
@@ -267,10 +277,17 @@ echo "• View logs: pm2 logs lean-construction-api"
 echo "• Restart: pm2 restart lean-construction-api"
 echo "• Stop: pm2 stop lean-construction-api"
 echo "• Start: pm2 start lean-construction-api"
+echo "• Emergency backup: sudo systemctl start lean-construction-backend"
 echo ""
 echo "⚠️  Next Steps:"
 echo "1. Configure Nginx reverse proxy"
 echo "2. Set up environment variables in .env file"
 echo "3. Test external access via VPS IP"
 echo "4. Configure DNS and SSL certificates"
+echo ""
+echo "⚠️  IMPORTANT NOTES:"
+echo "• PM2 is the PRIMARY process manager for port 8000"
+echo "• Systemd service is for emergency fallback only and is NOT enabled"
+echo "• Environment variables (DATABASE_URL, SECRET_KEY) are loaded from .env file"
+echo "• Currently running app.main_lite (Lite version) - see DEPLOYMENT_INSTRUCTIONS.md"
 echo ""
