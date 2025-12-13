@@ -15,10 +15,10 @@ echo "Packaging Website..."
 tar -czf website_update.tar.gz --exclude='.next/cache' website/.next website/public website/package.json website/next.config.mjs
 
 echo "Uploading Update..."
-scp website_update.tar.gz root@$VPS_HOST:$APP_DIR/
+scp -i ~/.ssh/vps_deploy_key website_update.tar.gz root@$VPS_HOST:$APP_DIR/
 
 echo "Applying Update on VPS..."
-ssh root@$VPS_HOST << 'ENDSSH'
+ssh -i ~/.ssh/vps_deploy_key root@$VPS_HOST << 'ENDSSH'
     APP_DIR="/var/www/lean-ai-construction"
     cd $APP_DIR
     

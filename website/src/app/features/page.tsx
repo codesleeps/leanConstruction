@@ -171,17 +171,14 @@ const additionalFeatures = [
 ];
 
 const integrations = [
-  { name: "Procore", logo: "/integrated_tools_logo/procore.webp" },
-  { name: "Autodesk", logo: "/integrated_tools_logo/autodesk.webp" },
-  {
-    name: "Microsoft Project",
-    logo: "/integrated_tools_logo/microsoft-project.webp",
-  },
-  { name: "Primavera P6", logo: "/integrated_tools_logo/Primavera-P6.webp" },
-  { name: "Bluebeam", logo: "/integrated_tools_logo/Bluebeam.webp" },
-  { name: "PlanGrid", logo: "/integrated_tools_logo/plangrid-logo.webp" },
-  { name: "Sage", logo: "/integrated_tools_logo/sage.webp" },
-  { name: "QuickBooks", logo: "/integrated_tools_logo/intuit-quickbooks.webp" },
+  "/integrated_tools_logo/procore.webp",
+  "/integrated_tools_logo/autodesk.webp",
+  "/integrated_tools_logo/microsoft-project.webp",
+  "/integrated_tools_logo/Primavera-P6.webp",
+  "/integrated_tools_logo/Bluebeam.webp",
+  "/integrated_tools_logo/plangrid-logo.webp",
+  "/integrated_tools_logo/sage.webp",
+  "/integrated_tools_logo/intuit-quickbooks.webp",
 ];
 
 export default function FeaturesPage() {
@@ -338,20 +335,17 @@ export default function FeaturesPage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {integrations.map((integration) => (
+            {integrations.map((logo) => (
               <div
-                key={integration.name}
-                className="flex items-center justify-center p-8 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                key={logo}
+                className="flex items-center justify-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto bg-gray-100 rounded-xl flex items-center justify-center mb-3">
-                    <span className="text-2xl font-bold text-gray-400">
-                      {integration.name.charAt(0)}
-                    </span>
-                  </div>
-                  <span className="text-sm font-medium text-gray-700">
-                    {integration.name}
-                  </span>
+                <div className="w-full h-24 flex items-center justify-center">
+                  <img
+                    src={logo}
+                    alt="Integration logo"
+                    className="max-w-full max-h-full object-contain"
+                  />
                 </div>
               </div>
             ))}
