@@ -1,0 +1,17 @@
+[Unit]
+Description=Lean Construction AI Backend API
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/var/www/lean-construction
+Environment="PYTHONPATH=/var/www/lean-construction"
+ExecStart=/var/www/lean-construction/venv/bin/uvicorn app.main_lite:app --host 0.0.0.0 --port 8000
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/www/lean-construction/logs/backend.log
+StandardError=append:/var/www/lean-construction/logs/backend-error.log
+
+[Install]
+WantedBy=multi-user.target
