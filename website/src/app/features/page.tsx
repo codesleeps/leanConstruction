@@ -16,14 +16,15 @@ import {
   Cloud,
   Lock,
   RefreshCw,
-  CheckCircle
+  CheckCircle,
 } from "lucide-react";
 
 const mainFeatures = [
   {
     id: "waste-detection",
     name: "AI-Powered Waste Detection",
-    description: "Our computer vision technology analyzes images and video feeds from your construction sites to identify waste in real-time. From material overuse to inefficient processes, our AI spots opportunities for improvement that humans might miss.",
+    description:
+      "Our computer vision technology analyzes images and video feeds from your construction sites to identify waste in real-time. From material overuse to inefficient processes, our AI spots opportunities for improvement that humans might miss.",
     icon: Camera,
     color: "bg-blue-500",
     benefits: [
@@ -38,7 +39,8 @@ const mainFeatures = [
   {
     id: "predictive-analytics",
     name: "Predictive Analytics",
-    description: "Machine learning models trained on millions of construction data points help you forecast project outcomes before they happen. Anticipate delays, budget overruns, and resource shortages weeks in advance.",
+    description:
+      "Machine learning models trained on millions of construction data points help you forecast project outcomes before they happen. Anticipate delays, budget overruns, and resource shortages weeks in advance.",
     icon: Brain,
     color: "bg-purple-500",
     benefits: [
@@ -53,7 +55,8 @@ const mainFeatures = [
   {
     id: "dashboards",
     name: "Real-Time Dashboards",
-    description: "Monitor all your projects from a single, customizable dashboard. Get live updates on KPIs, project status, team performance, and more. Share dashboards with stakeholders for complete transparency.",
+    description:
+      "Monitor all your projects from a single, customizable dashboard. Get live updates on KPIs, project status, team performance, and more. Share dashboards with stakeholders for complete transparency.",
     icon: BarChart3,
     color: "bg-green-500",
     benefits: [
@@ -68,7 +71,8 @@ const mainFeatures = [
   {
     id: "lean-tools",
     name: "Lean Methodology Tools",
-    description: "Built-in tools for implementing lean construction principles. From 5S audits to Kanban boards and value stream mapping, everything you need to optimize your workflows is at your fingertips.",
+    description:
+      "Built-in tools for implementing lean construction principles. From 5S audits to Kanban boards and value stream mapping, everything you need to optimize your workflows is at your fingertips.",
     icon: Zap,
     color: "bg-yellow-500",
     benefits: [
@@ -83,7 +87,8 @@ const mainFeatures = [
   {
     id: "collaboration",
     name: "Team Collaboration",
-    description: "Keep your entire team aligned with shared workspaces, task management, and real-time communication. From field workers to executives, everyone stays informed and connected.",
+    description:
+      "Keep your entire team aligned with shared workspaces, task management, and real-time communication. From field workers to executives, everyone stays informed and connected.",
     icon: Users,
     color: "bg-pink-500",
     benefits: [
@@ -98,7 +103,8 @@ const mainFeatures = [
   {
     id: "security",
     name: "Enterprise Security",
-    description: "Your data is protected with bank-level encryption, SSO integration, and compliance with industry standards. We take security seriously so you can focus on building.",
+    description:
+      "Your data is protected with bank-level encryption, SSO integration, and compliance with industry standards. We take security seriously so you can focus on building.",
     icon: Shield,
     color: "bg-red-500",
     benefits: [
@@ -115,22 +121,26 @@ const mainFeatures = [
 const additionalFeatures = [
   {
     name: "Workflow Automation",
-    description: "Automate repetitive tasks and approvals with customizable workflows.",
+    description:
+      "Automate repetitive tasks and approvals with customizable workflows.",
     icon: Workflow,
   },
   {
     name: "Advanced Reporting",
-    description: "Generate detailed reports with custom metrics and visualizations.",
+    description:
+      "Generate detailed reports with custom metrics and visualizations.",
     icon: LineChart,
   },
   {
     name: "Smart Notifications",
-    description: "Get alerted about important events via email, SMS, or push notifications.",
+    description:
+      "Get alerted about important events via email, SMS, or push notifications.",
     icon: Bell,
   },
   {
     name: "Document Management",
-    description: "Store, organize, and version control all your project documents.",
+    description:
+      "Store, organize, and version control all your project documents.",
     icon: FileText,
   },
   {
@@ -161,14 +171,17 @@ const additionalFeatures = [
 ];
 
 const integrations = [
-  { name: "Procore", logo: "/integrations/procore.svg" },
-  { name: "Autodesk", logo: "/integrations/autodesk.svg" },
-  { name: "Microsoft Project", logo: "/integrations/ms-project.svg" },
-  { name: "Primavera P6", logo: "/integrations/primavera.svg" },
-  { name: "Bluebeam", logo: "/integrations/bluebeam.svg" },
-  { name: "PlanGrid", logo: "/integrations/plangrid.svg" },
-  { name: "Sage", logo: "/integrations/sage.svg" },
-  { name: "QuickBooks", logo: "/integrations/quickbooks.svg" },
+  { name: "Procore", logo: "/integrated_tools_logo/procore.webp" },
+  { name: "Autodesk", logo: "/integrated_tools_logo/autodesk.webp" },
+  {
+    name: "Microsoft Project",
+    logo: "/integrated_tools_logo/microsoft-project.webp",
+  },
+  { name: "Primavera P6", logo: "/integrated_tools_logo/Primavera-P6.webp" },
+  { name: "Bluebeam", logo: "/integrated_tools_logo/Bluebeam.webp" },
+  { name: "PlanGrid", logo: "/integrated_tools_logo/plangrid-logo.webp" },
+  { name: "Sage", logo: "/integrated_tools_logo/sage.webp" },
+  { name: "QuickBooks", logo: "/integrated_tools_logo/intuit-quickbooks.webp" },
 ];
 
 export default function FeaturesPage() {
@@ -177,9 +190,12 @@ export default function FeaturesPage() {
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 gradient-bg overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }} />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          />
         </div>
 
         <div className="container-custom relative z-10">
@@ -199,8 +215,15 @@ export default function FeaturesPage() {
 
         {/* Wave Divider */}
         <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="#F9FAFB" />
+          <svg
+            viewBox="0 0 1440 120"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z"
+              fill="#F9FAFB"
+            />
           </svg>
         </div>
       </section>
@@ -212,11 +235,17 @@ export default function FeaturesPage() {
             <div
               key={feature.id}
               id={feature.id}
-              className={`flex flex-col ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-12 items-center ${index > 0 ? 'mt-24' : ''} max-w-7xl mx-auto`}
+              className={`flex flex-col ${
+                index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+              } gap-12 items-center ${
+                index > 0 ? "mt-24" : ""
+              } max-w-7xl mx-auto`}
             >
               {/* Content */}
               <div className="flex-1">
-                <div className={`w-14 h-14 rounded-2xl ${feature.color} flex items-center justify-center mb-6`}>
+                <div
+                  className={`w-14 h-14 rounded-2xl ${feature.color} flex items-center justify-center mb-6`}
+                >
                   <feature.icon className="w-7 h-7 text-white" />
                 </div>
                 <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900">
@@ -240,12 +269,16 @@ export default function FeaturesPage() {
                 <div className="relative">
                   <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl shadow-xl overflow-hidden">
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className={`w-24 h-24 rounded-3xl ${feature.color} opacity-20`} />
+                      <div
+                        className={`w-24 h-24 rounded-3xl ${feature.color} opacity-20`}
+                      />
                       <feature.icon className="absolute w-12 h-12 text-gray-400" />
                     </div>
                   </div>
                   {/* Decorative elements */}
-                  <div className={`absolute -z-10 -top-4 -right-4 w-full h-full rounded-2xl ${feature.color} opacity-10`} />
+                  <div
+                    className={`absolute -z-10 -top-4 -right-4 w-full h-full rounded-2xl ${feature.color} opacity-10`}
+                  />
                 </div>
               </div>
             </div>
@@ -258,18 +291,21 @@ export default function FeaturesPage() {
         <div className="container-custom">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900">
-              And so much{" "}
-              <span className="gradient-text">more</span>
+              And so much <span className="gradient-text">more</span>
             </h2>
             <p className="mt-4 text-lg text-gray-600">
               Discover all the tools and features that make Lean AI Construction
-              the most comprehensive platform for modern construction management.
+              the most comprehensive platform for modern construction
+              management.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {additionalFeatures.map((feature) => (
-              <div key={feature.name} className="flex gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors">
+              <div
+                key={feature.name}
+                className="flex gap-4 p-6 rounded-xl hover:bg-gray-50 transition-colors"
+              >
                 <div className="w-12 h-12 rounded-xl bg-primary-100 flex items-center justify-center flex-shrink-0">
                   <feature.icon className="w-6 h-6 text-primary-600" />
                 </div>
@@ -296,8 +332,8 @@ export default function FeaturesPage() {
               <span className="gradient-text">favorite tools</span>
             </h2>
             <p className="mt-4 text-lg text-gray-600">
-              Connect Lean AI Construction with the tools you already use.
-              Our platform integrates seamlessly with industry-leading software.
+              Connect Lean AI Construction with the tools you already use. Our
+              platform integrates seamlessly with industry-leading software.
             </p>
           </div>
 
@@ -325,7 +361,10 @@ export default function FeaturesPage() {
             <p className="text-gray-600 mb-4">
               Don't see your tool? We're always adding new integrations.
             </p>
-            <Link href="/contact" className="text-primary-600 font-semibold hover:text-primary-700">
+            <Link
+              href="/contact"
+              className="text-primary-600 font-semibold hover:text-primary-700"
+            >
               Request an integration →
             </Link>
           </div>
@@ -344,8 +383,9 @@ export default function FeaturesPage() {
                 </span>
               </h2>
               <p className="mt-4 text-lg text-gray-400">
-                Our RESTful API gives you full access to your data and platform capabilities.
-                Build custom integrations, automate workflows, and extend functionality to meet your unique needs.
+                Our RESTful API gives you full access to your data and platform
+                capabilities. Build custom integrations, automate workflows, and
+                extend functionality to meet your unique needs.
               </p>
               <ul className="mt-8 space-y-4">
                 {[
@@ -355,7 +395,10 @@ export default function FeaturesPage() {
                   "Rate limiting and usage analytics",
                   "Sandbox environment for testing",
                 ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-gray-300">
+                  <li
+                    key={item}
+                    className="flex items-center gap-3 text-gray-300"
+                  >
                     <CheckCircle className="w-5 h-5 text-green-400" />
                     {item}
                   </li>
@@ -413,9 +456,12 @@ console.log(data);
         <div className="container-custom">
           <div className="relative overflow-hidden rounded-3xl gradient-bg p-12 md:p-20">
             <div className="absolute inset-0 opacity-10">
-              <div className="absolute inset-0" style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-              }} />
+              <div
+                className="absolute inset-0"
+                style={{
+                  backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                }}
+              />
             </div>
 
             <div className="relative z-10 text-center max-w-3xl mx-auto">
@@ -423,14 +469,21 @@ console.log(data);
                 Ready to see these features in action?
               </h2>
               <p className="mt-6 text-lg md:text-xl text-white/80">
-                Start your free trial today and experience the power of AI-driven construction management.
+                Start your free trial today and experience the power of
+                AI-driven construction management.
               </p>
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/signup" className="btn-primary bg-white text-primary-700 hover:bg-gray-100 text-lg px-8 py-4">
+                <Link
+                  href="/signup"
+                  className="btn-primary bg-white text-primary-700 hover:bg-gray-100 text-lg px-8 py-4"
+                >
                   Start Free Trial
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
-                <Link href="/contact" className="btn-secondary border-white/30 text-white hover:bg-white/10 text-lg px-8 py-4">
+                <Link
+                  href="/contact"
+                  className="btn-secondary border-white/30 text-white hover:bg-white/10 text-lg px-8 py-4"
+                >
                   Schedule a Demo
                 </Link>
               </div>
