@@ -1,33 +1,33 @@
 from sqlalchemy import Column, Integer, String, DateTime, Float, Text, ForeignKey, Boolean
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, Mapped
 from sqlalchemy.ext.declarative import declarative_base
-from datetime import datetime
+from datetime import datetime, timezone
 
 Base = declarative_base()
 
 class User(Base):
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True, index=True)
-    hashed_password = Column(String)
-    full_name = Column(String)
-    company = Column(String)
-    role = Column(String)  # e.g., 'admin', 'manager', 'worker'
-    created_at = Column(DateTime, default=datetime.utcnow)
-    is_active = Column(Integer, default=1)
-    
+    id: Mapped[int] = Column(Integer, primary_key=True, index=True)
+    email: Mapped[str] = Column(String, unique=True, index=True)
+    hashed_password: Mapped[str] = Column(String)
+    full_name: Mapped[str] = Column(String)
+    company: Mapped[str] = Column(String)
+    role: Mapped[str] = Column(String)  # e.g., 'admin', 'manager', 'worker'
+    created_at: Mapped[datetime] = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    is_active: Mapped[int] = Column(Integer, default=1)
+
     # Onboarding fields
-    is_onboarded = Column(Boolean, default=False)
-    onboarding_completed_at = Column(DateTime, nullable=True)
-    company_size = Column(String)  # 'small' (3-10), 'medium' (10-50), 'enterprise' (50+)
-    construction_type = Column(String)  # 'residential', 'commercial', 'infrastructure', 'industrial'
-    phone_number = Column(String, nullable=True)
-    onboarding_step = Column(Integer, default=0)  # Track onboarding progress (0-5)
-    email_verified = Column(Boolean, default=False)
-    last_login = Column(DateTime, nullable=True)
-    demo_account = Column(Boolean, default=False)  # Mark as demo account
-    trial_expires_at = Column(DateTime, nullable=True)
+    is_onboarded: Mapped[bool] = Column(Boolean, default=False)
+    onboarding_completed_at: Mapped[datetime | None] = Column(DateTime, nullable=True)
+    company_size: Mapped[str] = Column(String)  # 'small' (3-10), 'medium' (10-50), 'enterprise' (50+)
+    construction_type: Mapped[str] = Column(String)  # 'residential', 'commercial', 'infrastructure', 'industrial'
+    phone_number: Mapped[str | None] = Column(String, nullable=True)
+    onboarding_step: Mapped[int] = Column(Integer, default=0)  # Track onboarding progress (0-5)
+    email_verified: Mapped[bool] = Column(Boolean, default=False)
+    last_login: Mapped[datetime | None] = Column(DateTime, nullable=True)
+    demo_account: Mapped[bool] = Column(Boolean, default=False)  # Mark as demo account
+    trial_expires_at: Mapped[datetime | None] = Column(DateTime, nullable=True)
 
     projects = relationship("Project", back_populates="owner")
     onboarding_events = relationship("OnboardingEvent", back_populates="user")
@@ -45,7 +45,7 @@ class Project(Base):
     budget = Column(Float)
     start_date = Column(DateTime)
     end_date = Column(DateTime)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     owner = relationship("User", back_populates="projects")
     tasks = relationship("Task", back_populates="project")
@@ -63,8 +63,8 @@ class Task(Base):
     assigned_to = Column(Integer, ForeignKey("users.id"))
     estimated_hours = Column(Float)
     actual_hours = Column(Float)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     project = relationship("Project", back_populates="tasks")
 
@@ -77,7 +77,7 @@ class WasteLog(Base):
     description = Column(Text)
     impact_cost = Column(Float)
     impact_time = Column(Float)  # in hours
-    detected_at = Column(DateTime, default=datetime.utcnow)
+    detected_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     resolved_at = Column(DateTime, nullable=True)
 
     project = relationship("Project", back_populates="waste_logs")
@@ -89,7 +89,7 @@ class OnboardingEvent(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
     event_type = Column(String)  # 'signup', 'email_verified', 'profile_completed', 'first_project', 'feature_used'
     event_data = Column(Text)  # JSON string with event details
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
 
     user = relationship("User", back_populates="onboarding_events")
 
@@ -121,7 +121,7 @@ class Appointment(Base):
     status = Column(String, default="scheduled")  # 'scheduled', 'cancelled', 'completed'
     notes = Column(Text, nullable=True)
     meeting_link = Column(String, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     
     user = relationship("User")
 
@@ -131,8 +131,8 @@ class ChatConversation(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"))
     session_id = Column(String, index=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
+    updated_at = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
 
     user = relationship("User", back_populates="chat_conversations")
     messages = relationship("ChatMessage", back_populates="conversation")
@@ -144,7 +144,7 @@ class ChatMessage(Base):
     conversation_id = Column(Integer, ForeignKey("chat_conversations.id"))
     role = Column(String)  # 'user' or 'bot'
     content = Column(Text)
-    timestamp = Column(DateTime, default=datetime.utcnow)
+    timestamp = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     intent_classification = Column(String, nullable=True)
 
     conversation = relationship("ChatConversation", back_populates="messages")
@@ -160,5 +160,5 @@ class MLUsageLog(Base):
     latency_ms = Column(Float)
     error_occurred = Column(Boolean, default=False)
     error_message = Column(Text, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
+    created_at = Column(DateTime, default=lambda: datetime.now(timezone.utc))
     user_id = Column(Integer, ForeignKey("users.id"), nullable=True)
