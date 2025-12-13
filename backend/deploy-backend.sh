@@ -48,8 +48,36 @@ echo ""
 # Clean up existing deployment
 BACKEND_DIR="/var/www/lean-construction"
 if [ -d "$BACKEND_DIR" ]; then
-    echo "Removing existing deployment directory..."
-    sudo rm -rf $BACKEND_DIR
+    echo "Preserving persistent data and cleaning only application files..."
+    
+    # Create backup of persistent data if it exists
+    if [ -d "$BACKEND_DIR/data" ]; then
+        TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+        sudo mv "$BACKEND_DIR/data" "$BACKEND_DIR/data_backup_$TIMESTAMP"
+        print_warning "Backup created: $BACKEND_DIR/data_backup_$TIMESTAMP"
+    fi
+    
+    # Preserve logs if they exist
+    if [ -d "$BACKEND_DIR/logs" ]; then
+        sudo mv "$BACKEND_DIR/logs" "$BACKEND_DIR/logs_backup_$TIMESTAMP"
+        print_warning "Logs backup created: $BACKEND_DIR/logs_backup_$TIMESTAMP"
+    fi
+    
+    # Remove only the application code and venv, preserve data and logs
+    sudo rm -rf "$BACKEND_DIR/app" "$BACKEND_DIR/venv" "$BACKEND_DIR/alembic" "$BACKEND_DIR/requirements.txt" "$BACKEND_DIR/database.py" "$BACKEND_DIR/ecosystem.config.js" 2>/dev/null || true
+    
+    # Restore data and logs if they existed
+    if [ -d "$BACKEND_DIR/data_backup_$TIMESTAMP" ]; then
+        sudo mv "$BACKEND_DIR/data_backup_$TIMESTAMP" "$BACKEND_DIR/data"
+    fi
+    if [ -d "$BACKEND_DIR/logs_backup_$TIMESTAMP" ]; then
+        sudo mv "$BACKEND_DIR/logs_backup_$TIMESTAMP" "$BACKEND_DIR/logs"
+    fi
+else
+    # Create clean directory structure
+    sudo mkdir -p "$BACKEND_DIR"
+    sudo mkdir -p "$BACKEND_DIR/data"
+    sudo mkdir -p "$BACKEND_DIR/logs"
 fi
 
 # Stop any running processes
@@ -57,12 +85,7 @@ pm2 delete lean-construction-api 2>/dev/null || true
 pkill -f uvicorn 2>/dev/null || true
 
 echo ""
-print_step "Step 2: Creating directory structure..."
-echo ""
-
-# Create clean directory structure
-sudo mkdir -p $BACKEND_DIR
-sudo mkdir -p $BACKEND_DIR/logs
+# Set permissions on the directory structure
 sudo chown -R $USER:$USER $BACKEND_DIR
 sudo chmod -R 755 $BACKEND_DIR
 
@@ -111,7 +134,71 @@ pip install -r requirements.txt
 print_success "Dependencies installed from requirements.txt"
 
 echo ""
-print_step "Step 6: Testing backend import..."
+print_step "Step 6: Creating .env file..."
+echo ""
+
+# Create .env file from template or use existing one
+if [ -f "/tmp/lean-construction-backend/.env.example" ]; then
+    # Copy .env.example as a starting point
+    cp "/tmp/lean-construction-backend/.env.example" "$BACKEND_DIR/.env"
+    
+    # If .env already exists, preserve it
+    if [ -f "$BACKEND_DIR/.env" ]; then
+        print_warning ".env file already exists, preserving existing configuration"
+    else
+        # Create a basic .env file with SQLite and a generated secret key
+        cat > "$BACKEND_DIR/.env" <<'ENV'
+# Database Configuration
+DATABASE_URL=sqlite:///./data/lean_construction.db
+
+# Security
+SECRET_KEY=$(openssl rand -hex 32)
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# Environment
+ENVIRONMENT=production
+DEBUG=false
+
+# Logging
+LOG_LEVEL=INFO
+
+# Application URLs
+FRONTEND_URL=https://leanaiconstruction.com
+API_BASE_URL=https://api.leanaiconstruction.com
+
+# Feature Flags
+ENABLE_DEMO_ACCOUNTS=true
+ENABLE_EMAIL_VERIFICATION=false
+ENABLE_ONBOARDING_FLOW=true
+
+# Business Configuration
+COMPANY_NAME=Lean AI Construction
+SUPPORT_EMAIL=support@leanaiconstruction.com
+
+# Payment Integration (Stripe)
+STRIPE_PUBLISHABLE_KEY=pk_test_4242424242424242
+STRIPE_SECRET_KEY=sk_test_4242424242424242
+STRIPE_WEBHOOK_SECRET=whsec_4242424242424242
+ENV
+        print_success ".env file created with SQLite database configuration"
+        print_warning "Please review and update .env file with production values for:"
+        print_warning "  - DATABASE_URL (consider PostgreSQL for production)"
+        print_warning "  - SECRET_KEY (already generated)"
+        print_warning "  - STRIPE keys (test keys provided)"
+    fi
+else
+    print_warning ".env.example not found in package, creating basic .env file"
+    # Create minimal .env
+    cat > "$BACKEND_DIR/.env" <<'ENV'
+DATABASE_URL=sqlite:///./data/lean_construction.db
+SECRET_KEY=$(openssl rand -hex 32)
+ENVIRONMENT=production
+DEBUG=false
+ENV
+fi
+
+echo ""
+print_step "Step 7: Testing backend import..."
 echo ""
 
 # Test import
@@ -132,39 +219,17 @@ echo "For full production API with all routes, use app.main_production instead."
 echo "See DEPLOYMENT_INSTRUCTIONS.md for upgrade path."
 
 echo ""
-print_step "Step 7: Configuring PM2..."
+print_step "Step 8: Configuring PM2..."
 echo ""
 
-# Create PM2 configuration
-cat > $BACKEND_DIR/ecosystem.config.js << 'EOF'
-module.exports = {
-  apps: [{
-    name: 'lean-construction-api',
-    script: '/var/www/lean-construction/venv/bin/uvicorn',
-    args: 'app.main_lite:app --host 0.0.0.0 --port 8000',
-    cwd: '/var/www/lean-construction',
-    interpreter: 'none',
-    env: {
-      PYTHONPATH: '/var/www/lean-construction',
-      DATABASE_URL: 'sqlite:///./lean_construction.db',
-      SECRET_KEY: 'production-secret-key-change-this',
-      ENVIRONMENT: 'production'
-    },
-    instances: 1,
-    exec_mode: 'fork',
-    watch: false,
-    max_memory_restart: '1G',
-    error_file: '/var/www/lean-construction/logs/pm2-error.log',
-    out_file: '/var/www/lean-construction/logs/pm2-out.log',
-    time: true
-  }]
-};
-EOF
+# Copy the tracked ecosystem.config.js as the source of truth
+# This file should not contain sensitive environment variables
+cp /tmp/lean-construction-backend/ecosystem.config.js $BACKEND_DIR/ecosystem.config.js
 
-print_success "PM2 configuration created"
+print_success "PM2 configuration copied from tracked file"
 
 echo ""
-print_step "Step 8: Starting backend service..."
+print_step "Step 9: Starting backend service..."
 echo ""
 
 # Start with PM2
@@ -176,7 +241,7 @@ pm2 startup
 print_success "Backend service started with PM2"
 
 echo ""
-print_step "Step 9: Verifying deployment..."
+print_step "Step 10: Verifying deployment..."
 echo ""
 
 # Wait for service to start
@@ -198,11 +263,12 @@ else
 fi
 
 echo ""
-print_step "Step 10: Configuring monitoring..."
+print_step "Step 11: Configuring monitoring..."
 echo ""
 
 # Create health check script
-sudo tee /usr/local/bin/lean-construction-healthcheck.sh > /dev/null <<'HEALTHCHECK'
+# Use unquoted heredoc to allow $BACKEND_DIR expansion at deploy time
+sudo tee /usr/local/bin/lean-construction-healthcheck.sh > /dev/null <<HEALTHCHECK
 #!/bin/bash
 
 API_URL="http://localhost:8000/health"
@@ -221,13 +287,22 @@ HEALTHCHECK
 
 sudo chmod +x /usr/local/bin/lean-construction-healthcheck.sh
 
-# Add to crontab
-(crontab -l 2>/dev/null; echo "*/5 * * * * /usr/local/bin/lean-construction-healthcheck.sh") | crontab -
+# Add to crontab - prevent duplicates by filtering out existing healthcheck entries
+CRON_LINE="*/5 * * * * /usr/local/bin/lean-construction-healthcheck.sh"
+if crontab -l 2>/dev/null | grep -q "lean-construction-healthcheck.sh"; then
+    # Remove existing healthcheck entries
+    crontab -l 2>/dev/null | grep -v "lean-construction-healthcheck.sh" | crontab -
+    # Add the new one
+    (crontab -l 2>/dev/null; echo "$CRON_LINE") | crontab -
+else
+    # No existing entry, add it
+    (crontab -l 2>/dev/null; echo "$CRON_LINE") | crontab -
+fi
 
 print_success "Health check monitoring configured"
 
 echo ""
-print_step "Step 11: Configuring systemd service (backup only)..."
+print_step "Step 12: Configuring systemd service (backup only)..."
 echo ""
 
 # Create systemd service as backup (not enabled by default)
