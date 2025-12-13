@@ -32,6 +32,8 @@ class User(Base):
     projects = relationship("Project", back_populates="owner")
     onboarding_events = relationship("OnboardingEvent", back_populates="user")
 
+    chat_conversations = relationship("ChatConversation", back_populates="user")
+
 class Project(Base):
     __tablename__ = "projects"
 
@@ -122,6 +124,30 @@ class Appointment(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     
     user = relationship("User")
+
+class ChatConversation(Base):
+    __tablename__ = "chat_conversations"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    session_id = Column(String, index=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    user = relationship("User", back_populates="chat_conversations")
+    messages = relationship("ChatMessage", back_populates="conversation")
+
+class ChatMessage(Base):
+    __tablename__ = "chat_messages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    conversation_id = Column(Integer, ForeignKey("chat_conversations.id"))
+    role = Column(String)  # 'user' or 'bot'
+    content = Column(Text)
+    timestamp = Column(DateTime, default=datetime.utcnow)
+    intent_classification = Column(String, nullable=True)
+
+    conversation = relationship("ChatConversation", back_populates="messages")
 
 class MLUsageLog(Base):
     __tablename__ = "ml_usage_logs"
