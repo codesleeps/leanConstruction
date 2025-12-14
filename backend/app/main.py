@@ -23,12 +23,21 @@ app = FastAPI(
 )
 
 # CORS middleware for frontend integration
+import os
+from typing import List
+
+# Get CORS configuration from environment
+cors_origins = os.getenv("CORS_ALLOWED_ORIGINS", "*").split(",") if os.getenv("CORS_ALLOWED_ORIGINS") else ["*"]
+cors_credentials = os.getenv("CORS_ALLOW_CREDENTIALS", "true").lower() == "true"
+cors_methods = os.getenv("CORS_ALLOW_METHODS", "*").split(",") if os.getenv("CORS_ALLOW_METHODS") else ["*"]
+cors_headers = os.getenv("CORS_ALLOW_HEADERS", "*").split(",") if os.getenv("CORS_ALLOW_HEADERS") else ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=cors_origins,
+    allow_credentials=cors_credentials,
+    allow_methods=cors_methods,
+    allow_headers=cors_headers,
 )
 
 # Include ML API routes
@@ -49,6 +58,10 @@ app.include_router(appointments_router)
 # Include payments API routes
 from .api.payments import router as payments_router
 app.include_router(payments_router)
+
+# Include chat API routes
+from .api.chat import router as chat_router
+app.include_router(chat_router, prefix="/api/v1")
 
 # Dependency to get DB session
 def get_db():
