@@ -149,15 +149,42 @@ ssh $VPS_USER@$VPS_HOST << 'ENDSSH'
         apt-get install -y python3-venv python3-full || true
     fi
     
-    # Create and activate virtual environment
-    if [ ! -d "venv" ]; then
-        python3 -m venv venv
-    fi
-    source venv/bin/activate
+    # Create virtual environment
+    echo "Creating Python virtual environment..."
     
-    # Install dependencies using venv pip (use python3 explicitly)
-    python3 -m pip install --upgrade pip
-    python3 -m pip install -r requirements.txt
+    # Remove broken venv if it exists
+    if [ -d "venv" ] && [ ! -f "./venv/bin/python3" ]; then
+        echo "Removing broken virtual environment..."
+        rm -rf venv
+    fi
+    
+    # Create fresh venv
+    if [ ! -d "venv" ]; then
+        echo "Running: python3 -m venv venv"
+        python3 -m venv venv
+        if [ $? -eq 0 ]; then
+            echo "Virtual environment created"
+        else
+            echo "ERROR: python3 -m venv venv failed with exit code $?"
+            exit 1
+        fi
+    else
+        echo "Virtual environment already exists"
+    fi
+    
+    # Verify venv was created successfully
+    if [ ! -f "./venv/bin/python3" ]; then
+        echo "ERROR: Virtual environment creation failed!"
+        echo "Directory contents:"
+        ls -la venv/ 2>/dev/null || echo "venv directory does not exist"
+        exit 1
+    fi
+    
+    # Install dependencies using venv pip directly (relative path since we're in backend dir)
+    echo "Installing Python dependencies..."
+    ./venv/bin/python3 -m pip install --upgrade pip
+    ./venv/bin/python3 -m pip install -r requirements.txt
+    echo "Python dependencies installed successfully"
 
     
     # 3. Setup Systemd Service for Backend
