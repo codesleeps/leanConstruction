@@ -1,0 +1,1387 @@
+{
+  "metadata": {
+    "timestamp": "2025-12-14T18:19:10.740925",
+    "execution_time": 0.97457,
+    "environment": {
+      "backend_url": "http://localhost:8000",
+      "frontend_url": "http://localhost:3000"
+    }
+  },
+  "summary": {
+    "total_tests": 185,
+    "passed": 85,
+    "failed": 87,
+    "warnings": 8,
+    "skipped": 5,
+    "production_readiness_score": 45.94594594594595
+  },
+  "results": [
+    {
+      "name": "Backend Health",
+      "status": "FAIL",
+      "message": "Health check error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /health (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "API Documentation",
+      "status": "FAIL",
+      "message": "Docs error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /docs (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "Auth Endpoint /api/v1/auth/login",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/login (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "Auth Endpoint /api/v1/auth/register",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/register (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "Auth Endpoint /api/v1/auth/me",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/me (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "Auth Endpoint /api/v1/auth/logout",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/logout (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "Chat Endpoint /api/v1/chat/conversations",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/chat/conversations (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "Chat Endpoint /api/v1/chat/messages",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/chat/messages (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "Chat Endpoint /api/v1/chat/conversations/search",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/chat/conversations/search (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "ML Endpoint /api/v1/ml/analyze-waste",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/ml/analyze-waste (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "ML Endpoint /api/v1/ml/computer-vision",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/ml/computer-vision (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "ML Endpoint /api/v1/ml/predictive-models",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/ml/predictive-models (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "Database Connection",
+      "status": "FAIL",
+      "message": "Database test error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/me (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.007909848139836239
+    },
+    {
+      "name": "API Endpoint Discovery",
+      "status": "SKIP",
+      "message": "Could not import FastAPI app: No module named 'fastapi'",
+      "details": null,
+      "execution_time": 0.060179948806762695
+    },
+    {
+      "name": "Frontend Accessibility",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Route /",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Route /about",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /about (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Route /features",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /features (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Route /pricing",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /pricing (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Route /contact",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Route /login",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Route /signup",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Route /book-demo",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /book-demo (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Route /onboarding",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /onboarding (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Static Asset /favicon.ico",
+      "status": "WARNING",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /favicon.ico (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Static Asset /apple-touch-icon.png",
+      "status": "WARNING",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /apple-touch-icon.png (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Static Asset /_next/static/css/",
+      "status": "WARNING",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /_next/static/css/ (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Static Asset /_next/static/js/",
+      "status": "WARNING",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /_next/static/js/ (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Frontend-Backend Integration",
+      "status": "WARNING",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/health (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0054261207580566405
+    },
+    {
+      "name": "Internal Link /signup",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /features",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /features (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /login",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /features",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /features (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /signup",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /book-demo",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /book-demo (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /dashboard",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /dashboard (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /login",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /signup",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /dashboard",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /dashboard (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /login",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /signup",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /signup",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /pricing",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /pricing (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /terms",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /terms (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /privacy",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /privacy (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /login",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /contact",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /docs",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /docs (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /signup",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /contact",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /signup",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /careers",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /careers (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /signup",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /login",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /contact",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /login",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /reset-password",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /reset-password (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /login",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /contact",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /book-demo",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /book-demo (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /signup",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /reset-password",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /reset-password (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /signup",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /demo",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /demo (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /dashboard",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /dashboard (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /help",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /help (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Internal Link /contact",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.006191487007952751
+    },
+    {
+      "name": "Image sage.webp",
+      "status": "PASS",
+      "message": "Valid image (7496 bytes, hash: d82910e6...)",
+      "details": {
+        "size": 7496,
+        "hash": "d82910e67b9ae0c5f143e7eb6761b62f"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image intuit-quickbooks.webp",
+      "status": "PASS",
+      "message": "Valid image (10556 bytes, hash: df14585d...)",
+      "details": {
+        "size": 10556,
+        "hash": "df14585d7ade41f756871e06e4e84f3c"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image Primavera-P6.webp",
+      "status": "PASS",
+      "message": "Valid image (7946 bytes, hash: 73d5c71d...)",
+      "details": {
+        "size": 7946,
+        "hash": "73d5c71d41fb7367bbd9b663385d7f96"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image Screenshot 2025-12-12 at 05.15.40.png",
+      "status": "PASS",
+      "message": "Valid image (66460 bytes, hash: 82321eec...)",
+      "details": {
+        "size": 66460,
+        "hash": "82321eec40bc494200e5751e2af82971"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image plangrid-logo.webp",
+      "status": "PASS",
+      "message": "Valid image (4458 bytes, hash: 020a1d66...)",
+      "details": {
+        "size": 4458,
+        "hash": "020a1d662e6c175a988b1350f79425fc"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image autodesk.webp",
+      "status": "PASS",
+      "message": "Valid image (2784 bytes, hash: 778e4d69...)",
+      "details": {
+        "size": 2784,
+        "hash": "778e4d692c0013d3794d3f6225e79282"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image microsoft-project.webp",
+      "status": "PASS",
+      "message": "Valid image (5364 bytes, hash: c3d44959...)",
+      "details": {
+        "size": 5364,
+        "hash": "c3d44959c0fb41fc55560dd090b59f8b"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image procore.webp",
+      "status": "PASS",
+      "message": "Valid image (2732 bytes, hash: 24ae6d6f...)",
+      "details": {
+        "size": 2732,
+        "hash": "24ae6d6f76d2e3a5a0336b7718553cb4"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image Bluebeam.webp",
+      "status": "PASS",
+      "message": "Valid image (10592 bytes, hash: c20394dd...)",
+      "details": {
+        "size": 10592,
+        "hash": "c20394dd46e318a2ac5742bc5e4a6306"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image iso-ce-web-2024-600x205-1.webp",
+      "status": "PASS",
+      "message": "Valid image (16244 bytes, hash: cca6633a...)",
+      "details": {
+        "size": 16244,
+        "hash": "cca6633a5c98f5bb4019eece085cf227"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image BLACKRIDGE+1-528w.webp",
+      "status": "PASS",
+      "message": "Valid image (25390 bytes, hash: 96c82299...)",
+      "details": {
+        "size": 25390,
+        "hash": "96c8229985d7b3b9abf6a776926b69e8"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image Aecom-logo.webp",
+      "status": "PASS",
+      "message": "Valid image (6330 bytes, hash: eb234f2b...)",
+      "details": {
+        "size": 6330,
+        "hash": "eb234f2b25c95ea5e9bdd85075b0aa11"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image logo.webp",
+      "status": "PASS",
+      "message": "Valid image (7454 bytes, hash: cae84a16...)",
+      "details": {
+        "size": 7454,
+        "hash": "cae84a1603e03ac7f5889767dccca747"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp",
+      "status": "PASS",
+      "message": "Valid image (2774 bytes, hash: b0f2c2aa...)",
+      "details": {
+        "size": 2774,
+        "hash": "b0f2c2aa7b31b20787e37baf250e15c7"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image network-rail-logo-png_seeklogo-323728.webp",
+      "status": "PASS",
+      "message": "Valid image (19162 bytes, hash: ae3e1a68...)",
+      "details": {
+        "size": 19162,
+        "hash": "ae3e1a68dd669047f7a93f02349f6e9e"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image Hensel_Phelps_200_200.webp",
+      "status": "PASS",
+      "message": "Valid image (10750 bytes, hash: 50595470...)",
+      "details": {
+        "size": 10750,
+        "hash": "50595470cb8dd8c649ea1c5e322112a7"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image iso-ce-web-2024-600x205-1.webp",
+      "status": "PASS",
+      "message": "Valid image (16244 bytes, hash: cca6633a...)",
+      "details": {
+        "size": 16244,
+        "hash": "cca6633a5c98f5bb4019eece085cf227"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image BLACKRIDGE+1-528w.webp",
+      "status": "PASS",
+      "message": "Valid image (25390 bytes, hash: 96c82299...)",
+      "details": {
+        "size": 25390,
+        "hash": "96c8229985d7b3b9abf6a776926b69e8"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image Aecom-logo.webp",
+      "status": "PASS",
+      "message": "Valid image (6330 bytes, hash: eb234f2b...)",
+      "details": {
+        "size": 6330,
+        "hash": "eb234f2b25c95ea5e9bdd85075b0aa11"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image logo.webp",
+      "status": "PASS",
+      "message": "Valid image (7454 bytes, hash: cae84a16...)",
+      "details": {
+        "size": 7454,
+        "hash": "cae84a1603e03ac7f5889767dccca747"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp",
+      "status": "PASS",
+      "message": "Valid image (2774 bytes, hash: b0f2c2aa...)",
+      "details": {
+        "size": 2774,
+        "hash": "b0f2c2aa7b31b20787e37baf250e15c7"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image network-rail-logo-png_seeklogo-323728.webp",
+      "status": "PASS",
+      "message": "Valid image (19162 bytes, hash: ae3e1a68...)",
+      "details": {
+        "size": 19162,
+        "hash": "ae3e1a68dd669047f7a93f02349f6e9e"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image Screenshot 2025-12-11 at 23.02.37.png",
+      "status": "PASS",
+      "message": "Valid image (34159 bytes, hash: 3056f37a...)",
+      "details": {
+        "size": 34159,
+        "hash": "3056f37a39485c88628460a704657680"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image Hensel_Phelps_200_200.webp",
+      "status": "PASS",
+      "message": "Valid image (10750 bytes, hash: 50595470...)",
+      "details": {
+        "size": 10750,
+        "hash": "50595470cb8dd8c649ea1c5e322112a7"
+      },
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Icon favicon.ico",
+      "status": "PASS",
+      "message": "Valid icon (56 bytes)",
+      "details": null,
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Icon apple-touch-icon.png",
+      "status": "PASS",
+      "message": "Valid icon (66 bytes)",
+      "details": null,
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Icon favicon-16x16.png",
+      "status": "PASS",
+      "message": "Valid icon (55 bytes)",
+      "details": null,
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Icon favicon-32x32.png",
+      "status": "PASS",
+      "message": "Valid icon (55 bytes)",
+      "details": null,
+      "execution_time": 0.0006272111620221819
+    },
+    {
+      "name": "Image sage.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x357, 7496 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image intuit-quickbooks.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 10556 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Primavera-P6.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 410x150, 7946 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Screenshot 2025-12-12 at 05.15.40.png",
+      "status": "PASS",
+      "message": "Valid image (PNG, 957x518, 66460 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image plangrid-logo.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 4458 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image autodesk.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x373, 2784 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image microsoft-project.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 5364 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image procore.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x375, 2732 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Bluebeam.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 10592 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image iso-ce-web-2024-600x205-1.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 527x180, 16244 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image BLACKRIDGE+1-528w.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 860x534, 25390 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Aecom-logo.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x344, 6330 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image logo.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x233, 7454 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 700x299, 2774 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image network-rail-logo-png_seeklogo-323728.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 19162 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Hensel_Phelps_200_200.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 10750 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image favicon-16x16.png",
+      "status": "FAIL",
+      "message": "Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caca8d60>",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image favicon.ico",
+      "status": "FAIL",
+      "message": "Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caca8d60>",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image apple-touch-icon.png",
+      "status": "FAIL",
+      "message": "Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caca8d60>",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image favicon-32x32.png",
+      "status": "FAIL",
+      "message": "Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caca8d60>",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image sage.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x357, 7496 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image intuit-quickbooks.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 10556 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Primavera-P6.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 410x150, 7946 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Screenshot 2025-12-12 at 05.15.40.png",
+      "status": "PASS",
+      "message": "Valid image (PNG, 957x518, 66460 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image plangrid-logo.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 4458 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image autodesk.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x373, 2784 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image microsoft-project.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 5364 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image procore.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x375, 2732 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Bluebeam.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 10592 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image iso-ce-web-2024-600x205-1.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 527x180, 16244 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image BLACKRIDGE+1-528w.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 860x534, 25390 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Aecom-logo.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x344, 6330 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image logo.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x233, 7454 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 700x299, 2774 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image network-rail-logo-png_seeklogo-323728.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 19162 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Hensel_Phelps_200_200.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 10750 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image favicon-16x16.png",
+      "status": "FAIL",
+      "message": "Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caed6110>",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image favicon.ico",
+      "status": "FAIL",
+      "message": "Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caed6110>",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image apple-touch-icon.png",
+      "status": "FAIL",
+      "message": "Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caed6110>",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image favicon.svg",
+      "status": "PASS",
+      "message": "Valid SVG (1115 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image favicon-32x32.png",
+      "status": "FAIL",
+      "message": "Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caed6110>",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image sage.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x357, 7496 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image intuit-quickbooks.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 10556 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Primavera-P6.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 572x572, 14834 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Screenshot 2025-12-12 at 05.15.40.png",
+      "status": "PASS",
+      "message": "Valid image (PNG, 957x518, 66460 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image plangrid-logo.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 4458 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image autodesk.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x373, 2784 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image microsoft-project.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 5364 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image procore.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x375, 2732 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Bluebeam.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 10592 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image iso-ce-web-2024-600x205-1.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 527x180, 16244 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image BLACKRIDGE+1-528w.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 860x534, 25390 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Aecom-logo.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x344, 6330 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image logo.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x233, 7454 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 700x299, 2774 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image network-rail-logo-png_seeklogo-323728.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 19162 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Image Hensel_Phelps_200_200.webp",
+      "status": "PASS",
+      "message": "Valid image (WEBP, 500x500, 10750 bytes)",
+      "details": null,
+      "execution_time": 0.004573403743275425
+    },
+    {
+      "name": "Database Connectivity",
+      "status": "SKIP",
+      "message": "SQLAlchemy not installed",
+      "details": null,
+      "execution_time": 0.0
+    },
+    {
+      "name": "HTTPS Redirect",
+      "status": "SKIP",
+      "message": "Local development - skipping HTTPS test",
+      "details": null,
+      "execution_time": 0.003383636474609375
+    },
+    {
+      "name": "Security Headers",
+      "status": "WARNING",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.003383636474609375
+    },
+    {
+      "name": "CORS Configuration",
+      "status": "WARNING",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/login (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.003383636474609375
+    },
+    {
+      "name": "Env File backend/.env.production",
+      "status": "PASS",
+      "message": "Environment file exists",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Env File backend/.env.example",
+      "status": "PASS",
+      "message": "Environment file exists",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Env File website/.env.local",
+      "status": "PASS",
+      "message": "Environment file exists",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Env File website/.env.example",
+      "status": "WARNING",
+      "message": "Environment file missing",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Env Var SECRET_KEY",
+      "status": "FAIL",
+      "message": "Required variable missing (Backend secret key for JWT)",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Env Var DATABASE_URL",
+      "status": "FAIL",
+      "message": "Required variable missing (Database connection string)",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Env Var NEXT_PUBLIC_API_URL",
+      "status": "FAIL",
+      "message": "Required variable missing (Frontend API URL)",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Env Var OPENAI_API_KEY",
+      "status": "SKIP",
+      "message": "Optional variable not set",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Env Var ANTHROPIC_API_KEY",
+      "status": "SKIP",
+      "message": "Optional variable not set",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Config backend/requirements.txt",
+      "status": "PASS",
+      "message": "Exists (Python dependencies)",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Config website/package.json",
+      "status": "PASS",
+      "message": "Exists (Node.js dependencies)",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Config mobile/package.json",
+      "status": "PASS",
+      "message": "Exists (React Native dependencies)",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Config backend/alembic.ini",
+      "status": "PASS",
+      "message": "Exists (Database migration config)",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Config docker-compose.yml",
+      "status": "PASS",
+      "message": "Exists (Docker configuration)",
+      "details": null,
+      "execution_time": 0.00010813985552106584
+    },
+    {
+      "name": "Response Time http://localhost:3000",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0037756760915120444
+    },
+    {
+      "name": "Response Time http://localhost:8000/health",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /health (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0037756760915120444
+    },
+    {
+      "name": "Response Time http://localhost:8000/docs",
+      "status": "FAIL",
+      "message": "Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /docs (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused\"))",
+      "details": null,
+      "execution_time": 0.0037756760915120444
+    },
+    {
+      "name": "Performance Frontend Homepage",
+      "status": "FAIL",
+      "message": "All requests failed",
+      "details": null,
+      "execution_time": 0.041146278381347656
+    },
+    {
+      "name": "Performance Backend Health",
+      "status": "FAIL",
+      "message": "All requests failed",
+      "details": null,
+      "execution_time": 0.041146278381347656
+    },
+    {
+      "name": "Performance Backend Docs",
+      "status": "FAIL",
+      "message": "All requests failed",
+      "details": null,
+      "execution_time": 0.041146278381347656
+    }
+  ]
+}
