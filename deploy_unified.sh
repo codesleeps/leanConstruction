@@ -155,9 +155,9 @@ ssh $VPS_USER@$VPS_HOST << 'ENDSSH'
     fi
     source venv/bin/activate
     
-    # Install dependencies using venv pip
-    python -m pip install --upgrade pip
-    python -m pip install -r requirements.txt
+    # Install dependencies using venv pip (use python3 explicitly)
+    python3 -m pip install --upgrade pip
+    python3 -m pip install -r requirements.txt
 
     
     # 3. Setup Systemd Service for Backend
