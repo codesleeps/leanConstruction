@@ -140,16 +140,25 @@ ssh $VPS_USER@$VPS_HOST << 'ENDSSH'
     # 2. Setup Backend
     echo "Setting up Backend..."
     cd $APP_DIR/backend
-    # Install Python 3.10 or ensure venv
+    
+    # Install Python venv and full package for Ubuntu 24.04+
     if ! command -v python3 &> /dev/null; then
-        apt-get update && apt-get install -y python3-venv python3-pip
+        apt-get update && apt-get install -y python3-venv python3-full python3-pip
+    else
+        # Ensure venv package is available
+        apt-get install -y python3-venv python3-full || true
     fi
     
+    # Create and activate virtual environment
     if [ ! -d "venv" ]; then
         python3 -m venv venv
     fi
     source venv/bin/activate
-    pip install -r requirements.txt
+    
+    # Install dependencies using venv pip
+    python -m pip install --upgrade pip
+    python -m pip install -r requirements.txt
+
     
     # 3. Setup Systemd Service for Backend
     echo "Configuring Backend Service..."

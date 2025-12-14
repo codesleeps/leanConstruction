@@ -3,16 +3,22 @@
 import { useState, useEffect } from "react";
 import { MessageCircle, X, Send, User } from "lucide-react";
 
+interface Message {
+  role: string;
+  content: string;
+  timestamp: string;
+}
+
 export function ChatWidget() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [sessionId, setSessionId] = useState("default-session");
   const [token, setToken] = useState("");
 
   useEffect(() => {
     const t = localStorage.getItem("token");
-    setToken(t);
+    setToken(t ?? "");
     if (t && isOpen) {
       fetch("/api/v1/chat/conversations", {
         headers: { Authorization: `Bearer ${t}` },
@@ -28,7 +34,7 @@ export function ChatWidget() {
     }
   }, [isOpen, token]);
 
-  const loadMessages = (sid, t) => {
+  const loadMessages = (sid: string, t: string) => {
     fetch(`/api/v1/chat/conversations/${sid}/messages`, {
       headers: { Authorization: `Bearer ${t}` },
     })
@@ -125,9 +131,8 @@ export function ChatWidget() {
                 messages.map((msg, i) => (
                   <div
                     key={i}
-                    className={`flex gap-2 ${
-                      msg.role === "user" ? "justify-end" : "justify-start"
-                    }`}
+                    className={`flex gap-2 ${msg.role === "user" ? "justify-end" : "justify-start"
+                      }`}
                   >
                     {msg.role === "bot" && (
                       <div className="w-8 h-8 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0">
@@ -135,19 +140,17 @@ export function ChatWidget() {
                       </div>
                     )}
                     <div
-                      className={`rounded-lg p-3 shadow-sm max-w-[80%] ${
-                        msg.role === "user"
-                          ? "bg-primary-600 text-white rounded-br-none"
-                          : "bg-white rounded-tl-none"
-                      }`}
+                      className={`rounded-lg p-3 shadow-sm max-w-[80%] ${msg.role === "user"
+                        ? "bg-primary-600 text-white rounded-br-none"
+                        : "bg-white rounded-tl-none"
+                        }`}
                     >
                       <p className="text-sm">{msg.content}</p>
                       <p
-                        className={`text-xs mt-1 ${
-                          msg.role === "user"
-                            ? "text-primary-100"
-                            : "text-gray-500"
-                        }`}
+                        className={`text-xs mt-1 ${msg.role === "user"
+                          ? "text-primary-100"
+                          : "text-gray-500"
+                          }`}
                       >
                         {new Date(msg.timestamp).toLocaleTimeString()}
                       </p>
