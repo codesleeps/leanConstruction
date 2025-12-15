@@ -1,52 +1,42 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Modern flowing F favicon design -->
+  <!-- Gradient background -->
   <defs>
-    <linearGradient id="fGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#1976d2"/>
-      <stop offset="100%" stop-color="#42a5f5"/>
+      <stop offset="100%" stop-color="#2e7d32"/>
     </linearGradient>
   </defs>
   
-  <!-- Flowing F letter with smooth curves -->
-  <path d="M 30,20 
-           L 75,20 
-           Q 77,20 77,22
-           L 77,28
-           Q 77,30 75,30
-           L 45,30
-           L 45,42
-           L 68,42
-           Q 70,42 70,44
-           L 70,50
-           Q 70,52 68,52
-           L 45,52
-           L 45,80
-           Q 45,82 43,82
-           L 32,82
-           Q 30,82 30,80
-           Z" 
-        fill="url(#fGradient)"/>
+  <!-- Background -->
+  <rect width="100" height="100" fill="url(#bgGradient)" rx="18"/>
   
-  <!-- Subtle glow effect -->
-  <path d="M 30,20 
-           L 75,20 
-           Q 77,20 77,22
-           L 77,28
-           Q 77,30 75,30
-           L 45,30
-           L 45,42
-           L 68,42
-           Q 70,42 70,44
-           L 70,50
-           Q 70,52 68,52
-           L 45,52
-           L 45,80
-           Q 45,82 43,82
-           L 32,82
-           Q 30,82 30,80
-           Z" 
-        fill="url(#fGradient)" 
-        opacity="0.3" 
-        transform="translate(2, 2)"
-        filter="blur(3px)"/>
+  <!-- Stylized construction crane with lean efficiency elements -->
+  <g transform="translate(50,50)">
+    <!-- Crane base -->
+    <rect x="-3" y="15" width="6" height="25" fill="white" opacity="0.9"/>
+    
+    <!-- Crane tower -->
+    <rect x="-4" y="-25" width="8" height="40" fill="white"/>
+    
+    <!-- Crane arm (horizontal beam) -->
+    <rect x="-28" y="-30" width="56" height="4" fill="white"/>
+    
+    <!-- Counterweight -->
+    <rect x="-28" y="-34" width="10" height="8" fill="white" opacity="0.8"/>
+    
+    <!-- Hook cable -->
+    <line x1="18" y1="-26" x2="18" y2="-10" stroke="white" stroke-width="1.5"/>
+    
+    <!-- Hook/load -->
+    <rect x="14" y="-10" width="8" height="6" fill="white" opacity="0.9"/>
+    
+    <!-- Lean efficiency symbol - arrows showing optimization -->
+    <path d="M -38,-18 L -42,-22 L -38,-26" stroke="#FFC107" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <path d="M 38,-18 L 42,-22 L 38,-26" stroke="#FFC107" stroke-width="2" fill="none" stroke-linecap="round"/>
+    
+    <!-- Small building blocks showing construction progress -->
+    <rect x="-12" y="8" width="7" height="7" fill="white" opacity="0.6"/>
+    <rect x="-3" y="8" width="7" height="7" fill="white" opacity="0.7"/>
+    <rect x="6" y="8" width="7" height="7" fill="white" opacity="0.8"/>
+  </g>
 </svg>

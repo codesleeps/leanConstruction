@@ -289,14 +289,15 @@ export default function HomePage() {
             {trustedBy.map((company) => (
               <div
                 key={company.name}
-                className="relative h-24 w-48 transition-all duration-300 ease-in-out hover:scale-110"
+                className={`relative h-32 w-full transition-all duration-300 ease-in-out hover:scale-110 ${company.name === "Kier Construction" ? "max-w-[280px]" : "max-w-[220px]"
+                  }`}
               >
                 <Image
                   src={company.logo}
                   alt={company.alt}
                   fill
                   className="object-contain"
-                  sizes="(max-width: 768px) 128px, 160px"
+                  sizes="(max-width: 768px) 180px, 280px"
                 />
               </div>
             ))}
@@ -401,12 +402,13 @@ export default function HomePage() {
                 ].map((tool, index) => (
                   <div
                     key={`${tool.name}-${index}`}
-                    className="flex-shrink-0 w-48 h-24 bg-gray-50 rounded-xl border border-gray-200 shadow-sm flex items-center justify-center p-4 hover:shadow-md transition-all duration-300"
+                    className="flex-shrink-0 w-64 h-32 bg-gray-50 rounded-xl border border-gray-200 shadow-sm flex items-center justify-center p-4 hover:shadow-md transition-all duration-300"
                   >
                     <img
                       src={tool.src}
                       alt={`${tool.name} logo`}
-                      className="max-w-full max-h-full object-contain"
+                      className="object-contain"
+                      style={{ width: '100%', height: '100%', maxWidth: '200px', maxHeight: '80px' }}
                       loading="eager"
                     />
                   </div>

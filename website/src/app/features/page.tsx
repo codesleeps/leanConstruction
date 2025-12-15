@@ -1,4 +1,5 @@
 import Link from "next/link";
+import NextImage from "next/image";
 import {
   ArrowRight,
   Camera,
@@ -232,11 +233,9 @@ export default function FeaturesPage() {
             <div
               key={feature.id}
               id={feature.id}
-              className={`flex flex-col ${
-                index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
-              } gap-12 items-center ${
-                index > 0 ? "mt-24" : ""
-              } max-w-7xl mx-auto`}
+              className={`flex flex-col ${index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
+                } gap-12 items-center ${index > 0 ? "mt-24" : ""
+                } max-w-7xl mx-auto`}
             >
               {/* Content */}
               <div className="flex-1">
@@ -261,16 +260,17 @@ export default function FeaturesPage() {
                 </ul>
               </div>
 
-              {/* Image Placeholder */}
+              {/* Feature Image */}
               <div className="flex-1">
                 <div className="relative">
                   <div className="aspect-video bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl shadow-xl overflow-hidden">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div
-                        className={`w-24 h-24 rounded-3xl ${feature.color} opacity-20`}
-                      />
-                      <feature.icon className="absolute w-12 h-12 text-gray-400" />
-                    </div>
+                    <NextImage
+                      src={feature.image}
+                      alt={feature.name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
                   </div>
                   {/* Decorative elements */}
                   <div
@@ -338,13 +338,14 @@ export default function FeaturesPage() {
             {integrations.map((logo) => (
               <div
                 key={logo}
-                className="flex items-center justify-center p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
+                className="flex items-center justify-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="w-full h-24 flex items-center justify-center">
+                <div className="w-full h-32 flex items-center justify-center">
                   <img
                     src={logo}
                     alt="Integration logo"
-                    className="max-w-full max-h-full object-contain"
+                    className="object-contain"
+                    style={{ width: '100%', height: '100%', maxWidth: '200px', maxHeight: '80px' }}
                   />
                 </div>
               </div>
