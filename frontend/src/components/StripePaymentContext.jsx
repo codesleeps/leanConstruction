@@ -26,13 +26,13 @@ export const StripePaymentProvider = ({ children }) => {
   const createSubscription = async (priceId, customerId = null) => {
     setLoading(true);
     setError(null);
-    
+
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE || 'http://localhost:8000'}/api/v1/payments/create-subscription`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE || 'https://leanaiconstruction.com/api/v1'}/payments/create-subscription`, {
         price_id: priceId,
         customer_id: customerId
       });
-      
+
       setClientSecret(response.data.client_secret);
       return response.data;
     } catch (err) {
@@ -47,14 +47,14 @@ export const StripePaymentProvider = ({ children }) => {
   const confirmPayment = async (paymentMethodId, customerId) => {
     setLoading(true);
     setError(null);
-    
+
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE || 'http://localhost:8000'}/api/v1/payments/confirm-subscription`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE || 'https://leanaiconstruction.com/api/v1'}/payments/confirm-subscription`, {
         payment_method_id: paymentMethodId,
         customer_id: customerId,
         client_secret: clientSecret
       });
-      
+
       setSubscription(response.data);
       return response.data;
     } catch (err) {
@@ -69,12 +69,12 @@ export const StripePaymentProvider = ({ children }) => {
   const cancelSubscription = async (subscriptionId) => {
     setLoading(true);
     setError(null);
-    
+
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_BASE || 'http://localhost:8000'}/api/v1/payments/cancel-subscription`, {
+      const response = await axios.post(`${import.meta.env.VITE_API_BASE || 'https://leanaiconstruction.com/api/v1'}/payments/cancel-subscription`, {
         subscription_id: subscriptionId
       });
-      
+
       setSubscription(null);
       return response.data;
     } catch (err) {
@@ -88,7 +88,7 @@ export const StripePaymentProvider = ({ children }) => {
   // Get current subscription status
   const getSubscriptionStatus = async (customerId) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_API_BASE || 'http://localhost:8000'}/api/v1/payments/subscription-status/${customerId}`);
+      const response = await axios.get(`${import.meta.env.VITE_API_BASE || 'https://leanaiconstruction.com/api/v1'}/payments/subscription-status/${customerId}`);
       setSubscription(response.data);
       return response.data;
     } catch (err) {

@@ -19,7 +19,7 @@ import {
 import axios from 'axios';
 import { ColorModeContext } from '../App';
 
-const API_BASE = 'http://localhost:8000';
+const API_BASE = import.meta.env.VITE_API_BASE || 'https://leanaiconstruction.com/api/v1';
 
 const SignupPage = ({ onLogin, onSwitchToLogin }) => {
   const [loading, setLoading] = useState(false);
