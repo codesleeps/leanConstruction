@@ -1,0 +1,47 @@
+#!/usr/bin/expect -f
+
+set timeout 60
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+# Create a script on the VPS to get and attach Ubuntu Pro
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        # Show current status
+        send "echo '=== Current Ubuntu Pro Status ==='\r"
+        expect "#"
+        send "pro status\r"
+        expect "#"
+        
+        # Instructions for user
+        send "echo '\r\n=== To Enable ESM (Free) ==='\r"
+        expect "#"
+        send "echo '1. Visit: https://ubuntu.com/pro'\r"
+        expect "#"
+        send "echo '2. Sign up for free (covers 5 machines)'\r"
+        expect "#"
+        send "echo '3. Copy your token'\r"
+        expect "#"
+        send "echo '4. Run: sudo pro attach YOUR_TOKEN_HERE'\r"
+        expect "#"
+        send "echo '5. Then run: sudo pro enable esm-apps'\r"
+        expect "#"
+        send "echo '\r\nOR try automatic enablement (may work without token):'\r"
+        expect "#"
+        send "echo 'sudo pro enable esm-apps'\r"
+        expect "#"
+        
+        # Try to enable directly (sometimes works)
+        send "echo '\r\n=== Attempting auto-enable ==='\r"
+        expect "#"
+        send "sudo pro enable esm-apps 2>&1 | head -20\r"
+        expect "#"
+        
+        send "exit\r"
+    }
+    eof
+}

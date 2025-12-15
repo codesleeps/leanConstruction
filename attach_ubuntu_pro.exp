@@ -1,0 +1,47 @@
+#!/usr/bin/expect -f
+
+set timeout 90
+set password "Tk,j(#P7BMIuE9qRBPR1"
+set token "C1knywKp9JZXV3HUzsSXDqrMsdrtB"
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        # Attach to Ubuntu Pro
+        send "echo '=== Attaching to Ubuntu Pro ==='\r"
+        expect "#"
+        send "sudo pro attach $token\r"
+        expect {
+            "#" { }
+            timeout { 
+                send "\r"
+                expect "#"
+            }
+        }
+        
+        # Enable ESM Apps
+        send "echo '\\n=== Enabling ESM Apps ==='\r"
+        expect "#"
+        send "sudo pro enable esm-apps\r"
+        expect {
+            "#" { }
+            timeout {
+                send "\r"
+                expect "#"
+            }
+        }
+        
+        # Show final status
+        send "echo '\\n=== Final Status ==='\r"
+        expect "#"
+        send "sudo pro status\r"
+        expect "#"
+        
+        send "exit\r"
+    }
+    eof
+}
