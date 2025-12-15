@@ -24,33 +24,33 @@
         <body>
             <div class="container">
                 <h1>🚀 Production Audit Report</h1>
-                <p>Generated: 2025-12-14 18:19:10</p>
+                <p>Generated: 2025-12-15 01:34:06</p>
                 
-                <div class="score">Production Readiness Score: 45.95%</div>
+                <div class="score">Production Readiness Score: 75.51%</div>
 
                 <div class="summary">
-                    <div class="summary-box" style="background-color: #28a745;"><strong>Passed</strong><br>85</div>
-                    <div class="summary-box" style="background-color: #dc3545;"><strong>Failed</strong><br>87</div>
-                    <div class="summary-box" style="background-color: #ffc107;"><strong>Warnings</strong><br>8</div>
-                    <div class="summary-box" style="background-color: #6c757d;"><strong>Skipped</strong><br>5</div>
+                    <div class="summary-box" style="background-color: #28a745;"><strong>Passed</strong><br>148</div>
+                    <div class="summary-box" style="background-color: #dc3545;"><strong>Failed</strong><br>21</div>
+                    <div class="summary-box" style="background-color: #ffc107;"><strong>Warnings</strong><br>23</div>
+                    <div class="summary-box" style="background-color: #6c757d;"><strong>Skipped</strong><br>4</div>
                 </div>
 
         <div class='test-category'><h2>Backend</h2>
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Backend Health</summary>
-                        <p>Health check error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /health (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Backend Health</summary>
+                        <p>Backend is healthy</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>API</h2>
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: API Documentation</summary>
-                        <p>Docs error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /docs (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: API Documentation</summary>
+                        <p>FastAPI docs accessible</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 
@@ -59,106 +59,106 @@
                         <summary>SKIP: API Endpoint Discovery</summary>
                         <p>Could not import FastAPI app: No module named 'fastapi'</p>
                         
-                        <small>Execution time: 0.0602s</small>
+                        <small>Execution time: 0.0025s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Auth</h2>
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Auth Endpoint /api/v1/auth/login</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Auth Endpoint /api/v1/auth/register</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/register (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Auth Endpoint /api/v1/auth/me</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/me (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Auth Endpoint /api/v1/auth/logout</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/logout (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Chat</h2>
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Chat Endpoint /api/v1/chat/conversations</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/chat/conversations (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Chat Endpoint /api/v1/chat/messages</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/chat/messages (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Chat Endpoint /api/v1/chat/conversations/search</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/chat/conversations/search (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>ML</h2>
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: ML Endpoint /api/v1/ml/analyze-waste</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/ml/analyze-waste (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: ML Endpoint /api/v1/ml/computer-vision</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/ml/computer-vision (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: ML Endpoint /api/v1/ml/predictive-models</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/ml/predictive-models (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Database</h2>
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Database Connection</summary>
-                        <p>Database test error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/me (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Database Connection</summary>
+                        <p>Database appears accessible</p>
                         
-                        <small>Execution time: 0.0079s</small>
+                        <small>Execution time: 0.1257s</small>
                     </details>
                 </div>
                 
@@ -171,561 +171,561 @@
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Frontend</h2>
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Frontend Accessibility</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Frontend Accessibility</summary>
+                        <p>Website accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Route</h2>
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Route /</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Route /</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Route /about</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /about (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Route /about</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Route /features</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /features (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Route /features</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Route /pricing</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /pricing (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Route /pricing</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Route /contact</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Route /contact</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Route /login</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Route /login</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Route /signup</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Route /signup</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Route /book-demo</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /book-demo (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Route /book-demo</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Route /onboarding</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /onboarding (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Route /onboarding</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Static</h2>
-                <div class="test-result WARNING">
+                <div class="test-result PASS">
                     <details>
-                        <summary>WARNING: Static Asset /favicon.ico</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /favicon.ico (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Static Asset /favicon.ico</summary>
+                        <p>Asset accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 
-                <div class="test-result WARNING">
+                <div class="test-result PASS">
                     <details>
-                        <summary>WARNING: Static Asset /apple-touch-icon.png</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /apple-touch-icon.png (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Static Asset /apple-touch-icon.png</summary>
+                        <p>Asset accessible</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 
                 <div class="test-result WARNING">
                     <details>
                         <summary>WARNING: Static Asset /_next/static/css/</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /_next/static/css/ (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 
                 <div class="test-result WARNING">
                     <details>
                         <summary>WARNING: Static Asset /_next/static/js/</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /_next/static/js/ (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Status: 404</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Frontend-Backend</h2>
-                <div class="test-result WARNING">
+                <div class="test-result PASS">
                     <details>
-                        <summary>WARNING: Frontend-Backend Integration</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /api/health (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Frontend-Backend Integration</summary>
+                        <p>API integration working</p>
                         
-                        <small>Execution time: 0.0054s</small>
+                        <small>Execution time: 0.1493s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Internal</h2>
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /signup</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /signup</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /features</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /features (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /features</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /login</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /login</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /features</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /features (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /features</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /signup</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /signup</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /book-demo</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /book-demo (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /book-demo</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result FAIL">
-                    <details>
-                        <summary>FAIL: Internal Link /dashboard</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /dashboard (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
-                        
-                        <small>Execution time: 0.0062s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result FAIL">
-                    <details>
-                        <summary>FAIL: Internal Link /login</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
-                        
-                        <small>Execution time: 0.0062s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result FAIL">
-                    <details>
-                        <summary>FAIL: Internal Link /signup</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
-                        
-                        <small>Execution time: 0.0062s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result FAIL">
-                    <details>
-                        <summary>FAIL: Internal Link /</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
-                        
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Internal Link /dashboard</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /dashboard (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Broken route (Status: 404)</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Internal Link /login</summary>
+                        <p>Route accessible</p>
+                        
+                        <small>Execution time: 0.1420s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Internal Link /signup</summary>
+                        <p>Route accessible</p>
+                        
+                        <small>Execution time: 0.1420s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Internal Link /</summary>
+                        <p>Route accessible</p>
+                        
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
-                        <summary>FAIL: Internal Link /login</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>FAIL: Internal Link /dashboard</summary>
+                        <p>Broken route (Status: 404)</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /signup</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /login</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /signup</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /signup</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /pricing</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /pricing (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /signup</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /pricing</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Internal Link /</summary>
+                        <p>Route accessible</p>
+                        
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Internal Link /terms</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /terms (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Broken route (Status: 404)</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Internal Link /privacy</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /privacy (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Broken route (Status: 404)</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /login</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /login</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /contact</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /contact</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Internal Link /docs</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /docs (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Broken route (Status: 404)</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /signup</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /signup</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /contact</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /contact</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /signup</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /signup</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Internal Link /careers</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /careers (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Broken route (Status: 404)</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /signup</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /signup</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /login</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /login</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /contact</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /contact</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /login</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /login</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /reset-password</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /reset-password (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /reset-password</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /login</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /login</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /contact</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /contact</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /book-demo</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /book-demo (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /book-demo</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /signup</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /signup</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /reset-password</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /reset-password (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /reset-password</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /signup</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /signup (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /signup</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /demo</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /demo (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /demo</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Internal Link /dashboard</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /dashboard (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Broken route (Status: 404)</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
                 <div class="test-result FAIL">
                     <details>
                         <summary>FAIL: Internal Link /help</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /help (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>Broken route (Status: 404)</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Internal Link /contact</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: /contact (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Internal Link /contact</summary>
+                        <p>Route accessible</p>
                         
-                        <small>Execution time: 0.0062s</small>
+                        <small>Execution time: 0.1420s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Image</h2>
@@ -737,7 +737,7 @@
   "size": 7496,
   "hash": "d82910e67b9ae0c5f143e7eb6761b62f"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -749,7 +749,7 @@
   "size": 10556,
   "hash": "df14585d7ade41f756871e06e4e84f3c"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -761,7 +761,7 @@
   "size": 7946,
   "hash": "73d5c71d41fb7367bbd9b663385d7f96"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -773,7 +773,7 @@
   "size": 66460,
   "hash": "82321eec40bc494200e5751e2af82971"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -785,7 +785,7 @@
   "size": 4458,
   "hash": "020a1d662e6c175a988b1350f79425fc"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -797,7 +797,7 @@
   "size": 2784,
   "hash": "778e4d692c0013d3794d3f6225e79282"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -809,7 +809,7 @@
   "size": 5364,
   "hash": "c3d44959c0fb41fc55560dd090b59f8b"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -821,7 +821,7 @@
   "size": 2732,
   "hash": "24ae6d6f76d2e3a5a0336b7718553cb4"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -833,7 +833,7 @@
   "size": 10592,
   "hash": "c20394dd46e318a2ac5742bc5e4a6306"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -845,7 +845,7 @@
   "size": 16244,
   "hash": "cca6633a5c98f5bb4019eece085cf227"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -857,7 +857,7 @@
   "size": 25390,
   "hash": "96c8229985d7b3b9abf6a776926b69e8"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -869,7 +869,7 @@
   "size": 6330,
   "hash": "eb234f2b25c95ea5e9bdd85075b0aa11"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -881,7 +881,7 @@
   "size": 7454,
   "hash": "cae84a1603e03ac7f5889767dccca747"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -893,7 +893,7 @@
   "size": 2774,
   "hash": "b0f2c2aa7b31b20787e37baf250e15c7"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -905,7 +905,7 @@
   "size": 19162,
   "hash": "ae3e1a68dd669047f7a93f02349f6e9e"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -917,7 +917,7 @@
   "size": 10750,
   "hash": "50595470cb8dd8c649ea1c5e322112a7"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -929,7 +929,7 @@
   "size": 16244,
   "hash": "cca6633a5c98f5bb4019eece085cf227"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -941,7 +941,7 @@
   "size": 25390,
   "hash": "96c8229985d7b3b9abf6a776926b69e8"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -953,7 +953,7 @@
   "size": 6330,
   "hash": "eb234f2b25c95ea5e9bdd85075b0aa11"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -965,7 +965,7 @@
   "size": 7454,
   "hash": "cae84a1603e03ac7f5889767dccca747"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -977,7 +977,7 @@
   "size": 2774,
   "hash": "b0f2c2aa7b31b20787e37baf250e15c7"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -989,7 +989,7 @@
   "size": 19162,
   "hash": "ae3e1a68dd669047f7a93f02349f6e9e"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -1001,7 +1001,7 @@
   "size": 34159,
   "hash": "3056f37a39485c88628460a704657680"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -1013,7 +1013,7 @@
   "size": 10750,
   "hash": "50595470cb8dd8c649ea1c5e322112a7"
 }</pre>
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
@@ -1022,7 +1022,7 @@
                         <summary>PASS: Image sage.webp</summary>
                         <p>Valid image (WEBP, 500x357, 7496 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1031,7 +1031,7 @@
                         <summary>PASS: Image intuit-quickbooks.webp</summary>
                         <p>Valid image (WEBP, 500x500, 10556 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1040,7 +1040,7 @@
                         <summary>PASS: Image Primavera-P6.webp</summary>
                         <p>Valid image (WEBP, 410x150, 7946 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1049,7 +1049,7 @@
                         <summary>PASS: Image Screenshot 2025-12-12 at 05.15.40.png</summary>
                         <p>Valid image (PNG, 957x518, 66460 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1058,7 +1058,7 @@
                         <summary>PASS: Image plangrid-logo.webp</summary>
                         <p>Valid image (WEBP, 500x500, 4458 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1067,7 +1067,7 @@
                         <summary>PASS: Image autodesk.webp</summary>
                         <p>Valid image (WEBP, 500x373, 2784 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1076,7 +1076,7 @@
                         <summary>PASS: Image microsoft-project.webp</summary>
                         <p>Valid image (WEBP, 500x500, 5364 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1085,7 +1085,7 @@
                         <summary>PASS: Image procore.webp</summary>
                         <p>Valid image (WEBP, 500x375, 2732 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1094,7 +1094,7 @@
                         <summary>PASS: Image Bluebeam.webp</summary>
                         <p>Valid image (WEBP, 500x500, 10592 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1103,7 +1103,7 @@
                         <summary>PASS: Image iso-ce-web-2024-600x205-1.webp</summary>
                         <p>Valid image (WEBP, 527x180, 16244 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1112,7 +1112,7 @@
                         <summary>PASS: Image BLACKRIDGE+1-528w.webp</summary>
                         <p>Valid image (WEBP, 860x534, 25390 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1121,7 +1121,7 @@
                         <summary>PASS: Image Aecom-logo.webp</summary>
                         <p>Valid image (WEBP, 500x344, 6330 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1130,7 +1130,7 @@
                         <summary>PASS: Image logo.webp</summary>
                         <p>Valid image (WEBP, 500x233, 7454 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1139,7 +1139,7 @@
                         <summary>PASS: Image IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp</summary>
                         <p>Valid image (WEBP, 700x299, 2774 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1148,7 +1148,7 @@
                         <summary>PASS: Image network-rail-logo-png_seeklogo-323728.webp</summary>
                         <p>Valid image (WEBP, 500x500, 19162 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1157,232 +1157,52 @@
                         <summary>PASS: Image Hensel_Phelps_200_200.webp</summary>
                         <p>Valid image (WEBP, 500x500, 10750 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result WARNING">
                     <details>
-                        <summary>FAIL: Image favicon-16x16.png</summary>
-                        <p>Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caca8d60></p>
+                        <summary>WARNING: Image favicon-16x16.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result WARNING">
                     <details>
-                        <summary>FAIL: Image favicon.ico</summary>
-                        <p>Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caca8d60></p>
+                        <summary>WARNING: Image favicon.ico</summary>
+                        <p>Format mismatch (file: .ico, actual: JPEG)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result WARNING">
                     <details>
-                        <summary>FAIL: Image apple-touch-icon.png</summary>
-                        <p>Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caca8d60></p>
+                        <summary>WARNING: Image apple-touch-icon.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
                         
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result FAIL">
-                    <details>
-                        <summary>FAIL: Image favicon-32x32.png</summary>
-                        <p>Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caca8d60></p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image sage.webp</summary>
-                        <p>Valid image (WEBP, 500x357, 7496 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image intuit-quickbooks.webp</summary>
-                        <p>Valid image (WEBP, 500x500, 10556 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image Primavera-P6.webp</summary>
-                        <p>Valid image (WEBP, 410x150, 7946 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image Screenshot 2025-12-12 at 05.15.40.png</summary>
-                        <p>Valid image (PNG, 957x518, 66460 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image plangrid-logo.webp</summary>
-                        <p>Valid image (WEBP, 500x500, 4458 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image autodesk.webp</summary>
-                        <p>Valid image (WEBP, 500x373, 2784 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image microsoft-project.webp</summary>
-                        <p>Valid image (WEBP, 500x500, 5364 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image procore.webp</summary>
-                        <p>Valid image (WEBP, 500x375, 2732 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image Bluebeam.webp</summary>
-                        <p>Valid image (WEBP, 500x500, 10592 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image iso-ce-web-2024-600x205-1.webp</summary>
-                        <p>Valid image (WEBP, 527x180, 16244 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image BLACKRIDGE+1-528w.webp</summary>
-                        <p>Valid image (WEBP, 860x534, 25390 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image Aecom-logo.webp</summary>
-                        <p>Valid image (WEBP, 500x344, 6330 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image logo.webp</summary>
-                        <p>Valid image (WEBP, 500x233, 7454 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp</summary>
-                        <p>Valid image (WEBP, 700x299, 2774 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image network-rail-logo-png_seeklogo-323728.webp</summary>
-                        <p>Valid image (WEBP, 500x500, 19162 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result PASS">
-                    <details>
-                        <summary>PASS: Image Hensel_Phelps_200_200.webp</summary>
-                        <p>Valid image (WEBP, 500x500, 10750 bytes)</p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result FAIL">
-                    <details>
-                        <summary>FAIL: Image favicon-16x16.png</summary>
-                        <p>Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caed6110></p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result FAIL">
-                    <details>
-                        <summary>FAIL: Image favicon.ico</summary>
-                        <p>Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caed6110></p>
-                        
-                        <small>Execution time: 0.0046s</small>
-                    </details>
-                </div>
-                
-                <div class="test-result FAIL">
-                    <details>
-                        <summary>FAIL: Image apple-touch-icon.png</summary>
-                        <p>Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caed6110></p>
-                        
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
                 <div class="test-result PASS">
                     <details>
                         <summary>PASS: Image favicon.svg</summary>
-                        <p>Valid SVG (1115 bytes)</p>
+                        <p>Valid SVG (1724 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result WARNING">
                     <details>
-                        <summary>FAIL: Image favicon-32x32.png</summary>
-                        <p>Corrupted or invalid image: cannot identify image file <_io.BytesIO object at 0x2caed6110></p>
+                        <summary>WARNING: Image favicon-32x32.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1391,7 +1211,7 @@
                         <summary>PASS: Image sage.webp</summary>
                         <p>Valid image (WEBP, 500x357, 7496 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1400,7 +1220,250 @@
                         <summary>PASS: Image intuit-quickbooks.webp</summary>
                         <p>Valid image (WEBP, 500x500, 10556 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image Primavera-P6.webp</summary>
+                        <p>Valid image (WEBP, 410x150, 7946 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image Screenshot 2025-12-12 at 05.15.40.png</summary>
+                        <p>Valid image (PNG, 957x518, 66460 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image plangrid-logo.webp</summary>
+                        <p>Valid image (WEBP, 500x500, 4458 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image autodesk.webp</summary>
+                        <p>Valid image (WEBP, 500x373, 2784 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image microsoft-project.webp</summary>
+                        <p>Valid image (WEBP, 500x500, 5364 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image procore.webp</summary>
+                        <p>Valid image (WEBP, 500x375, 2732 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image Bluebeam.webp</summary>
+                        <p>Valid image (WEBP, 500x500, 10592 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Image predictive-analytics.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Image dashboards.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Image waste-detection.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Image collaboration.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Image security.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Image lean-tools.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image iso-ce-web-2024-600x205-1.webp</summary>
+                        <p>Valid image (WEBP, 527x180, 16244 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image BLACKRIDGE+1-528w.webp</summary>
+                        <p>Valid image (WEBP, 860x534, 25390 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image Aecom-logo.webp</summary>
+                        <p>Valid image (WEBP, 500x344, 6330 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image logo.webp</summary>
+                        <p>Valid image (WEBP, 500x233, 7454 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp</summary>
+                        <p>Valid image (WEBP, 700x299, 2774 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image network-rail-logo-png_seeklogo-323728.webp</summary>
+                        <p>Valid image (WEBP, 500x500, 19162 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image Hensel_Phelps_200_200.webp</summary>
+                        <p>Valid image (WEBP, 500x500, 10750 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Image favicon-16x16.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Image favicon.ico</summary>
+                        <p>Format mismatch (file: .ico, actual: JPEG)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Image apple-touch-icon.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image favicon.svg</summary>
+                        <p>Valid SVG (1724 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Image favicon-32x32.png</summary>
+                        <p>Format mismatch (file: .png, actual: JPEG)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image sage.webp</summary>
+                        <p>Valid image (WEBP, 500x357, 7496 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result PASS">
+                    <details>
+                        <summary>PASS: Image intuit-quickbooks.webp</summary>
+                        <p>Valid image (WEBP, 500x500, 10556 bytes)</p>
+                        
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1409,7 +1472,7 @@
                         <summary>PASS: Image Primavera-P6.webp</summary>
                         <p>Valid image (WEBP, 572x572, 14834 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1418,7 +1481,7 @@
                         <summary>PASS: Image Screenshot 2025-12-12 at 05.15.40.png</summary>
                         <p>Valid image (PNG, 957x518, 66460 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1427,7 +1490,7 @@
                         <summary>PASS: Image plangrid-logo.webp</summary>
                         <p>Valid image (WEBP, 500x500, 4458 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1436,7 +1499,7 @@
                         <summary>PASS: Image autodesk.webp</summary>
                         <p>Valid image (WEBP, 500x373, 2784 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1445,7 +1508,7 @@
                         <summary>PASS: Image microsoft-project.webp</summary>
                         <p>Valid image (WEBP, 500x500, 5364 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1454,7 +1517,7 @@
                         <summary>PASS: Image procore.webp</summary>
                         <p>Valid image (WEBP, 500x375, 2732 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1463,7 +1526,7 @@
                         <summary>PASS: Image Bluebeam.webp</summary>
                         <p>Valid image (WEBP, 500x500, 10592 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1472,7 +1535,7 @@
                         <summary>PASS: Image iso-ce-web-2024-600x205-1.webp</summary>
                         <p>Valid image (WEBP, 527x180, 16244 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1481,7 +1544,7 @@
                         <summary>PASS: Image BLACKRIDGE+1-528w.webp</summary>
                         <p>Valid image (WEBP, 860x534, 25390 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1490,7 +1553,7 @@
                         <summary>PASS: Image Aecom-logo.webp</summary>
                         <p>Valid image (WEBP, 500x344, 6330 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1499,7 +1562,7 @@
                         <summary>PASS: Image logo.webp</summary>
                         <p>Valid image (WEBP, 500x233, 7454 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1508,7 +1571,7 @@
                         <summary>PASS: Image IC-Case-Study-Featured-Image-Kier-Construction-Logo-IC-700x299.webp</summary>
                         <p>Valid image (WEBP, 700x299, 2774 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1517,7 +1580,7 @@
                         <summary>PASS: Image network-rail-logo-png_seeklogo-323728.webp</summary>
                         <p>Valid image (WEBP, 500x500, 19162 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 
@@ -1526,70 +1589,106 @@
                         <summary>PASS: Image Hensel_Phelps_200_200.webp</summary>
                         <p>Valid image (WEBP, 500x500, 10750 bytes)</p>
                         
-                        <small>Execution time: 0.0046s</small>
+                        <small>Execution time: 0.0024s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Icon</h2>
                 <div class="test-result PASS">
                     <details>
                         <summary>PASS: Icon favicon.ico</summary>
-                        <p>Valid icon (56 bytes)</p>
+                        <p>Valid icon (410681 bytes)</p>
                         
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
                 <div class="test-result PASS">
                     <details>
                         <summary>PASS: Icon apple-touch-icon.png</summary>
-                        <p>Valid icon (66 bytes)</p>
+                        <p>Valid icon (417322 bytes)</p>
                         
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
                 <div class="test-result PASS">
                     <details>
                         <summary>PASS: Icon favicon-16x16.png</summary>
-                        <p>Valid icon (55 bytes)</p>
+                        <p>Valid icon (410681 bytes)</p>
                         
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 
                 <div class="test-result PASS">
                     <details>
                         <summary>PASS: Icon favicon-32x32.png</summary>
-                        <p>Valid icon (55 bytes)</p>
+                        <p>Valid icon (368935 bytes)</p>
                         
-                        <small>Execution time: 0.0006s</small>
+                        <small>Execution time: 0.0002s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>HTTPS</h2>
-                <div class="test-result SKIP">
+                <div class="test-result PASS">
                     <details>
-                        <summary>SKIP: HTTPS Redirect</summary>
-                        <p>Local development - skipping HTTPS test</p>
+                        <summary>PASS: HTTPS Redirect</summary>
+                        <p>HTTP properly redirects to HTTPS</p>
                         
-                        <small>Execution time: 0.0034s</small>
+                        <small>Execution time: 0.0474s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Security</h2>
                 <div class="test-result WARNING">
                     <details>
-                        <summary>WARNING: Security Headers</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>WARNING: Security Header X-Content-Type-Options</summary>
+                        <p>Header missing</p>
                         
-                        <small>Execution time: 0.0034s</small>
+                        <small>Execution time: 0.0474s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Security Header X-Frame-Options</summary>
+                        <p>Header missing</p>
+                        
+                        <small>Execution time: 0.0474s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Security Header X-XSS-Protection</summary>
+                        <p>Header missing</p>
+                        
+                        <small>Execution time: 0.0474s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Security Header Strict-Transport-Security</summary>
+                        <p>Header missing</p>
+                        
+                        <small>Execution time: 0.0474s</small>
+                    </details>
+                </div>
+                
+                <div class="test-result WARNING">
+                    <details>
+                        <summary>WARNING: Security Header Content-Security-Policy</summary>
+                        <p>Header missing</p>
+                        
+                        <small>Execution time: 0.0474s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>CORS</h2>
                 <div class="test-result WARNING">
                     <details>
                         <summary>WARNING: CORS Configuration</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /api/v1/auth/login (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <p>CORS headers missing</p>
                         
-                        <small>Execution time: 0.0034s</small>
+                        <small>Execution time: 0.0474s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Env</h2>
@@ -1598,7 +1697,7 @@
                         <summary>PASS: Env File backend/.env.production</summary>
                         <p>Environment file exists</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1607,7 +1706,7 @@
                         <summary>PASS: Env File backend/.env.example</summary>
                         <p>Environment file exists</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1616,7 +1715,7 @@
                         <summary>PASS: Env File website/.env.local</summary>
                         <p>Environment file exists</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1625,7 +1724,7 @@
                         <summary>WARNING: Env File website/.env.example</summary>
                         <p>Environment file missing</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1634,7 +1733,7 @@
                         <summary>FAIL: Env Var SECRET_KEY</summary>
                         <p>Required variable missing (Backend secret key for JWT)</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1643,7 +1742,7 @@
                         <summary>FAIL: Env Var DATABASE_URL</summary>
                         <p>Required variable missing (Database connection string)</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1652,7 +1751,7 @@
                         <summary>FAIL: Env Var NEXT_PUBLIC_API_URL</summary>
                         <p>Required variable missing (Frontend API URL)</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1661,7 +1760,7 @@
                         <summary>SKIP: Env Var OPENAI_API_KEY</summary>
                         <p>Optional variable not set</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1670,7 +1769,7 @@
                         <summary>SKIP: Env Var ANTHROPIC_API_KEY</summary>
                         <p>Optional variable not set</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Config</h2>
@@ -1679,7 +1778,7 @@
                         <summary>PASS: Config backend/requirements.txt</summary>
                         <p>Exists (Python dependencies)</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1688,7 +1787,7 @@
                         <summary>PASS: Config website/package.json</summary>
                         <p>Exists (Node.js dependencies)</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1697,7 +1796,7 @@
                         <summary>PASS: Config mobile/package.json</summary>
                         <p>Exists (React Native dependencies)</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1706,7 +1805,7 @@
                         <summary>PASS: Config backend/alembic.ini</summary>
                         <p>Exists (Database migration config)</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 
@@ -1715,61 +1814,88 @@
                         <summary>PASS: Config docker-compose.yml</summary>
                         <p>Exists (Docker configuration)</p>
                         
-                        <small>Execution time: 0.0001s</small>
+                        <small>Execution time: 0.0000s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Response</h2>
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Response Time http://localhost:3000</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=3000): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='localhost', port=3000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Response Time https://leanaiconstruction.com</summary>
+                        <p>Average: 142ms</p>
                         
-                        <small>Execution time: 0.0038s</small>
+                        <small>Execution time: 0.3837s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Response Time http://localhost:8000/health</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /health (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Response Time https://leanaiconstruction.com/api/health</summary>
+                        <p>Average: 123ms</p>
                         
-                        <small>Execution time: 0.0038s</small>
+                        <small>Execution time: 0.3837s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Response Time http://localhost:8000/docs</summary>
-                        <p>Error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /docs (Caused by NewConnectionError("HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 61] Connection refused"))</p>
+                        <summary>PASS: Response Time https://leanaiconstruction.com/api/docs</summary>
+                        <p>Average: 119ms</p>
                         
-                        <small>Execution time: 0.0038s</small>
+                        <small>Execution time: 0.3837s</small>
                     </details>
                 </div>
                 </div><div class='test-category'><h2>Performance</h2>
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Performance Frontend Homepage</summary>
-                        <p>All requests failed</p>
-                        
-                        <small>Execution time: 0.0411s</small>
+                        <summary>PASS: Performance Frontend Homepage</summary>
+                        <p>Avg: 296ms, p95: 0ms, RPS: 3.4, Errors: 0</p>
+                        <pre>{
+  "min": 233.22510719299316,
+  "max": 335.0191116333008,
+  "mean": 295.508337020874,
+  "median": 304.15451526641846,
+  "p95": 0,
+  "p99": 0,
+  "rps": 3.383999280972443,
+  "errors": 0
+}</pre>
+                        <small>Execution time: 0.3158s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Performance Backend Health</summary>
-                        <p>All requests failed</p>
-                        
-                        <small>Execution time: 0.0411s</small>
+                        <summary>PASS: Performance Backend Health</summary>
+                        <p>Avg: 202ms, p95: 0ms, RPS: 4.9, Errors: 0</p>
+                        <pre>{
+  "min": 155.99393844604492,
+  "max": 245.7411289215088,
+  "mean": 202.12152004241943,
+  "median": 206.64799213409424,
+  "p95": 0,
+  "p99": 0,
+  "rps": 4.947518699592845,
+  "errors": 0
+}</pre>
+                        <small>Execution time: 0.3158s</small>
                     </details>
                 </div>
                 
-                <div class="test-result FAIL">
+                <div class="test-result PASS">
                     <details>
-                        <summary>FAIL: Performance Backend Docs</summary>
-                        <p>All requests failed</p>
-                        
-                        <small>Execution time: 0.0411s</small>
+                        <summary>PASS: Performance Backend Docs</summary>
+                        <p>Avg: 200ms, p95: 0ms, RPS: 5.0, Errors: 0</p>
+                        <pre>{
+  "min": 172.53804206848145,
+  "max": 227.5691032409668,
+  "mean": 199.7685670852661,
+  "median": 198.8905668258667,
+  "p95": 0,
+  "p99": 0,
+  "rps": 5.005792525773965,
+  "errors": 0
+}</pre>
+                        <small>Execution time: 0.3158s</small>
                     </details>
                 </div>
                 </div>
