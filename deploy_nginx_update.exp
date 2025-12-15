@@ -1,0 +1,39 @@
+#!/usr/bin/expect -f
+
+set timeout 60
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+# Read the script content
+set scriptfile [open "update_nginx.sh" r]
+set scriptcontent [read $scriptfile]
+close $scriptfile
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        # Create the script on remote server
+        send "cat > /tmp/update_nginx.sh << 'ENDOFSCRIPTCONTENT'\r"
+        expect ">"
+        send "$scriptcontent"
+        expect ">"
+        send "ENDOFSCRIPTCONTENT\r"
+        expect "#"
+        
+        # Make executable and run
+        send "chmod +x /tmp/update_nginx.sh && /tmp/update_nginx.sh\r"
+        expect "#"
+        
+        # Test the chat endpoint
+        send "echo '\\n=== Testing chat endpoint ==='\r"
+        expect "#"
+        send "sleep 2 && curl -I https://leanaiconstruction.com/api/v1/chat/conversations 2>&1 | head -10\r"
+        expect "#"
+        
+        send "exit\r"
+    }
+    eof
+}

@@ -1,0 +1,49 @@
+#!/usr/bin/expect -f
+
+set timeout 600
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        send "echo '=== Updating requirements.txt on VPS ==='\r"
+        expect "#"
+        send "cd /var/www/lean-construction/backend\r"
+        expect "#"
+        
+        # Add torch and torchvision to requirements
+        send "grep -q 'torch' requirements.txt || echo -e 'torch>=2.0.0\\ntorchvision>=0.15.0' >> requirements.txt\r"
+        expect "#"
+        
+        send "echo '\\n=== Rebuilding backend container ==='\r"
+        expect "#"
+        send "cd /var/www/lean-construction\r"
+        expect "#"
+        send "docker-compose build backend\r"
+        expect "#"
+        sleep 5
+        
+        send "echo '\\n=== Starting updated backend ==='\r"
+        expect "#"
+        send "docker-compose up -d backend\r"
+        expect "#"
+        sleep 10
+        
+        send "echo '\\n=== Testing chat endpoint ==='\r"
+        expect "#"
+        send "curl -I http://localhost:8000/api/v1/chat/conversations 2>&1 | head -10\r"
+        expect "#"
+        
+        send "echo '\\n=== Testing from outside ==='\r"
+        expect "#"
+        send "curl -I https://leanaiconstruction.com/api/v1/chat/conversations 2>&1 | head -10\r"
+        expect "#"
+        
+        send "exit\r"
+    }
+    eof
+}

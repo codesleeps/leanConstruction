@@ -1,0 +1,42 @@
+#!/usr/bin/expect -f
+
+set timeout 30
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        send "echo '=== Check if script ran ==='\r"
+        expect "#"
+        send "cat /tmp/update_nginx.sh | head -5\r"
+        expect "#"
+        
+        send "echo '\\n=== Run script manually ==='\r"
+        expect "#"
+        send "bash /tmp/update_nginx.sh\r"
+        expect "#"
+        sleep 2
+        
+        send "echo '\\n=== Check backend status ==='\r"
+        expect "#"
+        send "docker ps | grep backend\r"
+        expect "#"
+        
+        send "echo '\\n=== Test backend locally ==='\r"
+        expect "#"
+        send "curl -I http://localhost:8000/api/v1/chat/conversations 2>&1 | head -8\r"
+        expect "#"
+        
+        send "echo '\\n=== Check Nginx config ==='\r"
+        expect "#"
+        send "grep -A5 'location /api/v1/' /etc/nginx/sites-available/leanaiconstruction.com\r"
+        expect "#"
+        
+        send "exit\r"
+    }
+    eof
+}

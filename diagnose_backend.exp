@@ -1,0 +1,41 @@
+#!/usr/bin/expect -f
+
+set timeout 30
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        send "echo '=== Check what process is running on port 8000 ==='\r"
+        expect "#"
+        send "lsof -i :8000 | head -5\r"
+        expect "#"
+        
+        send "echo '\\n=== Check PM2 processes ==='\r"
+        expect "#"
+        send "pm2 list\r"
+        expect "#"
+        
+        send "echo '\\n=== Test available endpoints ==='\r"
+        expect "#"
+        send "curl http://localhost:8000/docs 2>&1 | head -5\r"
+        expect "#"
+        
+        send "echo '\\n=== Check backend directory ==='\r"
+        expect "#"
+        send "ls -la /var/www/lean-construction/backend/ | head -15\r"
+        expect "#"
+        
+        send "echo '\\n=== Check which main file is being used ==='\r"
+        expect "#"
+        send "ps aux | grep 'uvicorn\\|fastapi\\|main' | grep -v grep | head -5\r"
+        expect "#"
+        
+        send "exit\r"
+    }
+    eof
+}

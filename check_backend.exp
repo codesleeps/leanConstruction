@@ -1,0 +1,36 @@
+#!/usr/bin/expect -f
+
+set timeout 30
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        send "echo '=== Checking Backend Service ==='\r"
+        expect "#"
+        send "systemctl status lean-construction-backend | head -20\r"
+        expect "#"
+        
+        send "echo '\\n=== Testing Backend API Health ==='\r"
+        expect "#"
+        send "curl -I http://localhost:8000/health 2>&1 | head -10\r"
+        expect "#"
+        
+        send "echo '\\n=== Testing Chat Endpoint ==='\r"
+        expect "#"
+        send "curl -I http://localhost:8000/api/v1/chat/messages 2>&1 | head -10\r"
+        expect "#"
+        
+        send "echo '\\n=== Checking Backend Logs ==='\r"
+        expect "#"
+        send "journalctl -u lean-construction-backend -n 30 --no-pager\r"
+        expect "#"
+        
+        send "exit\r"
+    }
+    eof
+}

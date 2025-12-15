@@ -1,0 +1,39 @@
+#!/usr/bin/expect -f
+
+set timeout 60
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        send "echo '=== Stopping Old Backend ==='\r"
+        expect "#"
+        send "docker stop agentsflowai-backend-1\r"
+        expect "#"
+        
+        send "echo '\\n=== Starting Lean Construction Backend ==='\r"
+        expect "#"
+        send "cd /var/www/lean-construction\r"
+        expect "#"
+        send "docker-compose start backend\r"
+        expect "#"
+        sleep 5
+        
+        send "echo '\\n=== Testing Chat Endpoint ==='\r"
+        expect "#"
+        send "curl -I http://localhost:8000/api/v1/chat/conversations 2>&1 | head -10\r"
+        expect "#"
+        
+        send "echo '\\n=== Docker Containers Status ==='\r"
+        expect "#"
+        send "docker ps | grep 8000\r"
+        expect "#"
+        
+        send "exit\r"
+    }
+    eof
+}

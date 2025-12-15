@@ -1,0 +1,44 @@
+#!/usr/bin/expect -f
+
+set timeout 600
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        send "cd /var/www/lean-construction/backend\r"
+        expect "#"
+        
+        send "echo '=== Current requirements ==='\r"
+        expect "#"
+        send "cat requirements.txt\r"
+        expect "#"
+        
+        send "echo '\\n=== Adding torch dependencies ==='\r"
+        expect "#"
+        send "echo 'torch>=2.0.0' >> requirements.txt\r"
+        expect "#"
+        send "echo 'torchvision>=0.15.0' >> requirements.txt\r"
+        expect "#"
+        
+        send "echo '\\n=== Updated requirements ==='\r"
+        expect "#"
+        send "cat requirements.txt\r"
+        expect "#"
+        
+        send "echo '\\n=== Rebuild without cache ==='\r"
+        expect "#"
+        send "cd /var/www/lean-construction\r"
+        expect "#"
+        send "docker-compose build --no-cache backend\r"
+        expect "#"
+        sleep 5
+        
+        send "exit\r"
+    }
+    eof
+}

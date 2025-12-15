@@ -1,0 +1,48 @@
+#!/usr/bin/expect -f
+
+set timeout 300
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        send "echo '=== Stopping Backend Service ==='\r"
+        expect "#"
+        send "docker ps | grep lean\r"
+        expect "#"
+        send "docker stop \$(docker ps -q --filter ancestor=lean-construction-backend 2>/dev/null) 2>/dev/null || echo 'No container found'\r"
+        expect "#"
+        
+        send "echo '\\n=== Updating Backend Code ==='\r"
+        expect "#"
+        send "cd /var/www/lean-construction/backend\r"
+        expect "#"
+        send "git pull || echo 'Skipping git pull'\r"
+        expect "#"
+        
+        send "echo '\\n=== Restarting Backend with Docker Compose ==='\r"
+        expect "#"
+        send "cd /var/www/lean-construction\r"
+        expect "#"
+        send "docker-compose up -d --build backend\r"
+        expect "#"
+        sleep 10
+        
+        send "echo '\\n=== Testing Chat Endpoint ==='\r"
+        expect "#"
+        send "sleep 5 && curl -I http://localhost:8000/api/v1/chat/conversations 2>&1\r"
+        expect "#"
+        
+        send "echo '\\n=== Backend Deployment Complete ==='\r"
+        expect "#"
+        send "docker ps | grep lean\r"
+        expect "#"
+        
+        send "exit\r"
+    }
+    eof
+}

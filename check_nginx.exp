@@ -1,0 +1,14 @@
+#!/usr/bin/expect -f
+
+set timeout 30
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com "ls -la /etc/nginx/sites-enabled/ && cat /etc/nginx/sites-enabled/* | grep -E 'server_name|listen'"
+
+expect {
+    "password:" {
+        send "$password\r"
+        exp_continue
+    }
+    eof
+}

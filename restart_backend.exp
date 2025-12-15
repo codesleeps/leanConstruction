@@ -1,0 +1,38 @@
+#!/usr/bin/expect -f
+
+set timeout 30
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        send "echo '=== Backend Container Logs ==='\r"
+        expect "#"
+        send "docker logs lean-construction-backend-1 2>&1 | tail -40\r"
+        expect "#"
+        sleep 2
+        
+        send "echo '\\n=== Try restarting backend ==='\r"
+        expect "#"
+        send "docker restart lean-construction-backend-1\r"
+        expect "#"
+        sleep 10
+        
+        send "echo '\\n=== Test backend after restart ==='\r"
+        expect "#"
+        send "curl -I http://localhost:8000/api/v1/chat/conversations 2>&1 | head -8\r"
+        expect "#"
+        
+        send "echo '\\n=== Test from outside ==='\r"
+        expect "#"
+        send "curl -I https://leanaiconstruction.com/api/v1/chat/conversations 2>&1 | head -8\r"
+        expect "#"
+        
+        send "exit\r"
+    }
+    eof
+}
