@@ -1,0 +1,31 @@
+#!/usr/bin/expect -f
+
+set timeout 30
+set password "Tk,j(#P7BMIuE9qRBPR1"
+
+spawn ssh -o StrictHostKeyChecking=no root@leanaiconstruction.com
+
+expect {
+    "password:" {
+        send "$password\r"
+        expect "#"
+        
+        send "echo '=== Check Docker build process ==='\r"
+        expect "#"
+        send "ps aux | grep 'docker-compose build' | grep -v grep\r"
+        expect "#"
+        
+        send "echo '\\n=== Check if build completed ==='\r"
+        expect "#"
+        send "docker images | grep lean-construction-backend | head -3\r"
+        expect "#"
+        
+        send "echo '\\n=== Check container status ==='\r"
+        expect "#"
+        send "docker ps -a | grep lean-construction-backend\r"
+        expect "#"
+        
+        send "exit\r"
+    }
+    eof
+}
