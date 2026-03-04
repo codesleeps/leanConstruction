@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useState } from "react";
 import {
   ArrowRight,
   Check,
@@ -118,6 +121,8 @@ const comparisonFeatures = [
 ];
 
 export default function PricingPage() {
+  const [isAnnual, setIsAnnual] = useState(true);
+  
   return (
     <>
       {/* Hero Section */}
@@ -156,11 +161,14 @@ export default function PricingPage() {
         <div className="container-custom">
           {/* Billing Toggle */}
           <div className="flex items-center justify-center gap-4 mb-12">
-            <span className="text-gray-600">Monthly</span>
-            <button className="relative w-14 h-8 bg-primary-600 rounded-full transition-colors">
-              <span className="absolute right-1 top-1 w-6 h-6 bg-white rounded-full shadow-sm transition-transform" />
+            <span className={isAnnual ? "text-gray-600" : "text-gray-900 font-medium"}>Monthly</span>
+            <button 
+              onClick={() => setIsAnnual(!isAnnual)}
+              className={`relative w-14 h-8 rounded-full transition-colors ${isAnnual ? 'bg-primary-600' : 'bg-gray-300'}`}
+            >
+              <span className={`absolute top-1 w-6 h-6 bg-white rounded-full shadow-sm transition-transform ${isAnnual ? 'right-1' : 'left-1'}`} />
             </button>
-            <span className="text-gray-900 font-medium">Annual</span>
+            <span className={isAnnual ? "text-gray-900 font-medium" : "text-gray-600"}>Annual</span>
             <span className="ml-2 px-3 py-1 bg-green-100 text-green-700 text-sm font-medium rounded-full">
               Save 20%
             </span>
@@ -195,11 +203,14 @@ export default function PricingPage() {
                     {tier.price.monthly ? (
                       <>
                         <span className="text-4xl font-heading font-bold text-gray-900">
-                          ${tier.price.annual}
+                          ${isAnnual ? tier.price.annual : tier.price.monthly}
                         </span>
                         <span className="text-gray-500">/month</span>
                         <p className="text-sm text-gray-500 mt-1">
-                          billed annually (${tier.price.annual * 12}/year)
+                          {isAnnual 
+                            ? `billed annually ($${tier.price.annual * 12}/year)`
+                            : `billed monthly ($${tier.price.monthly * 12}/year)`
+                          }
                         </p>
                       </>
                     ) : (
