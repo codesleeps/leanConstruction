@@ -22,7 +22,6 @@ Phase 4 Optimization and Scale:
 # Computer Vision Models
 from .computer_vision import (
     ProgressMonitoringModel,
-    ProgressMonitoringPipeline,
     SafetyComplianceDetector,
     EquipmentTracker,
     WorkplaceOrganizationAnalyzer,
@@ -37,7 +36,7 @@ from .waste_detection import (
     DefectsDetector,
     OverproductionDetector,
     WaitingDetector,
-    NonUtilizedTalentDetector,
+    TalentUtilizationDetector,
     TransportationDetector,
     InventoryDetector,
     MotionDetector,
@@ -141,18 +140,15 @@ from .model_finetuning import (
     finetuning_system,
     FeedbackCollector,
     FeedbackType,
-    FeedbackEntry,
+    Feedback,
     PerformanceMonitor,
     ModelVersionManager,
     ModelVersion,
     ModelStatus,
     TrainingPipeline,
-    TrainingConfig,
     ABTestManager,
     ABTest,
-    ABTestStatus,
-    RetrainingTrigger,
-    TriggerCondition
+    RetrainingTrigger
 )
 
 # Phase 4 - Analytics and Business Intelligence
@@ -160,19 +156,15 @@ from .analytics_bi import (
     AnalyticsBISystem,
     analytics_bi_system,
     KPIEngine,
-    KPIDefinition,
-    KPICategory,
-    KPIValue,
+    KPI,
+    MetricCategory,
     TrendAnalysisEngine,
-    TrendPeriod,
-    TrendResult,
+    TrendDirection,
     BenchmarkingEngine,
     BenchmarkType,
-    BenchmarkResult,
     DashboardManager,
     Dashboard,
     DashboardWidget,
-    WidgetType,
     ExecutiveDecisionSupport
 )
 
@@ -180,25 +172,19 @@ from .analytics_bi import (
 from .industry_customizations import (
     IndustryCustomizationSystem,
     industry_customization_system,
-    IndustryProfileManager,
-    IndustryProfile,
     IndustrySector,
-    IndustryKPIConfiguration,
-    IndustryWorkflow,
-    WorkflowStep,
+    IndustryProfile,
+    IndustryProfileRegistry,
+    IndustryKPIConfig,
+    IndustryWorkflowManager,
     IndustryTemplateManager,
-    ProjectTemplate,
-    ReportTemplate,
-    IndustryComplianceManager,
-    ComplianceFramework,
-    ComplianceRequirement,
-    IndustryBenchmarks
+    ComplianceConfigManager,
+    ComplianceFramework
 )
 
 __all__ = [
     # Computer Vision
     'ProgressMonitoringModel',
-    'ProgressMonitoringPipeline',
     'SafetyComplianceDetector',
     'EquipmentTracker',
     'WorkplaceOrganizationAnalyzer',
@@ -211,7 +197,7 @@ __all__ = [
     'DefectsDetector',
     'OverproductionDetector',
     'WaitingDetector',
-    'NonUtilizedTalentDetector',
+    'TalentUtilizationDetector',
     'TransportationDetector',
     'InventoryDetector',
     'MotionDetector',
@@ -301,54 +287,42 @@ __all__ = [
     'finetuning_system',
     'FeedbackCollector',
     'FeedbackType',
-    'FeedbackEntry',
+    'Feedback',
     'PerformanceMonitor',
     'ModelVersionManager',
     'ModelVersion',
     'ModelStatus',
     'TrainingPipeline',
-    'TrainingConfig',
     'ABTestManager',
     'ABTest',
-    'ABTestStatus',
     'RetrainingTrigger',
-    'TriggerCondition',
     
     # Phase 4 - Analytics and BI
     'AnalyticsBISystem',
     'analytics_bi_system',
     'KPIEngine',
-    'KPIDefinition',
-    'KPICategory',
-    'KPIValue',
+    'KPI',
+    'MetricCategory',
     'TrendAnalysisEngine',
-    'TrendPeriod',
-    'TrendResult',
+    'TrendDirection',
     'BenchmarkingEngine',
     'BenchmarkType',
-    'BenchmarkResult',
     'DashboardManager',
     'Dashboard',
     'DashboardWidget',
-    'WidgetType',
     'ExecutiveDecisionSupport',
     
     # Phase 4 - Industry Customizations
     'IndustryCustomizationSystem',
     'industry_customization_system',
-    'IndustryProfileManager',
-    'IndustryProfile',
     'IndustrySector',
-    'IndustryKPIConfiguration',
-    'IndustryWorkflow',
-    'WorkflowStep',
+    'IndustryProfile',
+    'IndustryProfileRegistry',
+    'IndustryKPIConfig',
+    'IndustryWorkflowManager',
     'IndustryTemplateManager',
-    'ProjectTemplate',
-    'ReportTemplate',
-    'IndustryComplianceManager',
-    'ComplianceFramework',
-    'ComplianceRequirement',
-    'IndustryBenchmarks'
+    'ComplianceConfigManager',
+    'ComplianceFramework'
 ]
 
 __version__ = '4.0.0'

@@ -1,4 +1,4 @@
-ntti"""
+"""
 Chat API endpoints for managing conversations and messages.
 """
 
