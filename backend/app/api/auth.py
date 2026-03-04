@@ -29,7 +29,7 @@ from ..auth import (
 )
 from ..integrations.email_service import send_welcome_email
 
-router = APIRouter(prefix="/api/auth", tags=["authentication"])
+router = APIRouter(prefix="/auth", tags=["authentication"])
 
 # Dependency to get DB session
 def get_db():
@@ -175,7 +175,7 @@ async def login(
     db: Session = Depends(get_db)
 ):
     """
-    Authenticate user and return access token
+    Authenticate user and return access token (JSON format)
     """
     user = authenticate_user(db, user_credentials.email, user_credentials.password)
     if not user:
@@ -212,6 +212,64 @@ async def login(
             "role": user.role,
             "email_verified": user.email_verified
         }
+    }
+
+@router.post("/token", response_model=dict)
+async def login_oauth2(
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: Session = Depends(get_db)
+):
+    """
+    Authenticate user and return access token (OAuth2 format)
+    """
+    user = authenticate_user(db, form_data.username, form_data.password)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Incorrect email or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    if not user.is_active:
+        raise HTTPException(
+            status_code=400,
+            detail="Inactive user account"
+        )
+    
+    # Update last login
+    user.last_login = datetime.utcnow()
+    db.commit()
+    
+    # Create access token
+    access_token_expires = timedelta(minutes=30)
+    access_token = create_access_token(
+        data={"sub": user.email}, expires_delta=access_token_expires
+    )
+    
+    return {
+        "access_token": access_token,
+        "token_type": "bearer",
+        "user": {
+            "id": user.id,
+            "email": user.email,
+            "full_name": user.full_name,
+            "company": user.company,
+            "role": user.role,
+            "email_verified": user.email_verified
+        }
+    }
+
+@router.get("/users/me", response_model=dict)
+async def read_users_me(current_user: User = Depends(get_current_active_user)):
+    """
+    Get current user information
+    """
+    return {
+        "id": current_user.id,
+        "email": current_user.email,
+        "full_name": current_user.full_name,
+        "company": current_user.company,
+        "role": current_user.role
     }
 
 @router.post("/forgot-password")
