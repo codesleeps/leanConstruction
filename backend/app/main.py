@@ -350,3 +350,23 @@ import os
 frontend_build_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "frontend", "build")
 if os.path.isdir(frontend_build_dir):
     app.mount("/dashboard", StaticFiles(directory=frontend_build_dir, html=True), name="frontend")
+
+# Proxy root path to Next.js website (port 3001)
+from fastapi.responses import HTMLResponse
+import httpx
+
+NEXTJS_URL = "http://localhost:3001"
+
+@app.middleware("http")
+async def proxy_website(request, call_next):
+    path = request.url.path
+    # Let these paths through to FastAPI
+    if path.startswith("/api/") or path.startswith("/dashboard") or path.startswith("/docs") or path.startswith("/redoc") or path.startswith("/openapi.json"):
+        return await call_next(request)
+    # Everything else -> Next.js
+    async with httpx.AsyncClient() as client:
+        try:
+            resp = await client.get(f"{NEXTJS_URL}{path}")
+            return HTMLResponse(content=resp.text, status_code=resp.status_code)
+        except httpx.ConnectError:
+            return HTMLResponse(content="Website is starting up...", status_code=503)
