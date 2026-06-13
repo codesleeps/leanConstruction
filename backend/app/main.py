@@ -352,7 +352,7 @@ if os.path.isdir(frontend_build_dir):
     app.mount("/dashboard", StaticFiles(directory=frontend_build_dir, html=True), name="frontend")
 
 # Proxy root path to Next.js website (port 3001)
-from fastapi.responses import HTMLResponse
+from fastapi.responses import Response
 import httpx
 
 NEXTJS_URL = "http://localhost:3001"
@@ -367,6 +367,6 @@ async def proxy_website(request, call_next):
     async with httpx.AsyncClient() as client:
         try:
             resp = await client.get(f"{NEXTJS_URL}{path}")
-            return HTMLResponse(content=resp.text, status_code=resp.status_code)
+            return Response(content=resp.content, status_code=resp.status_code, media_type=resp.headers.get("content-type", "text/html"))
         except httpx.ConnectError:
             return HTMLResponse(content="Website is starting up...", status_code=503)
