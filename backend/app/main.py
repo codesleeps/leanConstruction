@@ -363,10 +363,12 @@ async def proxy_website(request, call_next):
     # Let these paths through to FastAPI
     if path.startswith("/api/") or path.startswith("/dashboard") or path.startswith("/docs") or path.startswith("/redoc") or path.startswith("/openapi.json"):
         return await call_next(request)
-    # Everything else -> Next.js
+    # Everything else -> Next.js (preserve query string from request.url)
     async with httpx.AsyncClient() as client:
         try:
-            resp = await client.get(f"{NEXTJS_URL}{path}")
+            # Replace scheme+host+port with Next.js URL, preserve path+query
+            next_url = str(request.url).replace(str(request.base_url), NEXTJS_URL + "/")
+            resp = await client.get(next_url)
             return Response(content=resp.content, status_code=resp.status_code, media_type=resp.headers.get("content-type", "text/html"))
         except httpx.ConnectError:
-            return HTMLResponse(content="Website is starting up...", status_code=503)
+            return Response(content="Website is starting up...", status_code=503)
