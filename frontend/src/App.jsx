@@ -846,7 +846,7 @@ function Dashboard({ user, onLogout }) {
                         <BusinessIcon sx={{ mr: 1, color: 'primary.main', fontSize: 32 }} />
                         <Typography variant="h6">{sector.name}</Typography>
                       </Box>
-                      <Chip label={sector.id.toUpperCase()} size="small" color="primary" variant="outlined" sx={{ mb: 2 }} />
+                      <Chip label={(sector.id || sector.sector || '').toUpperCase()} size="small" color="primary" variant="outlined" sx={{ mb: 2 }} />
                       <Typography variant="body2" color="textSecondary">
                         {sector.description || 'Industry-specific KPIs, workflows, and compliance requirements'}
                       </Typography>
