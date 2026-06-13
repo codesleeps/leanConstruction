@@ -28,7 +28,7 @@ export const StripePaymentProvider = ({ children }) => {
     setError(null);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE || 'https://leanaiconstruction.com/api/v1'}/payments/create-subscription`, {
+      const response = await axios.post(`/api/payments/create-subscription`, {
         price_id: priceId,
         customer_id: customerId
       });
@@ -49,7 +49,7 @@ export const StripePaymentProvider = ({ children }) => {
     setError(null);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE || 'https://leanaiconstruction.com/api/v1'}/payments/confirm-subscription`, {
+      const response = await axios.post(`/api/payments/confirm-subscription`, {
         payment_method_id: paymentMethodId,
         customer_id: customerId,
         client_secret: clientSecret
@@ -71,7 +71,7 @@ export const StripePaymentProvider = ({ children }) => {
     setError(null);
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_API_BASE || 'https://leanaiconstruction.com/api/v1'}/payments/cancel-subscription`, {
+      const response = await axios.post(`/api/payments/cancel-subscription`, {
         subscription_id: subscriptionId
       });
 
@@ -88,7 +88,7 @@ export const StripePaymentProvider = ({ children }) => {
   // Get current subscription status
   const getSubscriptionStatus = async (customerId) => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_BASE || 'https://leanaiconstruction.com/api/v1'}/payments/subscription-status/${customerId}`);
+      const response = await axios.get(`/api/payments/subscription-status/${customerId}`);
       setSubscription(response.data);
       return response.data;
     } catch (err) {

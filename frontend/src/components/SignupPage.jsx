@@ -19,7 +19,7 @@ import {
 import axios from 'axios';
 import { ColorModeContext } from '../App';
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'https://leanaiconstruction.com/api/v1';
+const API_BASE = '';
 
 const SignupPage = ({ onLogin, onSwitchToLogin }) => {
   const [loading, setLoading] = useState(false);
@@ -105,7 +105,7 @@ const SignupPage = ({ onLogin, onSwitchToLogin }) => {
     setSuccess('');
 
     try {
-      const response = await axios.post(`${API_BASE}/api/auth/demo-account/create?account_type=${accountType}`);
+      const response = await axios.post(`${API_BASE}/auth/demo-account/create?account_type=${accountType}`);
 
       const { demo_email, demo_password, message, account_type, login_url, features } = response.data;
 

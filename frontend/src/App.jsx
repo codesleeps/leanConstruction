@@ -43,7 +43,7 @@ import SubscriptionManager from './components/SubscriptionManager';
 import Logo from './components/Logo';
 import SignupPage from './components/SignupPage';
 
-const API_BASE = '/api';
+const API_BASE = '';
 
 // Auth Context
 const AuthContext = createContext(null);
@@ -359,7 +359,7 @@ function Dashboard({ user, onLogout }) {
     setLoading(true);
     try {
       const [healthRes, wasteRes, kpiRes, execRes, industryRes, infraRes, tiersRes] = await Promise.all([
-        axios.get(`${API_BASE}/health`),
+        axios.get(`/api/v1/ml/health`),
         axios.post(`${API_BASE}/api/v1/ml/analyze-waste`, {
           project_id: "demo-project",
           data: { schedule: [], budget: 2000000 },

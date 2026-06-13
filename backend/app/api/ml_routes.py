@@ -274,12 +274,12 @@ async def analyze_progress(
         pipeline = get_progress_pipeline()
         
         # Analyze image
-        result = pipeline.analyze_image(image_data)
+        result = await pipeline.analyze_image(image_data)
         
         # Add safety analysis if requested
         if include_safety:
             safety_detector = get_safety_detector()
-            safety_result = safety_detector.analyze(image_data)
+            safety_result = await safety_detector.analyze(image_data)
             result['safety_analysis'] = safety_result
         
         return ProgressAnalysisResponse(
@@ -309,7 +309,7 @@ async def analyze_safety(
         image_data = await file.read()
         
         detector = get_safety_detector()
-        result = detector.analyze(image_data)
+        result = await detector.analyze(image_data)
         
         return {
             "status": "success",
@@ -341,7 +341,7 @@ async def analyze_workplace_organization(
         if _workplace_analyzer is None:
             _workplace_analyzer = WorkplaceOrganizationAnalyzer()
         
-        result = _workplace_analyzer.analyze_5s(image_data)
+        result = await _workplace_analyzer.analyze_5s(image_data)
         
         return {
             "status": "success",
@@ -377,7 +377,7 @@ async def analyze_waste(request: WasteAnalysisRequest):
     try:
         engine = get_waste_engine()
         
-        result = engine.analyze(request.data)
+        result = await engine.analyze(request.data)
         
         # Remove recommendations if not requested
         if not request.include_recommendations:
@@ -473,7 +473,7 @@ async def generate_forecast(request: ForecastRequest):
         if request.historical_data:
             project_data['historical_data'] = request.historical_data
         
-        result = system.generate_forecast(project_data)
+        result = await system.generate_forecast(project_data)
         
         return ForecastResponse(
             status="success",
@@ -1325,41 +1325,62 @@ async def schedule_crew(
         raise HTTPException(status_code=500, detail=str(e))
 
 
+class WarehouseLocation(BaseModel):
+    lat: float = Field(..., description="Warehouse latitude")
+    lon: float = Field(..., description="Warehouse longitude")
+
+
+class DeliveryRequest(BaseModel):
+    id: str = Field(..., description="Delivery identifier")
+    type: str = Field(..., description="Material type")
+    quantity: float = Field(..., description="Delivery quantity")
+    destination: Dict[str, Any] = Field(..., description="Destination location")
+    earliest: str = Field(..., description="Earliest delivery time (ISO format)")
+    latest: str = Field(..., description="Latest delivery time (ISO format)")
+    priority: int = Field(1, description="Delivery priority")
+
+
+class VehicleRequest(BaseModel):
+    id: str = Field(..., description="Vehicle identifier")
+    capacity: float = Field(..., description="Vehicle capacity")
+    cost_per_mile: float = Field(2.0, description="Cost per mile")
+
+
 @router.post("/optimization/delivery-routes")
 async def optimize_delivery_routes(
-    deliveries: List[Dict[str, Any]],
-    vehicles: List[Dict[str, Any]],
-    warehouse: Dict[str, float]
+    deliveries: List[DeliveryRequest],
+    vehicles: List[VehicleRequest],
+    warehouse: WarehouseLocation
 ):
     """
     Optimize material delivery routes
     
-    - **deliveries**: List of delivery requests
-    - **vehicles**: Fleet of delivery vehicles
-    - **warehouse**: Warehouse location {lat, lon}
+    - **deliveries**: List of delivery requests with id, type, quantity, destination, earliest, latest
+    - **vehicles**: Fleet of delivery vehicles with id, capacity, cost_per_mile
+    - **warehouse**: Warehouse location with lat and lon
     """
     try:
         optimizer = resource_optimizer.delivery_optimizer
-        optimizer.set_warehouse(warehouse['lat'], warehouse['lon'])
+        optimizer.set_warehouse(warehouse.lat, warehouse.lon)
         
-        from ..ml.resource_optimizer import DeliveryRequest
+        from ..ml import DeliveryRequest as DeliveryRequestData
         
         for d in deliveries:
-            optimizer.add_delivery(DeliveryRequest(
-                id=d['id'],
-                material_type=d['type'],
-                quantity=d['quantity'],
-                destination=d['destination'],
-                earliest_delivery=datetime.fromisoformat(d['earliest']),
-                latest_delivery=datetime.fromisoformat(d['latest']),
-                priority=d.get('priority', 1)
+            optimizer.add_delivery(DeliveryRequestData(
+                id=d.id,
+                material_type=d.type if hasattr(d, 'type') else d.material_type,
+                quantity=d.quantity,
+                destination=d.destination,
+                earliest_delivery=datetime.fromisoformat(d.earliest),
+                latest_delivery=datetime.fromisoformat(d.latest),
+                priority=d.priority
             ))
         
         for v in vehicles:
             optimizer.add_vehicle(
-                v['id'],
-                v['capacity'],
-                v.get('cost_per_mile', 2.0)
+                v.id,
+                v.capacity,
+                v.cost_per_mile
             )
         
         routes = optimizer.optimize_routes()
@@ -2216,7 +2237,20 @@ async def get_subscription_tiers():
     """Get available subscription tiers"""
     try:
         from ..core import commercial_system
-        tiers = commercial_system.get_subscription_tiers()
+        pricing = commercial_system.get_pricing_info()
+        # Format for frontend consumption
+        tiers = []
+        tier_order = {"free": 0, "starter": 1, "professional": 2, "enterprise": 3}
+        for tier_key, info in pricing.items():
+            tiers.append({
+                "id": tier_key,
+                "name": tier_key.capitalize(),
+                "price_monthly": info.get("monthly_price", 0),
+                "features": info.get("features", []),
+                "users": info.get("limits", {}).get("users", "Unlimited"),
+                "projects": info.get("limits", {}).get("projects", "Unlimited"),
+            })
+        tiers.sort(key=lambda t: tier_order.get(t["id"], 99))
         return {"status": "success", "tiers": tiers}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

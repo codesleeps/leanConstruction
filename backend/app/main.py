@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 from datetime import timedelta
 from .database import SessionLocal, engine
@@ -343,3 +344,9 @@ async def list_procore_projects(
         return {"projects": projects}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to fetch projects: {str(e)}")
+
+# Mount frontend build at /dashboard
+import os
+frontend_build_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "frontend", "build")
+if os.path.isdir(frontend_build_dir):
+    app.mount("/dashboard", StaticFiles(directory=frontend_build_dir, html=True), name="frontend")
