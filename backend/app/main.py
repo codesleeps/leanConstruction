@@ -361,7 +361,9 @@ NEXTJS_URL = "http://localhost:3001"
 async def proxy_website(request, call_next):
     path = request.url.path
     # Let these paths through to FastAPI
-    if path.startswith("/api/") or path.startswith("/dashboard") or path.startswith("/docs") or path.startswith("/redoc") or path.startswith("/openapi.json"):
+    fastapi_prefixes = ("/api/", "/dashboard", "/docs", "/redoc", "/openapi.json",
+                        "/token", "/auth/", "/users/", "/projects/", "/integrations/")
+    if path.startswith(fastapi_prefixes):
         return await call_next(request)
     # Everything else -> Next.js (preserve query string from request.url)
     async with httpx.AsyncClient() as client:
