@@ -2185,6 +2185,153 @@ async def configure_project_for_industry(
 # Phase 4 - Infrastructure & Commercial Routes
 # ============================================
 
+# =============================================================================
+# LIVE DATA INGESTION ENDPOINTS
+# =============================================================================
+
+@router.get("/live/hs2/overrun")
+async def get_hs2_cost_overrun():
+    """Get real HS2 cost overrun data from public sources"""
+    try:
+        from ..data_ingestion import data_ingestion
+        report = data_ingestion.get_hs2_full_report()
+        return {"status": "success", "data": report}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/live/hs2/timeline")
+async def get_hs2_timeline():
+    """Get HS2 project milestone timeline"""
+    try:
+        from ..data_ingestion import data_ingestion
+        timeline = data_ingestion.get_timeline_summary()
+        return {"status": "success", "timeline": timeline}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/live/hs2/waste-logs")
+async def get_hs2_waste_logs():
+    """Get real HS2 waste/overrun data as WasteLog-compatible records"""
+    try:
+        from ..data_ingestion import data_ingestion
+        logs = data_ingestion.generate_hs2_waste_logs()
+        return {"status": "success", "waste_logs": logs}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/live/hs2/tasks")
+async def get_hs2_tasks():
+    """Get real HS2 tasks from current project status"""
+    try:
+        from ..data_ingestion import data_ingestion
+        tasks = data_ingestion.generate_hs2_tasks()
+        return {"status": "success", "tasks": tasks}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/live/market/overview")
+async def get_uk_market_overview():
+    """Get UK construction market data"""
+    try:
+        from ..data_ingestion import data_ingestion
+        overview = data_ingestion.get_market_overview()
+        return {"status": "success", "market": overview}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/live/ons/construction-output")
+async def get_ons_construction_output():
+    """Fetch latest ONS construction output statistics (live from ONS API)"""
+    try:
+        from ..data_ingestion import extract_ons_construction_output
+        data = extract_ons_construction_output()
+        if data:
+            return {"status": "success", "data": data}
+        return {"status": "partial", "message": "ONS API unavailable, returning cached data", "data": None}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/live/ingest/hs2")
+async def ingest_hs2_live_data(background_tasks: BackgroundTasks):
+    """Ingest real HS2 data into the leanConstruction database"""
+    from ..data_ingestion import data_ingestion
+    from ..database import SessionLocal
+    from ..models import Project, Task, WasteLog, User
+    
+    try:
+        db = SessionLocal()
+        
+        # Find or create HS2 project
+        hs2 = db.query(Project).filter(Project.name == "HS2 London-Birmingham Phase 1").first()
+        if not hs2:
+            # Get first demo user
+            user = db.query(User).filter(User.demo_account == True).first()
+            if not user:
+                raise HTTPException(status_code=404, detail="No demo user found")
+            
+            hs2 = Project(
+                name="HS2 London-Birmingham Phase 1",
+                description=f"High Speed 2 rail link — Phase 1 from London Euston to Birmingham Curzon Street. Latest estimate: £{data_ingestion.hs2_snapshot.current_cost_low/1e9:.1f}B-£{data_ingestion.hs2_snapshot.current_cost_high/1e9:.1f}B. Overrun from original £{data_ingestion.hs2_snapshot.original_budget_full_network/1e9:.0f}B full-network budget. Identifiable waste: £{sum(w['cost'] for w in data_ingestion.hs2_snapshot.waste_breakdown)/1e9:.1f}B.",
+                owner_id=user.id,
+                status="active",
+                budget=data_ingestion.hs2_snapshot.current_cost_high,
+                start_date=datetime(2020, 1, 1),
+                end_date=datetime(2039, 12, 31),
+                created_at=datetime.now(timezone.utc)
+            )
+            db.add(hs2)
+            db.flush()
+        
+        # Clear and replace tasks
+        db.query(Task).filter(Task.project_id == hs2.id).delete()
+        for t in data_ingestion.generate_hs2_tasks():
+            task = Task(
+                project_id=hs2.id,
+                name=t["name"],
+                description=t["description"],
+                status=t["status"],
+                priority=t["priority"],
+                estimated_hours=t["estimated_hours"],
+                actual_hours=t["actual_hours"]
+            )
+            db.add(task)
+        
+        # Clear and replace waste logs
+        db.query(WasteLog).filter(WasteLog.project_id == hs2.id).delete()
+        for w in data_ingestion.generate_hs2_waste_logs():
+            log = WasteLog(
+                project_id=hs2.id,
+                waste_type=w["waste_type"],
+                description=w["description"],
+                impact_cost=w["impact_cost"],
+                impact_time=w["impact_time"],
+                detected_at=w["detected_at"]
+            )
+            db.add(log)
+        
+        db.commit()
+        
+        return {
+            "status": "success",
+            "message": f"HS2 project updated with real data: {len(data_ingestion.generate_hs2_tasks())} tasks, {len(data_ingestion.generate_hs2_waste_logs())} waste logs",
+            "project_id": hs2.id,
+            "project_budget": hs2.budget
+        }
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
+    finally:
+        db.close()
+
+
+# ── Original infrastructure endpoints ──────────────────────────────────────
+
 @router.get("/infrastructure/status")
 async def get_infrastructure_status():
     """Get infrastructure status"""
