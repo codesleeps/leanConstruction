@@ -515,7 +515,7 @@ async def create_demo_account(
     """Create a demo account with pre-populated construction data"""
     
     # Validate account type
-    valid_types = ["small", "medium", "enterprise"]
+    valid_types = ["small", "medium", "enterprise", "hs2"]
     if account_type not in valid_types:
         raise HTTPException(status_code=400, detail="Invalid demo account type")
     
@@ -537,7 +537,8 @@ async def create_demo_account(
     company_names = {
         "small": "ABC Home Builders",
         "medium": "Metro Construction Group", 
-        "enterprise": "Global Infrastructure Corp"
+        "enterprise": "Global Infrastructure Corp",
+        "hs2": "HS2 Ltd (High Speed 2)"
     }
     
     demo_user = User(
@@ -665,6 +666,24 @@ def get_demo_features(account_type: str) -> list:
             "Resource optimization",
             "Predictive analytics"
         ],
+        "hs2": [
+            "Real HS2 Phase 1 data",
+            "£32.5B DOWNTIME waste analysis",
+            "NAO-verified cost overruns",
+            "8 waste categories tracked",
+            "Live project timeline",
+            "£36B→£102B cost growth"
+        ],
+        "hs2": [
+            {
+                "name": "HS2 Phase 1 — London to Birmingham",
+                "description": "134-mile high-speed railway. Original budget £36B, now £87-102B. £32.5B waste identified via DOWNTIME analysis.",
+                "budget": 87700000000,
+                "tasks": 320,
+                "waste_logs": 10,
+                "completion_rate": 0.45
+            }
+        ],
         "enterprise": [
             "AI-powered predictions",
             "Custom integrations",
@@ -741,6 +760,24 @@ def create_comprehensive_demo_data(user_id: int, account_type: str, db: Session)
                 "tasks": 48,
                 "waste_logs": 20,
                 "completion_rate": 0.55
+            }
+        ],
+        "hs2": [
+            "Real HS2 Phase 1 data",
+            "£32.5B DOWNTIME waste analysis",
+            "NAO-verified cost overruns",
+            "8 waste categories tracked",
+            "Live project timeline",
+            "£36B→£102B cost growth"
+        ],
+        "hs2": [
+            {
+                "name": "HS2 Phase 1 — London to Birmingham",
+                "description": "134-mile high-speed railway. Original budget £36B, now £87-102B. £32.5B waste identified via DOWNTIME analysis.",
+                "budget": 87700000000,
+                "tasks": 320,
+                "waste_logs": 10,
+                "completion_rate": 0.45
             }
         ],
         "enterprise": [
