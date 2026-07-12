@@ -12,8 +12,10 @@ from .tasks.data_ingestion import ingest_external_data
 from .api.ml_routes import router as ml_router
 from pydantic import BaseModel
 import os
+from .startup import run_startup
 
 Base.metadata.create_all(bind=engine)
+
 
 app = FastAPI(
     title="Lean Construction AI API",
@@ -32,6 +34,10 @@ cors_origins = os.getenv("CORS_ALLOWED_ORIGINS", "*").split(",") if os.getenv("C
 cors_credentials = os.getenv("CORS_ALLOW_CREDENTIALS", "true").lower() == "true"
 cors_methods = os.getenv("CORS_ALLOW_METHODS", "*").split(",") if os.getenv("CORS_ALLOW_METHODS") else ["*"]
 cors_headers = os.getenv("CORS_ALLOW_HEADERS", "*").split(",") if os.getenv("CORS_ALLOW_HEADERS") else ["*"]
+
+@app.on_event("startup")
+async def startup_event():
+    run_startup()
 
 app.add_middleware(
     CORSMiddleware,
