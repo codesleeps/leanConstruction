@@ -156,8 +156,10 @@ async def get_subscription_status(
                 }
             return {"status": "inactive"}
             
+        except stripe.error.AuthenticationError:
+            return {"status": "inactive", "message": "Stripe not configured or test placeholder key in use"}
         except Exception as e:
-             raise HTTPException(status_code=500, detail=str(e))
+            return {"status": "inactive", "warning": f"Stripe unavailable: {str(e)}"}
              
     # Mock Fallback
     try:
