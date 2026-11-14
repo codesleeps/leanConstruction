@@ -252,6 +252,26 @@ async def send_message(
             detail=f"Error sending message: {str(e)}"
         )
 
+class DirectChatRequest(BaseModel):
+    message: Optional[str] = None
+    content: Optional[str] = None
+    session_id: Optional[str] = None
+
+@router.post("")
+async def direct_chat(
+    req: DirectChatRequest,
+    current_user: User = Depends(get_current_active_user),
+    db: Session = Depends(get_db)
+):
+    text = req.message or req.content or "What is lean construction?"
+    msg_create = MessageCreate(content=text, session_id=req.session_id)
+    res = await send_message(msg_create, current_user, db)
+    return {
+        "response": res.bot_message.content,
+        "message": res.bot_message.content,
+        "bot_message": res.bot_message.model_dump() if hasattr(res.bot_message, 'model_dump') else res.bot_message.dict()
+    }
+
 @router.post("/conversations", response_model=ConversationCreateResponse)
 async def create_conversation(
     conversation_data: ConversationCreate,
