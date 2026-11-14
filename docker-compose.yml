@@ -47,6 +47,14 @@ services:
     depends_on:
       - backend
 
+  website:
+    build: ./website
+    ports:
+      - "3001:3001"
+    environment:
+      NEXT_PUBLIC_API_URL: https://leanaiconstruction.com/api
+    restart: unless-stopped
+
   celery_worker:
     build: ./backend
     restart: unless-stopped
