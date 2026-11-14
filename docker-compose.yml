@@ -3,6 +3,7 @@ version: '3.8'
 services:
   db:
     image: postgres:15
+    restart: unless-stopped
     environment:
       POSTGRES_DB: leandb
       POSTGRES_USER: postgres
@@ -14,16 +15,20 @@ services:
 
   redis:
     image: redis:7-alpine
+    restart: unless-stopped
     ports:
-      - "6380:6379"
+      - "6379:6379"
 
   backend:
     build: ./backend
+    restart: unless-stopped
+    env_file:
+      - ./backend/.env
     environment:
       DATABASE_URL: postgresql://postgres:password@db/leandb
-      SECRET_KEY: your-secret-key-here
+      SECRET_KEY: lean-construction-dev-secret-key-change-in-prod
     ports:
-      - "8001:8000"
+      - "8000:8000"
     depends_on:
       - db
       - redis
@@ -33,8 +38,9 @@ services:
 
   frontend:
     build: ./frontend
+    restart: unless-stopped
     ports:
-      - "3003:80"
+      - "3000:80"
     volumes:
       - ./frontend:/app
       - /app/node_modules
@@ -43,7 +49,10 @@ services:
 
   celery_worker:
     build: ./backend
+    restart: unless-stopped
     command: celery -A app.celery_app worker --loglevel=info
+    env_file:
+      - ./backend/.env
     environment:
       DATABASE_URL: postgresql://postgres:password@db/leandb
       CELERY_BROKER_URL: redis://redis:6379/0
@@ -56,7 +65,10 @@ services:
 
   celery_beat:
     build: ./backend
+    restart: unless-stopped
     command: celery -A app.celery_app beat --loglevel=info
+    env_file:
+      - ./backend/.env
     environment:
       DATABASE_URL: postgresql://postgres:password@db/leandb
       CELERY_BROKER_URL: redis://redis:6379/0
@@ -69,9 +81,12 @@ services:
 
   flower:
     build: ./backend
+    restart: unless-stopped
     command: celery -A app.celery_app flower --port=5555
     ports:
       - "5555:5555"
+    env_file:
+      - ./backend/.env
     environment:
       CELERY_BROKER_URL: redis://redis:6379/0
       CELERY_RESULT_BACKEND: redis://redis:6379/0
