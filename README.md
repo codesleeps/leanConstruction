@@ -283,3 +283,14 @@ See [TODO.md](TODO.md) for the complete development roadmap.
 - Advanced Analytics
 - Industry Customizations
 - Commercial Launch
+
+## Post‑deployment checklist
+
+- Verify HTTPS front‑door (`curl -k https://leanaiconstruction.com` → 200).
+- Confirm API proxy works (`curl -k https://leanaiconstruction.com/api/users/me`).
+- Check Swagger docs reachable (`curl -k https://leanaiconstruction.com/api/docs`).
+- Ensure mock payments endpoint returns fallback (`curl -k https://leanaiconstruction.com/api/payments/subscription-status`).
+- Confirm HTTP→HTTPS redirect and security headers (`curl -I http://leanaiconstruction.com`).
+- Review `DEPLOYMENT_STATUS.md` for final health‑check.
+
+See the latest deployment status in [`DEPLOYMENT_STATUS.md`](DEPLOYMENT_STATUS.md).
